@@ -1,8 +1,6 @@
 using System;
-using System.Security.Cryptography;
-using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
@@ -66,7 +64,7 @@ public class PlayerControl : MonoBehaviour
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        if (coyoteTimeCounter > 0f) rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
+        if (coyoteTimeCounter > 0f && isJumping) rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
     }
 
     void OnJumpExit(InputAction.CallbackContext value)
@@ -85,6 +83,7 @@ public class PlayerControl : MonoBehaviour
     {
         transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -93,25 +92,15 @@ public class PlayerControl : MonoBehaviour
             coyoteTimeCounter = coyoteTime;
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             coyoteTimeCounter -= Time.deltaTime;
-            
         }
-        
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     void SetInput()
     {
@@ -125,16 +114,19 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.performed += OnJump;
         controls.Player.Jump.canceled += OnJumpExit;
     }
+
     void GetComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void OnEnable()
     {
         controls.Enable();
     }
+
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
