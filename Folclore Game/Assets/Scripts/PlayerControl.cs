@@ -33,11 +33,12 @@ public class PlayerControl : MonoBehaviour
 
     #endregion
 
-    private float lastGroundedTime;
-    private float lastJumpTime;
-    
-    [SerializeField] private float jumpCoyoteTime;
-    [SerializeField] private float jumpBufferTime;
+    private float coyoteTimeCounter;
+    //private float lastJumpTime;
+
+    [SerializeField] private float coyoteTime;
+    //[SerializeField] private float jumpBufferTime;
+
     void Awake()
     {
         #region Singleton
@@ -57,12 +58,6 @@ public class PlayerControl : MonoBehaviour
         GetComponents();
     }
 
-    private void Start()
-    {
-        lastJumpTime = jumpBufferTime;
-        lastGroundedTime = jumpCoyoteTime;
-    }
-
     void OnMove(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
@@ -71,11 +66,14 @@ public class PlayerControl : MonoBehaviour
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        
-        if (isJumping && lastGroundedTime > 0 && lastJumpTime > 0)
-        {
-            Jump();
-        }
+        if (coyoteTimeCounter > 0f) rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
+    }
+
+    void OnJumpExit(InputAction.CallbackContext value)
+    {
+        isJumping = value.ReadValueAsButton();
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        coyoteTimeCounter = 0f;
     }
 
     void Update()
@@ -88,34 +86,32 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
 
-
-    void CheckJumpTimers()
-    {
-        lastGroundedTime -= Time.deltaTime;
-        lastJumpTime -= Time.deltaTime;
-
-        if(lastJumpTime <= 0)lastJumpTime = 0;
-        if (lastGroundedTime <= 0) lastGroundedTime = 0;
-        
-        print(lastGroundedTime);
-        print(lastJumpTime);
-    }
-    void Jump()
-    {
-        rb.AddForce(Vector2.up * (jumpForce * 100));
-        lastJumpTime = jumpBufferTime;
-        CheckJumpTimers();
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            lastGroundedTime = jumpCoyoteTime;
-            CheckJumpTimers();
+            coyoteTimeCounter = coyoteTime;
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+            
+        }
+        
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     void SetInput()
     {
@@ -127,21 +123,18 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Jump.started += OnJump;
         controls.Player.Jump.performed += OnJump;
-        controls.Player.Jump.canceled += OnJump;
+        controls.Player.Jump.canceled += OnJumpExit;
     }
-
     void GetComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
     private void OnEnable()
     {
         controls.Enable();
     }
-
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
