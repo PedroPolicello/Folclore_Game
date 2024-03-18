@@ -749,9 +749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc455b230334ce41ae4ac2ba7da7ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  maxSpeed: 15
+  accelerationSpeed: 30
+  decelerationSpeed: 1000
   jumpForce: 8
-  coyoteTime: 0.03
+  coyoteTime: 0.025
 --- !u!1 &1585240669
 GameObject:
   m_ObjectHideFlags: 0
