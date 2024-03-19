@@ -23,22 +23,25 @@ public class PlayerControl : MonoBehaviour
     #endregion
 
     #region SerializedField Variables
-    
-    [Header("Movement Variables")]
-    [SerializeField] private float maxSpeed;
+
+    [Header("Movement Variables")] [SerializeField]
+    private float maxSpeed;
+
     [SerializeField] private float accelerationSpeed;
     [SerializeField] private float decelerationSpeed;
     private float speed;
-    
-    [Header("Jump Variables")]
-    [SerializeField] private float jumpForce;
+
+    [Header("Jump Variables")] [SerializeField]
+    private float jumpForce;
+
     [SerializeField] private float coyoteTime;
     private float coyoteTimeCounter;
-    
+
+    [SerializeField] private float jumpBufferTime;
+    private float jumpBufferCounter;
+
     #endregion
 
-    //private float lastJumpTime;
-    //[SerializeField] private float jumpBufferTime;
 
     void Awake()
     {
@@ -63,6 +66,7 @@ public class PlayerControl : MonoBehaviour
     {
         moveDirection = value.ReadValue<Vector2>();
     }
+
     void OnMoveExit(InputAction.CallbackContext value)
     {
         Decelerate();
@@ -72,8 +76,12 @@ public class PlayerControl : MonoBehaviour
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        if (coyoteTimeCounter > 0f && isJumping) rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
+        if (coyoteTimeCounter > 0f && isJumping)
+        {
+            rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
+        }
     }
+
     void OnJumpExit(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
@@ -85,6 +93,7 @@ public class PlayerControl : MonoBehaviour
     {
         Move();
     }
+
     void Move()
     {
         speed += Time.deltaTime * accelerationSpeed;
@@ -103,9 +112,8 @@ public class PlayerControl : MonoBehaviour
 
     void Decelerate()
     {
-        print("oi");
-        if (moveDirection.x > 0) rb.AddForce(new Vector2(decelerationSpeed, rb.velocity.y));
-        if (moveDirection.x < 0) rb.AddForce(new Vector2(decelerationSpeed * -1, rb.velocity.y));
+        if (moveDirection.x > 0) rb.AddForce(new Vector2(decelerationSpeed * 10, rb.velocity.y));
+        if (moveDirection.x < 0) rb.AddForce(new Vector2(decelerationSpeed * -10, rb.velocity.y));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -115,13 +123,15 @@ public class PlayerControl : MonoBehaviour
             coyoteTimeCounter = coyoteTime;
         }
     }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             coyoteTimeCounter = coyoteTime;
         }
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -131,10 +141,6 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    
-    
-    
-    
     void SetInput()
     {
         controls = new Controls();
@@ -147,16 +153,19 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.performed += OnJump;
         controls.Player.Jump.canceled += OnJumpExit;
     }
+
     void GetComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void OnEnable()
     {
         controls.Enable();
     }
+
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
