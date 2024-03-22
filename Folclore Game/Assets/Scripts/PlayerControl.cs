@@ -34,14 +34,10 @@ public class PlayerControl : MonoBehaviour
     [Header("Jump Variables")] [SerializeField]
     private float jumpForce;
 
-    [SerializeField] private float coyoteTime;
-    private float coyoteTimeCounter;
-
-    [SerializeField] private float jumpBufferTime;
-    private float jumpBufferCounter;
+    [SerializeField] private Transform groundCheckPos;
+    [SerializeField] private LayerMask groundLayer;
 
     #endregion
-
 
     void Awake()
     {
@@ -69,16 +65,15 @@ public class PlayerControl : MonoBehaviour
 
     void OnMoveExit(InputAction.CallbackContext value)
     {
-        Decelerate();
         moveDirection = value.ReadValue<Vector2>();
     }
 
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        if (coyoteTimeCounter > 0f && isJumping)
+        if (IsGrounded())
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jumpForce * 100));
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
@@ -86,12 +81,12 @@ public class PlayerControl : MonoBehaviour
     {
         isJumping = value.ReadValueAsButton();
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        coyoteTimeCounter = 0f;
     }
 
     void Update()
     {
         Move();
+        print(IsGrounded());
     }
 
     void Move()
@@ -109,37 +104,6 @@ public class PlayerControl : MonoBehaviour
             speed = 0;
         }
     }
-
-    void Decelerate()
-    {
-        if (moveDirection.x > 0) rb.AddForce(new Vector2(decelerationSpeed * 10, rb.velocity.y));
-        if (moveDirection.x < 0) rb.AddForce(new Vector2(decelerationSpeed * -10, rb.velocity.y));
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            coyoteTimeCounter = coyoteTime;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-        }
-    }
-
 
     void SetInput()
     {
@@ -160,7 +124,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
+    
     private void OnEnable()
     {
         controls.Enable();
@@ -172,5 +136,17 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Move.performed -= OnMove;
         controls.Player.Move.canceled -= OnMove;
         controls.Disable();
+    }
+
+    private bool IsGrounded()
+    {
+        bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.2f), groundLayer);
+        return isGrounded;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.2f));
     }
 }
