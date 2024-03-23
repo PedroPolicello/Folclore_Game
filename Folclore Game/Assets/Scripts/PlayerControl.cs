@@ -61,11 +61,13 @@ public class PlayerControl : MonoBehaviour
     void OnMove(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
+        isMoving = true;
     }
 
     void OnMoveExit(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
+        isMoving = false;
     }
 
     void OnJump(InputAction.CallbackContext value)
@@ -91,18 +93,26 @@ public class PlayerControl : MonoBehaviour
 
     void Move()
     {
-        speed += Time.deltaTime * accelerationSpeed;
-        transform.Translate(moveDirection * (speed * Time.deltaTime));
+        if (isMoving)
+        {
+            speed += Time.deltaTime * accelerationSpeed;
+            print(speed);
+        }
+        else
+        {
+            speed -= Time.deltaTime * decelerationSpeed;
+        }
 
         if (speed >= maxSpeed)
         {
             speed = maxSpeed;
         }
-
-        if (moveDirection.x == 0)
+        else if (speed <= 0)
         {
             speed = 0;
         }
+
+        transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
 
     void SetInput()
@@ -124,7 +134,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    
+
     private void OnEnable()
     {
         controls.Enable();
