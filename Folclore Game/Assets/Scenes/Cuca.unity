@@ -750,8 +750,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  accelerationSpeed: 50
-  decelerationSpeed: 40
+  accelerationSpeed: 30
+  decelerationSpeed: 2
   jumpForce: 30
   groundCheckPos: {fileID: 980282598}
   groundLayer:
@@ -941,8 +941,8 @@ Transform:
   m_GameObject: {fileID: 1632208930}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.36, y: -5, z: 0}
-  m_LocalScale: {x: 13, y: 1, z: 1}
+  m_LocalPosition: {x: -21.47, y: -5, z: 0}
+  m_LocalScale: {x: 45.825, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
