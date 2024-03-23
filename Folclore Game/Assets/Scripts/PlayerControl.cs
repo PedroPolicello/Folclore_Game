@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
@@ -88,7 +89,6 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         Move();
-        print(IsGrounded());
     }
 
     void Move()
@@ -96,11 +96,26 @@ public class PlayerControl : MonoBehaviour
         if (isMoving)
         {
             speed += Time.deltaTime * accelerationSpeed;
-            print(speed);
         }
         else
         {
-            speed -= Time.deltaTime * decelerationSpeed;
+            speed = 0;
+            // switch (moveDirection.x)
+            // {
+            //     case  > 0:
+            //         speed -= Time.deltaTime * decelerationSpeed;
+            //         rb.velocity = new Vector2(1, 0 * (speed * Time.deltaTime));
+            //         break;
+            //     
+            //     case < 0:
+            //         speed -= Time.deltaTime * decelerationSpeed;
+            //         rb.velocity = new Vector2(-1, 0 * (speed * Time.deltaTime));
+            //         break;
+            //     
+            //     default:
+            //         speed = 0;
+            //         break;
+            // }
         }
 
         if (speed >= maxSpeed)
