@@ -25,16 +25,15 @@ public class PlayerControl : MonoBehaviour
 
     #region SerializedField Variables
 
-    [Header("Movement Variables")] [SerializeField]
-    private float maxSpeed;
+    [Header("Movement Variables")]
+    [SerializeField] private float maxSpeed;
 
     [SerializeField] private float accelerationSpeed;
     [SerializeField] private float decelerationSpeed;
     private float speed;
 
-    [Header("Jump Variables")] [SerializeField]
-    private float jumpForce;
-
+    [Header("Jump Variables")]
+    [SerializeField] private float jumpForce;
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
 
@@ -165,13 +164,20 @@ public class PlayerControl : MonoBehaviour
 
     private bool IsGrounded()
     {
-        bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.2f), groundLayer);
+        bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.2f));
+        if (IsGrounded())
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;            
+        }
+        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
     }
 }
