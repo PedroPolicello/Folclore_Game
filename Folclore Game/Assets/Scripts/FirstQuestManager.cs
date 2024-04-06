@@ -2,43 +2,37 @@ using UnityEngine;
 
 public class FirstQuestManager : MonoBehaviour
 {
-    private bool ingredient01;
-    private bool ingredient02;
-    private bool ingredient03;
+    private int ingredientCount;
     private bool hasAllIngredients;
+    private bool isNearWizard;
 
     void Update()
     {
-        if (ingredient01 && ingredient02 && ingredient03)
-        {
-            hasAllIngredients = true;
-        }
+        Collect();
     }
 
     void DeliverQuest()
     {
-        if (hasAllIngredients)
+        if (HasAllIngredients() && isNearWizard)
         {
-            //Instancia Carta Nº1
+            //Instancia Carta NÂº1
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Collect()
     {
-        if (collision.CompareTag("Ingredient01"))
+        if (Collectable.Instance.InRange() && 
+            Collectable.Instance.ObjTag() == "Ingredient" &&
+            Collectable.Instance.IsPressed())
         {
-            ingredient01 = true;
-            Destroy(collision.gameObject);
+            ingredientCount++;
+            Destroy(Collectable.Instance.gameObject);
         }
-        if (collision.CompareTag("Ingredient02"))
-        {
-            ingredient02 = true;
-            Destroy(collision.gameObject);
-        }
-        if (collision.CompareTag("Ingredient03"))
-        {
-            ingredient03 = true;
-            Destroy(collision.gameObject);
-        }
+    }
+
+    bool HasAllIngredients()
+    {
+        hasAllIngredients = ingredientCount >= 3;
+        return hasAllIngredients;
     }
 }

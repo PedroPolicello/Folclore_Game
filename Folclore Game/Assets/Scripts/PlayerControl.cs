@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
-    private static PlayerControl Instance;
+    public static PlayerControl Instance;
     private Controls controls;
 
     #region PlayerComponents
@@ -25,15 +24,16 @@ public class PlayerControl : MonoBehaviour
 
     #region SerializedField Variables
 
-    [Header("Movement Variables")]
-    [SerializeField] private float maxSpeed;
+    [Header("Movement Variables")] [SerializeField]
+    private float maxSpeed;
 
     [SerializeField] private float accelerationSpeed;
     [SerializeField] private float decelerationSpeed;
     private float speed;
 
-    [Header("Jump Variables")]
-    [SerializeField] private float jumpForce;
+    [Header("Jump Variables")] [SerializeField]
+    private float jumpForce;
+
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
 
@@ -99,22 +99,6 @@ public class PlayerControl : MonoBehaviour
         else
         {
             speed = 0;
-            // switch (moveDirection.x)
-            // {
-            //     case  > 0:
-            //         speed -= Time.deltaTime * decelerationSpeed;
-            //         rb.velocity = new Vector2(1, 0 * (speed * Time.deltaTime));
-            //         break;
-            //     
-            //     case < 0:
-            //         speed -= Time.deltaTime * decelerationSpeed;
-            //         rb.velocity = new Vector2(-1, 0 * (speed * Time.deltaTime));
-            //         break;
-            //     
-            //     default:
-            //         speed = 0;
-            //         break;
-            // }
         }
 
         if (speed >= maxSpeed)
@@ -128,7 +112,34 @@ public class PlayerControl : MonoBehaviour
 
         transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
+    
+    private bool IsGrounded()
+    {
+        bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
+        return isGrounded;
+    }
+    private void OnDrawGizmos()
+    {
+        if (IsGrounded())
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
+        }
 
+        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
+    }
+
+    
+    
+    void GetComponents()
+    {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     void SetInput()
     {
         controls = new Controls();
@@ -141,43 +152,20 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.performed += OnJump;
         controls.Player.Jump.canceled += OnJumpExit;
     }
-
-    void GetComponents()
-    {
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     private void OnEnable()
     {
         controls.Enable();
     }
-
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
         controls.Player.Move.performed -= OnMove;
         controls.Player.Move.canceled -= OnMove;
+        
+        controls.Player.Jump.started -= OnJump;
+        controls.Player.Jump.performed -= OnJump;
+        controls.Player.Jump.canceled -= OnJumpExit;
+        
         controls.Disable();
-    }
-
-    private bool IsGrounded()
-    {
-        bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
-        return isGrounded;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (IsGrounded())
-        {
-            Gizmos.color = Color.green;
-        }
-        else
-        {
-            Gizmos.color = Color.red;            
-        }
-        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
     }
 }
