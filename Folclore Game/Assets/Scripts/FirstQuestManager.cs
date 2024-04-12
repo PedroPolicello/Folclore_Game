@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class FirstQuestManager : MonoBehaviour
 {
+    public static FirstQuestManager Instance;
+
     private int ingredientCount;
     private bool hasAllIngredients;
     private bool isNearWizard;
 
-    void Update()
+    private void Awake()
     {
-        Collect();
+        Instance = this;
     }
 
     void DeliverQuest()
@@ -19,20 +21,14 @@ public class FirstQuestManager : MonoBehaviour
         }
     }
 
-    void Collect()
-    {
-        if (Collectable.Instance.InRange() && 
-            Collectable.Instance.ObjTag() == "Ingredient" &&
-            Collectable.Instance.IsPressed())
-        {
-            ingredientCount++;
-            Destroy(Collectable.Instance.gameObject);
-        }
-    }
-
     bool HasAllIngredients()
     {
         hasAllIngredients = ingredientCount >= 3;
         return hasAllIngredients;
+    }
+
+    public void AddIngredientCount()
+    {
+        ingredientCount ++;
     }
 }

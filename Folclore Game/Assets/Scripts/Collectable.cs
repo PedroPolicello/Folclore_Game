@@ -1,38 +1,32 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Collectable : MonoBehaviour
 {
     public static Collectable Instance;
-    private Controls controls;
-    
+
     [SerializeField] private GameObject pressE;
     private bool inRange;
-    private bool pressed;
+    private bool isPressed;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
 
     private void Update()
     {
-        SetInput();
+        Collect();
+        print(inRange);
+        print(isPressed);
     }
-    
-    private void OnCollect(InputAction.CallbackContext value)
+
+    public void OnCollect(InputAction.CallbackContext value)
     {
-        pressed = value.ReadValueAsButton();
+        isPressed = value.ReadValueAsButton();
     }
-    
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -50,39 +44,12 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    public bool IsPressed()
+    void Collect()
     {
-        return pressed;
-    }
-
-    public bool InRange()
-    {
-        return inRange;
-    }
-
-    public string ObjTag()
-    {
-        return gameObject.tag;
-    }
-    
-    
-    private void SetInput()
-    {
-        controls = new Controls();
-
-        controls.Player.Collect.started += OnCollect;
-        controls.Player.Collect.canceled += OnCollect;
-    }
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-    private void OnDisable()
-    {
-        controls.Player.Collect.started -= OnCollect;
-        controls.Player.Collect.canceled -= OnCollect;
-        
-        controls.Disable();
+        if (inRange && isPressed)
+        {
+            FirstQuestManager.Instance.AddIngredientCount();
+            Destroy(gameObject);
+        }
     }
 }

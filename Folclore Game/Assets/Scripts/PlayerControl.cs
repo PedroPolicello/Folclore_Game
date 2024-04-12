@@ -99,23 +99,16 @@ public class PlayerControl : MonoBehaviour
     {
         if (isMoving)
         {
-            speed += accelerationSpeed * Time.deltaTime ;
+            rb.velocity += new Vector2(moveDirection.x * accelerationSpeed, 0);
+            //speed += accelerationSpeed * Time.deltaTime ;
         }
         else
         {
-            speed -= decelerationSpeed * Time.deltaTime;
+            rb.velocity -= new Vector2(moveDirection.x * decelerationSpeed, 0);
+            //speed -= decelerationSpeed * Time.deltaTime;
         }
 
-        if (speed >= maxSpeed)
-        {
-            speed = maxSpeed;
-        }
-        else if (speed <= 0)
-        {
-            speed = 0;
-        }
-
-        transform.Translate(moveDirection * (speed * Time.deltaTime));
+        speed = Mathf.Clamp(rb.velocity.magnitude, 0, maxSpeed);
     }
 
     IEnumerator Dash()
@@ -167,6 +160,9 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.canceled += OnJumpExit;
 
         controls.Player.Dash.started += OnDash;
+
+        controls.Player.Collect.started += Collectable.Instance.OnCollect;
+        controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
     private void OnEnable()
     {
@@ -181,7 +177,12 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.started -= OnJump;
         controls.Player.Jump.performed -= OnJump;
         controls.Player.Jump.canceled -= OnJumpExit;
-        
+
+        controls.Player.Dash.started -= OnDash;
+
+        controls.Player.Collect.started -= Collectable.Instance.OnCollect;
+        controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
+
         controls.Disable();
     }
 }
