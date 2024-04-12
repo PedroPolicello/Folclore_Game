@@ -99,16 +99,13 @@ public class PlayerControl : MonoBehaviour
     {
         if (isMoving)
         {
-            rb.velocity += new Vector2(moveDirection.x * accelerationSpeed, 0);
-            //speed += accelerationSpeed * Time.deltaTime ;
+            rb.velocity.x += Mathf.Clamp(rb.velocity.magnitude + accelerationSpeed,0,maxSpeed);
         }
         else
         {
-            rb.velocity -= new Vector2(moveDirection.x * decelerationSpeed, 0);
-            //speed -= decelerationSpeed * Time.deltaTime;
+            rb.velocity.x -= Mathf.Clamp(rb.velocity.magnitude + decelerationSpeed,0,maxSpeed);
         }
 
-        speed = Mathf.Clamp(rb.velocity.magnitude, 0, maxSpeed);
     }
 
     IEnumerator Dash()
