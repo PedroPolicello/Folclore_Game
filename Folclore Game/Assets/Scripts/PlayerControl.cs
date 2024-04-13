@@ -99,11 +99,11 @@ public class PlayerControl : MonoBehaviour
     {
         if (isMoving)
         {
-            rb.velocity.x += Mathf.Clamp(rb.velocity.magnitude + accelerationSpeed,0,maxSpeed);
+            rb.velocity += new Vector2(Mathf.Clamp(rb.velocity.magnitude + accelerationSpeed,0,maxSpeed), 0);
         }
         else
         {
-            rb.velocity.x -= Mathf.Clamp(rb.velocity.magnitude + decelerationSpeed,0,maxSpeed);
+            rb.velocity -= new Vector2(Mathf.Clamp(rb.velocity.magnitude + decelerationSpeed,0,maxSpeed), 0);
         }
 
     }
@@ -158,8 +158,8 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Dash.started += OnDash;
 
-        controls.Player.Collect.started += Collectable.Instance.OnCollect;
-        controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
+        // controls.Player.Collect.started += Collectable.Instance.OnCollect;
+        // controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
     private void OnEnable()
     {
@@ -177,8 +177,8 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Dash.started -= OnDash;
 
-        controls.Player.Collect.started -= Collectable.Instance.OnCollect;
-        controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
+        // controls.Player.Collect.started -= Collectable.Instance.OnCollect;
+        // controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
 
         controls.Disable();
     }
