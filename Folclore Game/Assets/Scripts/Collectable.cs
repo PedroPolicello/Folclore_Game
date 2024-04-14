@@ -18,8 +18,6 @@ public class Collectable : MonoBehaviour
     private void Update()
     {
         Collect();
-        print(inRange);
-        print(isPressed);
     }
 
     public void OnCollect(InputAction.CallbackContext value)

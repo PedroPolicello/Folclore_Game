@@ -158,8 +158,8 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Dash.started += OnDash;
 
-        // controls.Player.Collect.started += Collectable.Instance.OnCollect;
-        // controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
+        controls.Player.Collect.started += Collectable.Instance.OnCollect;
+        controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
     private void OnEnable()
     {
@@ -177,8 +177,8 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Dash.started -= OnDash;
 
-        // controls.Player.Collect.started -= Collectable.Instance.OnCollect;
-        // controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
+        controls.Player.Collect.started -= Collectable.Instance.OnCollect;
+        controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
 
         controls.Disable();
     }
