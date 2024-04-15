@@ -1148,11 +1148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc455b230334ce41ae4ac2ba7da7ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 15
-  accelerationSpeed: 0.1
-  decelerationSpeed: 0.1
-  dashSpeed: 30
-  dashMaxSpeed: 30
+  maxSpeed: 30
+  accelerationSpeed: 100
+  dashSpeed: 50
   jumpForce: 35
   groundCheckPos: {fileID: 980282598}
   groundLayer:

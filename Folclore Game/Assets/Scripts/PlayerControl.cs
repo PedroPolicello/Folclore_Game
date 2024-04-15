@@ -6,37 +6,42 @@ public class PlayerControl : MonoBehaviour
 {
     public static PlayerControl Instance;
     private Controls controls;
-    
+
     #region PlayerComponents
+
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+
     #endregion
+
     #region Movement Variables
+
     private Vector2 moveDirection;
     private bool isMoving;
     private bool isJumping;
     private bool isDashing;
+
     #endregion
+
     #region SerializedField Variables
+
     [Header("Movement Variables")] 
+    private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
-    [SerializeField] private float decelerationSpeed;
-    private float speed;
 
     [Header("Dash Variables")] 
     [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashMaxSpeed;
     private float normalSpeed;
     private float normalMaxSpeed;
     private bool canDash = true;
 
-    [Header("Jump Variables")] [SerializeField]
-    private float jumpForce;
-
+    [Header("Jump Variables")] 
+    [SerializeField] private float jumpForce;
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
+
     #endregion
 
     void Awake()
@@ -65,6 +70,7 @@ public class PlayerControl : MonoBehaviour
         moveDirection = value.ReadValue<Vector2>();
         isMoving = true;
     }
+
     void OnMoveExit(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
@@ -79,6 +85,7 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
+
     void OnJumpExit(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
@@ -95,23 +102,25 @@ public class PlayerControl : MonoBehaviour
     {
         Move();
     }
+
     void Move()
     {
         if (isMoving)
         {
-            rb.velocity += new Vector2(Mathf.Clamp(rb.velocity.magnitude + accelerationSpeed,0,maxSpeed), 0);
+            speed += accelerationSpeed * Time.deltaTime;
         }
         else
         {
-            rb.velocity -= new Vector2(Mathf.Clamp(rb.velocity.magnitude + decelerationSpeed,0,maxSpeed), 0);
+            speed = 0;
         }
-
+        
+        transform.Translate(moveDirection * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
     }
 
     IEnumerator Dash()
     {
         canDash = false;
-        maxSpeed = dashMaxSpeed;
+        maxSpeed = 100;
         speed = dashSpeed;
         yield return new WaitForSeconds(.2f);
         speed = normalSpeed;
@@ -119,12 +128,13 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(2f);
         canDash = true;
     }
-    
+
     private bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
     }
+
     private void OnDrawGizmos()
     {
         if (IsGrounded())
@@ -138,12 +148,14 @@ public class PlayerControl : MonoBehaviour
 
         Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
     }
+
     void GetComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     void SetInput()
     {
         controls = new Controls();
@@ -161,16 +173,18 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Collect.started += Collectable.Instance.OnCollect;
         controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
+
     private void OnEnable()
     {
         controls.Enable();
     }
+
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
         controls.Player.Move.performed -= OnMove;
         controls.Player.Move.canceled -= OnMove;
-        
+
         controls.Player.Jump.started -= OnJump;
         controls.Player.Jump.performed -= OnJump;
         controls.Player.Jump.canceled -= OnJumpExit;
