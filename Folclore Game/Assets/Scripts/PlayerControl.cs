@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,18 +25,12 @@ public class PlayerControl : MonoBehaviour
 
     #region SerializedField Variables
 
-    [Header("Movement Variables")] 
+    [Header("Movement Variables")]
     private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
 
-    [Header("Dash Variables")] 
-    [SerializeField] private float dashSpeed;
-    private float normalSpeed;
-    private float normalMaxSpeed;
-    private bool canDash = true;
-
-    [Header("Jump Variables")] 
+    [Header("Jump Variables")]
     [SerializeField] private float jumpForce;
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
@@ -61,8 +54,6 @@ public class PlayerControl : MonoBehaviour
 
         SetInput();
         GetComponents();
-        normalSpeed = speed;
-        normalMaxSpeed = maxSpeed;
     }
 
     void OnMove(InputAction.CallbackContext value)
@@ -92,12 +83,6 @@ public class PlayerControl : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
 
-    void OnDash(InputAction.CallbackContext value)
-    {
-        isDashing = value.ReadValueAsButton();
-        StartCoroutine(Dash());
-    }
-
     void Update()
     {
         Move();
@@ -113,20 +98,8 @@ public class PlayerControl : MonoBehaviour
         {
             speed = 0;
         }
-        
-        transform.Translate(moveDirection * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
-    }
 
-    IEnumerator Dash()
-    {
-        canDash = false;
-        maxSpeed = 100;
-        speed = dashSpeed;
-        yield return new WaitForSeconds(.2f);
-        speed = normalSpeed;
-        maxSpeed = normalMaxSpeed;
-        yield return new WaitForSeconds(2f);
-        canDash = true;
+        transform.Translate(moveDirection * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
     }
 
     private bool IsGrounded()
@@ -168,8 +141,6 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.performed += OnJump;
         controls.Player.Jump.canceled += OnJumpExit;
 
-        controls.Player.Dash.started += OnDash;
-
         controls.Player.Collect.started += Collectable.Instance.OnCollect;
         controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
@@ -188,8 +159,6 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Jump.started -= OnJump;
         controls.Player.Jump.performed -= OnJump;
         controls.Player.Jump.canceled -= OnJumpExit;
-
-        controls.Player.Dash.started -= OnDash;
 
         controls.Player.Collect.started -= Collectable.Instance.OnCollect;
         controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;

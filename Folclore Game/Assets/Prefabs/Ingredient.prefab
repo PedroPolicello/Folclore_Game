@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1061305836396318129}
   - component: {fileID: 4331123796925870282}
   - component: {fileID: 4053708396506097395}
+  - component: {fileID: 704021687841964014}
   m_Layer: 0
   m_Name: Ingredient
   m_TagString: Collectable
@@ -120,3 +121,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &704021687841964014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965819568173323633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca123f4f8a76a9a44898d5b2fcea777a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressE: {fileID: 0}

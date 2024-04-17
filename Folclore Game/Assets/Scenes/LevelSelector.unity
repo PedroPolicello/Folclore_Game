@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level:
-  - Cuca
+  - CucaLevel
 --- !u!4 &702559833
 Transform:
   m_ObjectHideFlags: 0

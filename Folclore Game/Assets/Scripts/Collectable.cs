@@ -24,6 +24,14 @@ public class Collectable : MonoBehaviour
     {
         isPressed = value.ReadValueAsButton();
     }
+    void Collect()
+    {
+        if (inRange && isPressed)
+        {
+            FirstQuestManager.Instance.AddIngredientCount();
+            gameObject.SetActive(false);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -42,12 +50,4 @@ public class Collectable : MonoBehaviour
         }
     }
 
-    void Collect()
-    {
-        if (inRange && isPressed)
-        {
-            FirstQuestManager.Instance.AddIngredientCount();
-            Destroy(gameObject);
-        }
-    }
 }
