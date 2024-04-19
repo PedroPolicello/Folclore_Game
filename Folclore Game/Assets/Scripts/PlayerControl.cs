@@ -51,7 +51,10 @@ public class PlayerControl : MonoBehaviour
         }
 
         #endregion
+    }
 
+    private void Start()
+    {
         SetInput();
         GetComponents();
     }

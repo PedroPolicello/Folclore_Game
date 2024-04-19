@@ -24,6 +24,7 @@ public class Collectable : MonoBehaviour
     {
         isPressed = value.ReadValueAsButton();
     }
+
     void Collect()
     {
         if (inRange && isPressed)
