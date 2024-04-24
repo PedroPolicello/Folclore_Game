@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class Collectable : MonoBehaviour
 {
     public static Collectable Instance;
-
+    private Controls controls;
+    
     [SerializeField] private GameObject pressE;
     private bool inRange;
     private bool isPressed;
@@ -13,6 +14,10 @@ public class Collectable : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+        // controls = new Controls();
+        // controls.Player.Collect.started += OnCollect;
+        // controls.Player.Collect.canceled += OnCollect;
     }
 
     private void Update()
@@ -42,6 +47,7 @@ public class Collectable : MonoBehaviour
             inRange = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -51,4 +57,17 @@ public class Collectable : MonoBehaviour
         }
     }
 
+
+    // private void OnEnable()
+    // {
+    //     controls.Enable();
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     controls.Player.Collect.started -= OnCollect;
+    //     controls.Player.Collect.canceled -= OnCollect;
+    //
+    //     controls.Disable();
+    // }
 }

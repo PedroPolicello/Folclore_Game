@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,6 @@ public class PlayerControl : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     #endregion
-
     #region Movement Variables
 
     private Vector2 moveDirection;
@@ -22,16 +22,15 @@ public class PlayerControl : MonoBehaviour
     private bool isDashing;
 
     #endregion
-
     #region SerializedField Variables
 
-    [Header("Movement Variables")]
-    private float speed;
+    [Header("Movement Variables")] private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
 
-    [Header("Jump Variables")]
-    [SerializeField] private float jumpForce;
+    [Header("Jump Variables")] [SerializeField]
+    private float jumpForce;
+
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
 
@@ -51,26 +50,19 @@ public class PlayerControl : MonoBehaviour
         }
 
         #endregion
-    }
-
-    private void Start()
-    {
         SetInput();
         GetComponents();
     }
-
     void OnMove(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
         isMoving = true;
     }
-
     void OnMoveExit(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
         isMoving = false;
     }
-
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
@@ -79,18 +71,16 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
-
     void OnJumpExit(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
-
     void Update()
     {
         Move();
+        FlipX();
     }
-
     void Move()
     {
         if (isMoving)
@@ -104,13 +94,22 @@ public class PlayerControl : MonoBehaviour
 
         transform.Translate(moveDirection * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
     }
-
+    void FlipX()
+    {
+        if (moveDirection.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveDirection.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
     private bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
     }
-
     private void OnDrawGizmos()
     {
         if (IsGrounded())
@@ -131,11 +130,9 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
     void SetInput()
     {
         controls = new Controls();
-
         controls.Player.Move.started += OnMove;
         controls.Player.Move.performed += OnMove;
         controls.Player.Move.canceled += OnMoveExit;
@@ -147,12 +144,10 @@ public class PlayerControl : MonoBehaviour
         controls.Player.Collect.started += Collectable.Instance.OnCollect;
         controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
     }
-
     private void OnEnable()
     {
         controls.Enable();
     }
-
     private void OnDisable()
     {
         controls.Player.Move.started -= OnMove;
@@ -165,7 +160,7 @@ public class PlayerControl : MonoBehaviour
 
         controls.Player.Collect.started -= Collectable.Instance.OnCollect;
         controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
-
+        
         controls.Disable();
     }
 }
