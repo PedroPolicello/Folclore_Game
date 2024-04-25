@@ -22,15 +22,16 @@ public class FirstQuestManager : MonoBehaviour
 
     void DeliverQuest()
     {
-        if (HasAllIngredients() && isNearWizard)
+        if (HasAllIngredients() && isNearWizard && PlayerInputsControl.instance.GetIsPressed())
         {
+            print("Primeira carta recebida!");
             //Instancia Carta Nº1
         }
     }
 
     bool HasAllIngredients()
     {
-        hasAllIngredients = ingredientCount == 3;
+        hasAllIngredients = ingredientCount == 4;
         return hasAllIngredients;
     }
 

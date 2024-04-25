@@ -1,6 +1,5 @@
 using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -12,14 +11,6 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-
-    #endregion
-    #region Movement Variables
-
-    private Vector2 moveDirection;
-    private bool isMoving;
-    private bool isJumping;
-    private bool isDashing;
 
     #endregion
     #region SerializedField Variables
@@ -50,31 +41,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         #endregion
-        SetInput();
         GetComponents();
-    }
-    void OnMove(InputAction.CallbackContext value)
-    {
-        moveDirection = value.ReadValue<Vector2>();
-        isMoving = true;
-    }
-    void OnMoveExit(InputAction.CallbackContext value)
-    {
-        moveDirection = value.ReadValue<Vector2>();
-        isMoving = false;
-    }
-    void OnJump(InputAction.CallbackContext value)
-    {
-        isJumping = value.ReadValueAsButton();
-        if (IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
-    }
-    void OnJumpExit(InputAction.CallbackContext value)
-    {
-        isJumping = value.ReadValueAsButton();
-        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
     void Update()
     {
@@ -83,7 +50,7 @@ public class PlayerControl : MonoBehaviour
     }
     void Move()
     {
-        if (isMoving)
+        if (PlayerInputsControl.instance.GetIsMoving())
         {
             speed += accelerationSpeed * Time.deltaTime;
         }
@@ -92,20 +59,20 @@ public class PlayerControl : MonoBehaviour
             speed = 0;
         }
 
-        transform.Translate(moveDirection * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
+        transform.Translate(PlayerInputsControl.instance.GetMoveDirection() * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
     }
     void FlipX()
     {
-        if (moveDirection.x > 0)
+        if (PlayerInputsControl.instance.GetMoveDirection().x > 0)
         {
             spriteRenderer.flipX = false;
         }
-        else if (moveDirection.x < 0)
+        else if (PlayerInputsControl.instance.GetMoveDirection().x < 0)
         {
             spriteRenderer.flipX = true;
         }
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
@@ -123,44 +90,18 @@ public class PlayerControl : MonoBehaviour
 
         Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
     }
-
     void GetComponents()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    void SetInput()
+    public Rigidbody2D GetRb()
     {
-        controls = new Controls();
-        controls.Player.Move.started += OnMove;
-        controls.Player.Move.performed += OnMove;
-        controls.Player.Move.canceled += OnMoveExit;
-
-        controls.Player.Jump.started += OnJump;
-        controls.Player.Jump.performed += OnJump;
-        controls.Player.Jump.canceled += OnJumpExit;
-
-        controls.Player.Collect.started += Collectable.Instance.OnCollect;
-        controls.Player.Collect.canceled += Collectable.Instance.OnCollect;
+        return rb;
     }
-    private void OnEnable()
+    public float GetJumpForce()
     {
-        controls.Enable();
-    }
-    private void OnDisable()
-    {
-        controls.Player.Move.started -= OnMove;
-        controls.Player.Move.performed -= OnMove;
-        controls.Player.Move.canceled -= OnMove;
-
-        controls.Player.Jump.started -= OnJump;
-        controls.Player.Jump.performed -= OnJump;
-        controls.Player.Jump.canceled -= OnJumpExit;
-
-        controls.Player.Collect.started -= Collectable.Instance.OnCollect;
-        controls.Player.Collect.canceled -= Collectable.Instance.OnCollect;
-        
-        controls.Disable();
+        return jumpForce;
     }
 }

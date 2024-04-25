@@ -9,36 +9,24 @@ public class Collectable : MonoBehaviour
     
     [SerializeField] private GameObject pressE;
     private bool inRange;
-    private bool isPressed;
 
     private void Awake()
     {
         Instance = this;
-        
-        // controls = new Controls();
-        // controls.Player.Collect.started += OnCollect;
-        // controls.Player.Collect.canceled += OnCollect;
     }
-
     private void Update()
     {
         Collect();
     }
-
-    public void OnCollect(InputAction.CallbackContext value)
-    {
-        isPressed = value.ReadValueAsButton();
-    }
-
+    
     void Collect()
     {
-        if (inRange && isPressed)
+        if (inRange && PlayerInputsControl.instance.GetIsPressed())
         {
             FirstQuestManager.Instance.AddIngredientCount();
             gameObject.SetActive(false);
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -47,7 +35,6 @@ public class Collectable : MonoBehaviour
             inRange = true;
         }
     }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -56,18 +43,4 @@ public class Collectable : MonoBehaviour
             inRange = false;
         }
     }
-
-
-    // private void OnEnable()
-    // {
-    //     controls.Enable();
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     controls.Player.Collect.started -= OnCollect;
-    //     controls.Player.Collect.canceled -= OnCollect;
-    //
-    //     controls.Disable();
-    // }
 }
