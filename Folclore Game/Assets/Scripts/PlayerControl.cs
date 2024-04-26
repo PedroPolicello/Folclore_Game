@@ -1,5 +1,6 @@
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class PlayerControl : MonoBehaviour
     {
         Move();
         FlipX();
+        //Attack();
     }
     void Move()
     {
@@ -72,6 +74,14 @@ public class PlayerControl : MonoBehaviour
             spriteRenderer.flipX = true;
         }
     }
+    void Attack()
+    {
+        if (PlayerInputsControl.instance.GetIsAttacking())
+        {
+            print("Você Atacou!");
+        }
+    }
+    
     public bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);

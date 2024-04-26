@@ -9,6 +9,7 @@ public class PlayerInputsControl : MonoBehaviour
     private Vector2 moveDirection;
     private bool isMoving;
     private bool isJumping;
+    private bool isAttacking;
     private bool isPressed;
     
     private void Awake()
@@ -30,6 +31,7 @@ public class PlayerInputsControl : MonoBehaviour
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
+        //Chamar função do "PlayerControl" que realiza o pulo
         if (PlayerControl.Instance.IsGrounded())
         {
             PlayerControl.Instance.GetRb().velocity = new Vector2(PlayerControl.Instance.GetRb().velocity.x, PlayerControl.Instance.GetJumpForce());
@@ -44,6 +46,13 @@ public class PlayerInputsControl : MonoBehaviour
     {
         isPressed = value.ReadValueAsButton();
     }
+    public void OnAttack(InputAction.CallbackContext value)
+    {
+        isAttacking = value.ReadValueAsButton();
+        //Chamar função do "PlayerControl" que realiza o ataque
+        print("Você Atacou!");
+    }
+    
     public bool GetIsMoving()
     {
         return isMoving;
@@ -55,6 +64,10 @@ public class PlayerInputsControl : MonoBehaviour
     public bool GetIsPressed()
     {
         return isPressed;
+    }
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
     }
     
     void SetInput()
@@ -70,6 +83,9 @@ public class PlayerInputsControl : MonoBehaviour
 
         controls.Player.Collect.started += OnCollect;
         controls.Player.Collect.canceled += OnCollect;
+        
+        controls.Player.Attack.started += OnAttack;
+        controls.Player.Attack.canceled += OnAttack;
     }
     private void OnEnable()
     {
@@ -87,6 +103,9 @@ public class PlayerInputsControl : MonoBehaviour
 
         controls.Player.Collect.started -= OnCollect;
         controls.Player.Collect.canceled -= OnCollect;
+        
+        controls.Player.Attack.started -= OnAttack;
+        controls.Player.Attack.canceled -= OnAttack;
         
         controls.Disable();
     }

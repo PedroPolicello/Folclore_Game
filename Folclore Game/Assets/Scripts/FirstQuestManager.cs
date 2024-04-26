@@ -7,7 +7,6 @@ public class FirstQuestManager : MonoBehaviour
 
     private int ingredientCount;
     private bool hasAllIngredients;
-    private bool isNearWizard;
 
     private void Awake()
     {
@@ -22,7 +21,7 @@ public class FirstQuestManager : MonoBehaviour
 
     void DeliverQuest()
     {
-        if (HasAllIngredients() && isNearWizard && PlayerInputsControl.instance.GetIsPressed())
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed())
         {
             print("Primeira carta recebida!");
             //Instancia Carta Nº1
@@ -40,19 +39,5 @@ public class FirstQuestManager : MonoBehaviour
         ingredientCount ++;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Wizard"))
-        {
-            isNearWizard = true;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Wizard"))
-        {
-            isNearWizard = false;
-        }
-    }
 }
