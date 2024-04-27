@@ -17,7 +17,6 @@ public class PlayerInputsControl : MonoBehaviour
         instance = this;
         SetInput();
     }
-    
     void OnMove(InputAction.CallbackContext value)
     {
         moveDirection = value.ReadValue<Vector2>();
@@ -31,16 +30,12 @@ public class PlayerInputsControl : MonoBehaviour
     void OnJump(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        //Chamar função do "PlayerControl" que realiza o pulo
-        if (PlayerControl.Instance.IsGrounded())
-        {
-            PlayerControl.Instance.GetRb().velocity = new Vector2(PlayerControl.Instance.GetRb().velocity.x, PlayerControl.Instance.GetJumpForce());
-        }
+        PlayerMovement.Instance.JumpStart();
     }
     void OnJumpExit(InputAction.CallbackContext value)
     {
         isJumping = value.ReadValueAsButton();
-        PlayerControl.Instance.GetRb().velocity = new Vector2(PlayerControl.Instance.GetRb().velocity.x, PlayerControl.Instance.GetRb().velocity.y * 0.5f);
+        PlayerMovement.Instance.JumpCanceled();
     }
     public void OnCollect(InputAction.CallbackContext value)
     {
@@ -49,10 +44,8 @@ public class PlayerInputsControl : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext value)
     {
         isAttacking = value.ReadValueAsButton();
-        //Chamar função do "PlayerControl" que realiza o ataque
-        print("Você Atacou!");
+        PlayerAttack.instance.Attack();
     }
-    
     public bool GetIsMoving()
     {
         return isMoving;
@@ -69,7 +62,6 @@ public class PlayerInputsControl : MonoBehaviour
     {
         return isAttacking;
     }
-    
     void SetInput()
     {
         controls = new Controls();

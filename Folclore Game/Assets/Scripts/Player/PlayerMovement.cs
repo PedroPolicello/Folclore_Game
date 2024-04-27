@@ -1,10 +1,8 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.Timeline;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    public static PlayerControl Instance;
+    public static PlayerMovement Instance;
     private Controls controls;
 
     #region PlayerComponents
@@ -74,6 +72,17 @@ public class PlayerControl : MonoBehaviour
             spriteRenderer.flipX = true;
         }
     }
+    public void JumpStart()
+    {
+        if (IsGrounded())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+    public void JumpCanceled()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+    }
     void Attack()
     {
         if (PlayerInputsControl.instance.GetIsAttacking())
@@ -81,7 +90,6 @@ public class PlayerControl : MonoBehaviour
             print("Você Atacou!");
         }
     }
-    
     public bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
@@ -105,13 +113,5 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-    public Rigidbody2D GetRb()
-    {
-        return rb;
-    }
-    public float GetJumpForce()
-    {
-        return jumpForce;
     }
 }
