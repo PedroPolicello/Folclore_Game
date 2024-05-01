@@ -14,12 +14,13 @@ public class PlayerMovement : MonoBehaviour
     #endregion
     #region SerializedField Variables
 
-    [Header("Movement Variables")] private float speed;
+    [Header("Movement Variables")] 
+    private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
 
-    [Header("Jump Variables")] [SerializeField]
-    private float jumpForce;
+    [Header("Jump Variables")] 
+    [SerializeField] private float jumpForce;
 
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
@@ -46,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         FlipX();
-        //Attack();
     }
     void Move()
     {
@@ -83,30 +83,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
     }
-    void Attack()
-    {
-        if (PlayerInputsControl.instance.GetIsAttacking())
-        {
-            print("Você Atacou!");
-        }
-    }
     public bool IsGrounded()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
-    }
-    private void OnDrawGizmos()
-    {
-        if (IsGrounded())
-        {
-            Gizmos.color = Color.green;
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-        }
-
-        Gizmos.DrawWireCube(groundCheckPos.position, new Vector3(1.5f, 0.8f));
     }
     void GetComponents()
     {

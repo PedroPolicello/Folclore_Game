@@ -16,8 +16,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (PlayerInputsControl.instance.GetIsAttacking())
         {
-            Instantiate(projectile, shootPos);
-            print("Você Atacou!");
+            Instantiate(projectile, shootPos.position, shootPos.rotation);
         }
     }
 }
