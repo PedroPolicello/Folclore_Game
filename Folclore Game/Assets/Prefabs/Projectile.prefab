@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeSpawn: 2
-  speed: 8
+  speed: 15
