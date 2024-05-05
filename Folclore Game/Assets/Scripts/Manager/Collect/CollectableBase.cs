@@ -1,14 +1,12 @@
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Collectable : MonoBehaviour
+public class CollectableBase : MonoBehaviour
 {
-    public static Collectable Instance;
+    public static CollectableBase Instance;
     private Controls controls;
     
     [SerializeField] private GameObject pressE;
-    private bool inRange;
+    [HideInInspector] public bool inRange;
 
     private void Awake()
     {
@@ -19,12 +17,11 @@ public class Collectable : MonoBehaviour
         Collect();
     }
     
-    void Collect()
+    protected virtual void Collect()
     {
         if (inRange && PlayerInputsControl.instance.GetIsPressed())
         {
-            FirstQuestManager.Instance.AddIngredientCount();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
