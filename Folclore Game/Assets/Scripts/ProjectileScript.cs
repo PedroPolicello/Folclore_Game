@@ -1,19 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
     [SerializeField] private float lifeSpawn;
     [SerializeField] private float speed;
+    private Rigidbody2D rb;
 
     void Awake()
     {
         Destroy(gameObject, lifeSpawn);
+        rb = GetComponent<Rigidbody2D>();
+        AddForce();
     }
 
-    void Update()
+    void AddForce()
     {
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        if (PlayerMovement.Instance.spriteRenderer.flipX == false)
+        {
+            rb.AddForce(Vector2.right * speed * 100);
+        }
+        else
+        {
+            rb.AddForce(Vector2.left * speed * 100);
+        }
     }
 }

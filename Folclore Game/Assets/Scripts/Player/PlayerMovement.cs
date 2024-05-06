@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     #endregion
     #region SerializedField Variables

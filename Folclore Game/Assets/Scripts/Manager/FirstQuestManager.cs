@@ -35,10 +35,9 @@ public class FirstQuestManager : MonoBehaviour
         HasAllIngredients();
         SetupQuest();
     }
-
     void SetupQuest()
     {
-        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed())
+        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !HasAllIngredients())
         {
             StartCoroutine(Dialogue());
             ingredient1.SetActive(true);
@@ -46,7 +45,6 @@ public class FirstQuestManager : MonoBehaviour
             ingredient3.SetActive(true);
         }
     }
-
     void DeliverQuest()
     {
         if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed())
@@ -57,7 +55,6 @@ public class FirstQuestManager : MonoBehaviour
             print("Procure a segunda carta nos esgostos!");
         }
     }
-
     bool HasAllIngredients()
     {
         hasAllIngredients = ingredientCount >= 3;
