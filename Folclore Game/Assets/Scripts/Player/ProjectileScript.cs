@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
@@ -23,5 +24,10 @@ public class ProjectileScript : MonoBehaviour
         {
             rb.AddForce(Vector2.left * speed * 100);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Destroy(gameObject);
     }
 }

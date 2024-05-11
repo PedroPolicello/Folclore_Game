@@ -8,6 +8,7 @@ TagManager:
   - Collectable
   - FireBall
   - Wizard
+  - Spell
   layers:
   - Default
   - TransparentFX
