@@ -14,6 +14,7 @@ public class PlayerInputsControl : MonoBehaviour
     
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         instance = this;
         SetInput();
     }
