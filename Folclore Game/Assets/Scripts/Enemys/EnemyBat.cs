@@ -6,6 +6,7 @@ public class EnemyBat : MonoBehaviour
     [SerializeField] private int maxLife;
     [SerializeField] private float fireRate;
     [SerializeField] private GameObject poopPrefab;
+    [SerializeField] private float maxHeight;
     private float nextFire = 0.0F;
 
     private int currentLife;
@@ -42,9 +43,9 @@ public class EnemyBat : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-        if (transform.position.y <= 1)
+        if (transform.position.y <= maxHeight)
         {
-            transform.position = new Vector2(transform.position.x, 1);
+            transform.position = new Vector2(transform.position.x, maxHeight);
         }
 
         if (transform.position.x >= target.transform.position.x - 1 &&

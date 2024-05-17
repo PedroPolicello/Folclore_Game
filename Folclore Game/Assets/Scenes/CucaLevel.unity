@@ -1089,6 +1089,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressE: {fileID: 809588573}
   inRange: 0
+  ingredientType:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &289041197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,11 +1240,11 @@ PrefabInstance:
       objectReference: {fileID: 809588573}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.82
+      value: 12.0199995
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1391,6 +1394,9 @@ MonoBehaviour:
   ingredient1: {fileID: 275823463}
   ingredient2: {fileID: 1408808052}
   ingredient3: {fileID: 1756045518}
+  frogLeg: 0
+  feather: 0
+  batWing: 0
   potion: {fileID: 6965819568639281081}
   card: {fileID: 3152222}
   textBox: {fileID: 674857645}
@@ -1799,11 +1805,11 @@ PrefabInstance:
       objectReference: {fileID: 809588573}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.96
+      value: 9.08
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2580,11 +2586,11 @@ PrefabInstance:
       objectReference: {fileID: 809588573}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.26
+      value: 15.24
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.05
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1061305836396318129, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2906,6 +2912,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressE: {fileID: 809588573}
   inRange: 0
+  ingredientType:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1467792940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,6 +3651,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressE: {fileID: 809588573}
   inRange: 0
+  ingredientType:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1883763286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,7 +3934,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -273749254, guid: eed227303f853564e919e45c7bb96982, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

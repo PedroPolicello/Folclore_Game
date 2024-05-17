@@ -14,6 +14,10 @@ public class FirstQuestManager : MonoBehaviour
     [SerializeField] private GameObject ingredient2;
     [SerializeField] private GameObject ingredient3;
 
+    [HideInInspector] public bool frogLeg;
+    [HideInInspector] public bool feather;
+    [HideInInspector] public bool batWing;
+
     [SerializeField] private GameObject potion;
     [SerializeField] private GameObject card;
     #endregion
