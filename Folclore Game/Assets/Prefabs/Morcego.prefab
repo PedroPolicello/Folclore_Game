@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3497008559401761165}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -226,3 +226,4 @@ MonoBehaviour:
   maxLife: 2
   fireRate: 2
   poopPrefab: {fileID: 8859738837290520443, guid: a0d8c73efac1112488138e2168c07d17, type: 3}
+  maxHeight: 0
