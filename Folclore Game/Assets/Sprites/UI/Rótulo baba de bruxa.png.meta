@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f7bf27950bcfa244198234b62e64fe2a
+guid: cd9dd6df664cd17409615866dcda907b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 85
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,41 +136,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lua_0
+      name: "R\xF3tulo baba de bruxa_0"
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 648
-        width: 463
-        height: 432
+        x: 718
+        y: 154
+        width: 571
+        height: 845
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -112.5, y: 16}
-        - {x: -101.5, y: 53}
-        - {x: -85.5, y: 84}
-        - {x: -58.5, y: 110}
-        - {x: -25.5, y: 122}
-        - {x: 14.5, y: 126}
-        - {x: 49.5, y: 115}
-        - {x: 76.5, y: 96}
-        - {x: 97.5, y: 72}
-        - {x: 107.5, y: 33}
-        - {x: 107.5, y: -6}
-        - {x: 94.5, y: -43}
-        - {x: 68.5, y: -73}
-        - {x: 32.5, y: -90}
-        - {x: 9.5, y: -96}
-        - {x: -15.5, y: -96}
-        - {x: -54.5, y: -82}
-        - {x: -86.5, y: -52}
-        - {x: -108.5, y: -18}
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b8715a72629d1a47a67004743bcb511
-      internalID: 1244290622
+      spriteID: 4c76af53b53bdeb4f93b5233fb7282d5
+      internalID: -682908045
       vertices: []
       indices: 
       edges: []
@@ -186,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Lua_0: 1244290622
+      "R\xF3tulo baba de bruxa_0": -682908045
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

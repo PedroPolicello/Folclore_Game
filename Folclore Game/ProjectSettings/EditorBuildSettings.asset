@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 3c0c93d7576d7cc4fa720db475d0bf6c
+  - enabled: 1
+    path: Assets/Scenes/LevelSelector.unity
+    guid: 67417b53e4f693047bd7d6b562fe8094
+  - enabled: 1
     path: Assets/Scenes/CucaLevel.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/CucaEsgoto.unity
+    guid: 2170bb6074c9e9f4aa77f37c1644280b
+  - enabled: 1
+    path: Assets/Scenes/CucaBoss.unity
+    guid: e9e6093002f662140b02f3167676a49d
   m_configObjects: {}
