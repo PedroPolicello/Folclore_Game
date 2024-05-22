@@ -8,6 +8,7 @@ public class FirstQuestManager : MonoBehaviour
 
     private int ingredientCount;
     private bool hasAllIngredients;
+    private bool finishPuzzle1 = false;
 
     #region GameObjects
     [SerializeField] private GameObject ingredient1;
@@ -41,7 +42,7 @@ public class FirstQuestManager : MonoBehaviour
     }
     void SetupQuest()
     {
-        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !HasAllIngredients())
+        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !HasAllIngredients() && !finishPuzzle1)
         {
             StartCoroutine(Dialogue());
             ingredient1.SetActive(true);
@@ -51,11 +52,12 @@ public class FirstQuestManager : MonoBehaviour
     }
     void DeliverQuest()
     {
-        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed())
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
         {
             WizardScript.instance.ChangeSprite();
             card.SetActive(true);
             potion.SetActive(true);
+            finishPuzzle1 = true;
             print("Procure a segunda carta nos esgostos!");
         }
     }

@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
     public static CollectableBase Instance;
-    private Controls controls;
     
-    [SerializeField] private GameObject pressE;
+    [SerializeField] private GameObject textFeedback;
+    [SerializeField] private string text;
     [HideInInspector] public bool inRange;
 
     private void Awake()
@@ -28,7 +29,8 @@ public class CollectableBase : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            pressE.SetActive(true);
+            textFeedback.GetComponent<TextMeshProUGUI>().text = text;
+            textFeedback.SetActive(true);
             inRange = true;
         }
     }
@@ -36,7 +38,7 @@ public class CollectableBase : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            pressE.SetActive(false);
+            textFeedback.SetActive(false);
             inRange = false;
         }
     }

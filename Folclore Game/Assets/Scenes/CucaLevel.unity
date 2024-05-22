@@ -381,7 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdade31e469be8c46af963bac63d6299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressE: {fileID: 809588573}
+  textFeedback: {fileID: 809588573}
+  text: Coletar
   inRange: 0
 --- !u!1 &54030002
 GameObject:
@@ -1088,7 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565398581f9e24049b4c879e70ecec22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressE: {fileID: 809588573}
+  textFeedback: {fileID: 809588573}
+  text: Coletar
   inRange: 0
   ingredientType:
     serializedVersion: 2
@@ -2206,7 +2208,7 @@ GameObject:
   - component: {fileID: 809588576}
   - component: {fileID: 809588575}
   m_Layer: 5
-  m_Name: '[TMP] Collect'
+  m_Name: '[TMP] textFeedback'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2251,7 +2253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Coletar
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3138,7 +3140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565398581f9e24049b4c879e70ecec22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressE: {fileID: 809588573}
+  textFeedback: {fileID: 809588573}
+  text: Coletar
   inRange: 0
   ingredientType:
     serializedVersion: 2
@@ -3618,6 +3621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPos: {fileID: 657348814}
   projectile: {fileID: 8886890265566840755, guid: f853e73d2a34dc848b324558f987d3ad, type: 3}
+  fireRate: 0.5
 --- !u!114 &1566663782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4081,7 +4085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 565398581f9e24049b4c879e70ecec22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressE: {fileID: 809588573}
+  textFeedback: {fileID: 809588573}
+  text: Coletar
   inRange: 0
   ingredientType:
     serializedVersion: 2
@@ -4665,7 +4670,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1948007713, guid: c36f0bd69c0f9654eab4ccb39a578071, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4704,6 +4709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18704e2daf906b7428c19d256d2b5d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textFeedback: {fileID: 809588573}
+  text: Entrar
 --- !u!61 &2049263157
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5073,12 +5080,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -149550428, guid: a955b4c0a7ae27746b6f9eb1c6a0643d, type: 3}
+  m_Sprite: {fileID: 481970191, guid: fe9e11e3b9e83ca44a30d6b796c2d813, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.72, y: 3.24}
+  m_Size: {x: 1.7433333, y: 3.2633333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

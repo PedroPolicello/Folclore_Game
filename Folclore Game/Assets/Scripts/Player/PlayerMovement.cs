@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         #region Singleton
 
         if (Instance == null)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a955b4c0a7ae27746b6f9eb1c6a0643d
+guid: fe9e11e3b9e83ca44a30d6b796c2d813
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -81,33 +81,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -136,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Frasco po\xE7\xE3o_0"
+      name: "Frasco po\xE7\xE3o 1_0"
       rect:
         serializedVersion: 2
-        x: 721
-        y: 58
-        width: 516
-        height: 972
+        x: 718
+        y: 54
+        width: 523
+        height: 979
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6276f3c490a2364b81ffdba342d4b4d
-      internalID: -149550428
+      spriteID: da0055a13b4be03418b92d24817c1a63
+      internalID: 481970191
       vertices: []
       indices: 
       edges: []
@@ -167,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Frasco po\xE7\xE3o_0": -149550428
+      "Frasco po\xE7\xE3o 1_0": 481970191
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

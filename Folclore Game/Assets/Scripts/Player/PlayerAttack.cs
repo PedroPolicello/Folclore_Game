@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private Transform shootPos;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private float fireRate;
+    private float nextFire;
     private void Awake()
     {
         instance = this;
@@ -14,8 +16,9 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (PlayerInputsControl.instance.GetIsAttacking())
+        if (PlayerInputsControl.instance.GetIsAttacking() && Time.time > nextFire)
         {
+            nextFire = Time.time + fireRate;
             Instantiate(projectile, shootPos.position, shootPos.rotation);
         }
     }
