@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9170803503669868065}
   - component: {fileID: 5346299880073955584}
   - component: {fileID: 7364024491418630124}
-  - component: {fileID: 8136862630264775913}
   - component: {fileID: -352300816181771883}
+  - component: {fileID: 8136862630264775913}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Spell
@@ -114,20 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8136862630264775913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8886890265566840755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb1dca6c63a59484890ec2daa1eb2300, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeSpawn: 2
-  speed: 9
 --- !u!58 &-352300816181771883
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -163,3 +149,17 @@ CircleCollider2D:
   m_Offset: {x: -0.1, y: -1}
   serializedVersion: 2
   m_Radius: 0.94824785
+--- !u!114 &8136862630264775913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886890265566840755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1dca6c63a59484890ec2daa1eb2300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSpawn: 2
+  speed: 9

@@ -1,13 +1,14 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyBat : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private int maxLife;
     [SerializeField] private float fireRate;
-    [SerializeField] private GameObject poopPrefab;
+    [FormerlySerializedAs("poopPrefab")] [SerializeField] private GameObject batAttackPrefab;
     [SerializeField] private float maxHeight;
-    private float nextFire = 0.0F;
+    private float nextFire;
 
     private int currentLife;
     private Transform transform;
@@ -43,24 +44,25 @@ public class EnemyBat : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-        if (transform.position.y <= maxHeight)
-        {
-            transform.position = new Vector2(transform.position.x, maxHeight);
-        }
+         if (transform.position.y <= maxHeight)
+         {
+             transform.position = new Vector2(transform.position.x, maxHeight);
+         }
 
-        if (transform.position.x >= target.transform.position.x - 1 &&
-            transform.position.x <= target.transform.position.x + 1)
-        {
-            Shoot();
-        }
+        // if (transform.position.x >= target.transform.position.x - 1 &&
+        //     transform.position.x <= target.transform.position.x + 1)
+        // {
+        //     Attack();
+        // }
     }
 
-    void Shoot()
+    void Attack()
     {
         if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(poopPrefab, transform.position, transform.rotation);
+            transform.position = new Vector2(transform.position.x, -0.5f);
+            //Instantiate(batAttackPrefab, transform.position, transform.rotation);
         }
     }
 
@@ -68,15 +70,10 @@ public class EnemyBat : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spell"))
         {
-            TakeDamame(1);
+            currentLife -= 1;
+            CheckLife();
+            print(currentLife);
         }
-    }
-
-    void TakeDamame(int dmg)
-    {
-        currentLife -= dmg;
-        CheckLife();
-        print(currentLife);
     }
 
     void CheckLife()

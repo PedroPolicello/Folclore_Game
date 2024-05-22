@@ -11,7 +11,7 @@ public class DoorsManager : MonoBehaviour
 
     private void Update()
     {
-        if (inRange && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && PlayerInputsControl.instance.GetIsPressed() && FirstQuestManager.Instance.finishPuzzle1)
         {
             SceneManager.LoadScene("CucaEsgoto");
         }
@@ -19,7 +19,7 @@ public class DoorsManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = text;
             textFeedback.SetActive(true);
@@ -29,7 +29,7 @@ public class DoorsManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.SetActive(false);
             inRange = false;

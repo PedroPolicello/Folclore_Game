@@ -1,4 +1,3 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class EnemyDragon : MonoBehaviour
@@ -41,14 +40,15 @@ public class EnemyDragon : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spell"))
         {
-            TakeDamame(1);
+            currentLife -= 1;
+            CheckLife();
+            print(currentLife);
         }
-    }
-    void TakeDamame(int dmg)
-    {
-        currentLife -= dmg;
-        CheckLife();
-        print(currentLife);
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth.instance.TakeDamage(1);
+        }
     }
     void CheckLife()
     {

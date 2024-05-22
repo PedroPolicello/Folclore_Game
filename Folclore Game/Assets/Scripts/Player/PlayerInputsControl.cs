@@ -15,7 +15,18 @@ public class PlayerInputsControl : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        instance = this;
+        #region Singleton
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        #endregion
         SetInput();
     }
     void OnMove(InputAction.CallbackContext value)

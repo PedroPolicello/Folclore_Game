@@ -7,8 +7,8 @@ public class FirstQuestManager : MonoBehaviour
     public static FirstQuestManager Instance;
 
     private int ingredientCount;
-    private bool hasAllIngredients;
-    private bool finishPuzzle1 = false;
+    [HideInInspector] public bool hasAllIngredients;
+    [HideInInspector] public bool finishPuzzle1 = false;
 
     #region GameObjects
     [SerializeField] private GameObject ingredient1;
