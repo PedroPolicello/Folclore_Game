@@ -9,6 +9,8 @@ TagManager:
   - FireBall
   - Wizard
   - Spell
+  - textFeedback
+  - backgroundDialogue
   layers:
   - Default
   - TransparentFX

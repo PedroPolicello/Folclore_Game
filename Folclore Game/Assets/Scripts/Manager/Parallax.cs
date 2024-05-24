@@ -7,8 +7,13 @@ public class Parallax : MonoBehaviour
     private float _startingPos, //This is the starting position of the sprites.
         _lengthOfSprite; //This is the length of the sprites.
     public float AmountOfParallax; //This is amount of parallax scroll. 
-    public Camera MainCamera; //Reference of the camera.
-    
+    public GameObject MainCamera; //Reference of the camera.
+
+    private void Awake()
+    {
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    }
+
     private void Start()
     {
         //Getting the starting X position of sprite.
@@ -18,7 +23,7 @@ public class Parallax : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 Position = MainCamera.transform.position;
+        Vector3 Position = MainCamera.GetComponent<Camera>().transform.position;
         float Temp = Position.x * (1 - AmountOfParallax);
         float Distance = Position.x * AmountOfParallax;
 
