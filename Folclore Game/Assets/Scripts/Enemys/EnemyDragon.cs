@@ -9,10 +9,12 @@ public class EnemyDragon : MonoBehaviour
     private Transform transform;
     private GameObject target;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
     void Awake()
     {
         transform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player");
         currentLife = maxLife;
     }
@@ -35,6 +37,7 @@ public class EnemyDragon : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        rb.AddForce(new Vector2(0, -9));
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -54,6 +57,7 @@ public class EnemyDragon : MonoBehaviour
     {
         if (currentLife <= 0)
         {
+            SecondQuestManager.instance.AddKillCount();
             Destroy(gameObject);
         }
     }

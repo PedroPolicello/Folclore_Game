@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
+    [HideInInspector] public bool canMove = true;
 
     [Header("Jump Variables")] 
     [SerializeField] private float jumpForce;
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
-        if (PlayerInputsControl.instance.GetIsMoving())
+        if (PlayerInputsControl.instance.GetIsMoving() && canMove)
         {
             speed += accelerationSpeed * Time.deltaTime;
         }

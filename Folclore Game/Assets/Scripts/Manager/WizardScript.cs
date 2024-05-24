@@ -6,9 +6,9 @@ public class WizardScript : MonoBehaviour
     public static WizardScript instance;
 
     [SerializeField] private Sprite alquimista2;
-    [SerializeField] private GameObject textFeedback;
     [SerializeField] private string[] puzzleTexts;
 
+    private GameObject textFeedback;
     private bool isNearWizard;
     private SpriteRenderer spriteRenderer;
 
@@ -16,6 +16,8 @@ public class WizardScript : MonoBehaviour
     {
         instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        textFeedback = GameObject.FindGameObjectWithTag("textFeedback");
+        textFeedback.GetComponent<TextMeshProUGUI>().text = "";
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -24,13 +26,11 @@ public class WizardScript : MonoBehaviour
         {
             isNearWizard = true;
             textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[0];
-            textFeedback.SetActive(true);
         }
         if (other.CompareTag("Player") && FirstQuestManager.Instance.hasAllIngredients && !FirstQuestManager.Instance.finishPuzzle1)
         {
             isNearWizard = true;
             textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[1];
-            textFeedback.SetActive(true);
         }
     }
 
@@ -39,7 +39,7 @@ public class WizardScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isNearWizard = false;
-            textFeedback.SetActive(false);
+            textFeedback.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 

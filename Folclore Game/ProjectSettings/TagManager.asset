@@ -11,6 +11,10 @@ TagManager:
   - Spell
   - textFeedback
   - backgroundDialogue
+  - enemySpawner
+  - card1
+  - card2
+  - winScreen
   layers:
   - Default
   - TransparentFX

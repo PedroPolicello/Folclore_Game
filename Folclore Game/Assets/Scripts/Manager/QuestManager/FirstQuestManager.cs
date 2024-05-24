@@ -1,6 +1,7 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class FirstQuestManager : MonoBehaviour
 {
@@ -20,11 +21,11 @@ public class FirstQuestManager : MonoBehaviour
     [HideInInspector] public bool batWing;
 
     [SerializeField] private GameObject potion;
-    [SerializeField] private GameObject card;
+    private GameObject card;
     #endregion
 
     #region Texts
-    [SerializeField] private GameObject textBox;
+    private GameObject textBox;
     
     [TextArea(3,10)] [SerializeField] private string[] texts;
     #endregion
@@ -32,6 +33,14 @@ public class FirstQuestManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SetReferences();
+    }
+    void SetReferences()
+    {
+        card = GameObject.FindGameObjectWithTag("card1");
+        card.SetActive(false);
+        textBox = GameObject.FindGameObjectWithTag("backgroundDialogue");
+        textBox.GetComponent<Image>().enabled = false;
     }
 
     private void Update()
@@ -54,11 +63,11 @@ public class FirstQuestManager : MonoBehaviour
     {
         if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
         {
+            StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();
             card.SetActive(true);
             potion.SetActive(true);
             finishPuzzle1 = true;
-            print("Procure a segunda carta nos esgostos!");
         }
     }
     bool HasAllIngredients()
@@ -70,11 +79,29 @@ public class FirstQuestManager : MonoBehaviour
     {
         ingredientCount++;
     }
+
+    void ResetTextBox()
+    {
+        textBox.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        textBox.GetComponent<Image>().enabled = false;
+    }
+     
     IEnumerator Dialogue()
     {
-        textBox.gameObject.SetActive(true);
+        PlayerMovement.Instance.canMove = false;
+        textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
         yield return new WaitForSeconds(5f);
-        textBox.gameObject.SetActive(false);
+        PlayerMovement.Instance.canMove = true;
+        ResetTextBox();
+    }
+    IEnumerator Dialogue2()
+    {
+        PlayerMovement.Instance.canMove = false;
+        textBox.GetComponent<Image>().enabled = true;
+        textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];
+        yield return new WaitForSeconds(5f);
+        PlayerMovement.Instance.canMove = true;
+        ResetTextBox();
     }
 }

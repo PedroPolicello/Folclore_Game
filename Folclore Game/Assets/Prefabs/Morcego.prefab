@@ -226,4 +226,4 @@ MonoBehaviour:
   maxLife: 2
   fireRate: 2
   batAttackPrefab: {fileID: 8859738837290520443, guid: a0d8c73efac1112488138e2168c07d17, type: 3}
-  maxHeight: 0
+  maxHeight: 1

@@ -1,13 +1,22 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DoorsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject textFeedback;
+    private GameObject textFeedback;
+    
+    [SerializeField] private GameObject Player;
     [SerializeField] private string text;
 
     private bool inRange = false;
+
+    private void Awake()
+    {
+        textFeedback = GameObject.FindGameObjectWithTag("textFeedback");
+        textFeedback.GetComponent<TextMeshProUGUI>().text = "";
+    }
 
     private void Update()
     {
@@ -22,7 +31,6 @@ public class DoorsManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = text;
-            textFeedback.SetActive(true);
             inRange = true;
         }
     }
@@ -31,7 +39,7 @@ public class DoorsManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
         {
-            textFeedback.SetActive(false);
+            textFeedback.GetComponent<TextMeshProUGUI>().text = "";
             inRange = false;
         }
     }

@@ -48,24 +48,7 @@ public class EnemyBat : MonoBehaviour
          {
              transform.position = new Vector2(transform.position.x, maxHeight);
          }
-
-        // if (transform.position.x >= target.transform.position.x - 1 &&
-        //     transform.position.x <= target.transform.position.x + 1)
-        // {
-        //     Attack();
-        // }
     }
-
-    void Attack()
-    {
-        if (Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            transform.position = new Vector2(transform.position.x, -0.5f);
-            //Instantiate(batAttackPrefab, transform.position, transform.rotation);
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spell"))
@@ -75,11 +58,11 @@ public class EnemyBat : MonoBehaviour
             print(currentLife);
         }
     }
-
     void CheckLife()
     {
         if (currentLife <= 0)
         {
+            SecondQuestManager.instance.AddKillCount();
             Destroy(gameObject);
         }
     }

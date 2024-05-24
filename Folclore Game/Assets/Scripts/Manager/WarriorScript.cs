@@ -7,8 +7,8 @@ public class WarriorScript : MonoBehaviour
 
     [SerializeField] private Sprite guerreiro2;
     [SerializeField] private string[] puzzleTexts;
-    private GameObject textFeedback;
 
+    private GameObject textFeedback;
     private bool isNearWarrior;
     private SpriteRenderer spriteRenderer;
 
@@ -17,6 +17,7 @@ public class WarriorScript : MonoBehaviour
         instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();
         textFeedback = GameObject.FindGameObjectWithTag("textFeedback");
+        textFeedback.GetComponent<TextMeshProUGUI>().text = "";
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,14 +26,12 @@ public class WarriorScript : MonoBehaviour
         {
             isNearWarrior = true;
             textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[0];
-            textFeedback.SetActive(true);
         }
-        //if (other.CompareTag("Player") && SecondQuestManager.instance.killCount)
-        //{
-        //    isNearWarrior = true;
-        //    textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[0];
-        //    textFeedback.SetActive(true);
-        //}
+        if (other.CompareTag("Player") && SecondQuestManager.instance.killAllEnemies)
+        {
+            isNearWarrior = true;
+            textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[1];
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -40,7 +39,7 @@ public class WarriorScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isNearWarrior = false;
-            textFeedback.SetActive(false);
+            textFeedback.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 
