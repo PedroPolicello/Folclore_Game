@@ -6,7 +6,6 @@ public class EnemyBat : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private int maxLife;
     [SerializeField] private float fireRate;
-    [FormerlySerializedAs("poopPrefab")] [SerializeField] private GameObject batAttackPrefab;
     [SerializeField] private float maxHeight;
     private float nextFire;
 
@@ -27,6 +26,7 @@ public class EnemyBat : MonoBehaviour
     {
         FollowPlayer();
         FlipX();
+        AttackPlayer();
     }
 
     void FlipX()
@@ -44,20 +44,36 @@ public class EnemyBat : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-         if (transform.position.y <= maxHeight)
-         {
-             transform.position = new Vector2(transform.position.x, maxHeight);
-         }
     }
+
+    void AttackPlayer()
+    {
+        if (transform.position.x > target.transform.position.x - .5 && transform.position.x < target.transform.position.x + .5 && Time.time > nextFire)
+        {
+            //transform.position = Vector2.MoveTowards(transform.position, target.transform.position - new Vector3(0, -1, 0), speed * Time.deltaTime); AJUTES!!!!!!
+            nextFire = Time.time + fireRate;
+        }
+        else
+        {
+            transform.position = new Vector2(transform.position.x, maxHeight);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Spell"))
         {
             currentLife -= 1;
             CheckLife();
-            print(currentLife);
+        }
+        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth.instance.TakeDamage(1);
+            transform.position = new Vector2(transform.position.x, maxHeight);
         }
     }
+
     void CheckLife()
     {
         if (currentLife <= 0)

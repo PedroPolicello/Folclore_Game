@@ -16,13 +16,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void CallWinScreen()
-    {
-        if (SecondQuestManager.instance.finishPuzzle2)
-        {
-            StartCoroutine(WinScreen());
-        }
-    }
+    // public void CallWinScreen()
+    // {
+    //     if (SecondQuestManager.instance.finishPuzzle2)
+    //     {
+    //         StartCoroutine(WinScreen());
+    //     }
+    // }
 
     public void TakeDamage(int damage)
     {

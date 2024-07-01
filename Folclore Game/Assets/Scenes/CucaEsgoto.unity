@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killAllEnemies: 0
   finishPuzzle2: 0
+  Player: {fileID: 0}
   texts:
   - "Me ajude a limpar esse esgoto dos inimigos.\n\nEles devem estar logo \xE0 frente."
   - "Muito obrigado!\n\nProcure o guardi\xE3o da casa da Cuca, ele deve te deixar
@@ -827,7 +828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841248728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 

@@ -69,7 +69,6 @@ public class SecondQuestManager : MonoBehaviour
             WarriorScript.instance.ChangeSprite();
             card.SetActive(true);
             finishPuzzle2 = true;
-            PlayerHealth.instance.CallWinScreen();
         }
     }
 

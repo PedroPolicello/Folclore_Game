@@ -37,7 +37,7 @@ public class EnemyDragon : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-        rb.AddForce(new Vector2(0, -9));
+        transform.position = new Vector2(transform.position.x, -1);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -45,7 +45,6 @@ public class EnemyDragon : MonoBehaviour
         {
             currentLife -= 1;
             CheckLife();
-            print(currentLife);
         }
 
         if (collision.gameObject.CompareTag("Player"))
