@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 553b3918c33fb7544937f164012d2494
+guid: 84615b1d3e4defb4e9b944cbf421ad4f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Caldeir\xE3o_3"
+      name: porta alquimista_0
       rect:
         serializedVersion: 2
-        x: 735
-        y: 230
-        width: 450
-        height: 580
+        x: 113
+        y: 64
+        width: 363
+        height: 693
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 854bc32dc62d3354791ee872b288bac0
-      internalID: 37715932
+      spriteID: f768f0348487fc245886c0ecc6b78ec2
+      internalID: -1077749922
       vertices: []
       indices: 
       edges: []
@@ -167,10 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Caldeir\xE3o_0": 319189473
-      "Caldeir\xE3o_1": 449458428
-      "Caldeir\xE3o_2": 1476959368
-      "Caldeir\xE3o_3": 37715932
+      porta alquimista_0: -1077749922
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

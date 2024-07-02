@@ -15,6 +15,9 @@ TagManager:
   - card1
   - card2
   - winScreen
+  - esgoto
+  - alquimista
+  - caminho
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class DoorsManager : MonoBehaviour
 {
     private GameObject textFeedback;
     
-    [SerializeField] private GameObject Player;
+    //[SerializeField] private GameObject Player;
     [SerializeField] private string text;
 
     private bool inRange = false;
@@ -20,15 +20,28 @@ public class DoorsManager : MonoBehaviour
 
     private void Update()
     {
-        if (inRange && PlayerInputsControl.instance.GetIsPressed() && FirstQuestManager.Instance.finishPuzzle1)
+        SceneController();
+    }
+
+    void SceneController()
+    {
+        if (inRange && CompareTag("esgoto") && PlayerInputsControl.instance.GetIsPressed() && FirstQuestManager.Instance.finishPuzzle1)
         {
             SceneManager.LoadScene("CucaEsgoto");
+        }
+        if (inRange && CompareTag("alquimista") && PlayerInputsControl.instance.GetIsPressed())
+        {
+            SceneManager.LoadScene("CucaCasaAlquimista");
+        }
+        if (inRange && CompareTag("caminho") && PlayerInputsControl.instance.GetIsPressed())
+        {
+            SceneManager.LoadScene("CucaLevel");
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
+        if (collision.gameObject.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = text;
             inRange = true;
@@ -37,7 +50,7 @@ public class DoorsManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && FirstQuestManager.Instance.finishPuzzle1)
+        if (collision.gameObject.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "";
             inRange = false;
