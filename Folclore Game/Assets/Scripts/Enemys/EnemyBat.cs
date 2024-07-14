@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +10,7 @@ public class EnemyBat : MonoBehaviour
     [SerializeField] private float maxHeight;
     private float nextFire;
 
-    private int currentLife;
+    [SerializeField] private int currentLife;
     private Transform transform;
     private GameObject target;
     private SpriteRenderer spriteRenderer;
@@ -58,21 +59,20 @@ public class EnemyBat : MonoBehaviour
             transform.position = new Vector2(transform.position.x, maxHeight);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Spell"))
+        if (other.gameObject.CompareTag("Spell"))
         {
             currentLife -= 1;
             CheckLife();
         }
         
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             PlayerHealth.instance.TakeDamage(1);
             transform.position = new Vector2(transform.position.x, maxHeight);
-        }
-    }
+        }    }
 
     void CheckLife()
     {

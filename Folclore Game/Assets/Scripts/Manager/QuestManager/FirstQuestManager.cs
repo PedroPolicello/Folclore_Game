@@ -88,20 +88,20 @@ public class FirstQuestManager : MonoBehaviour
      
     IEnumerator Dialogue()
     {
-        PlayerMovement.Instance.canMove = false;
+        PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
         yield return new WaitForSeconds(5f);
-        PlayerMovement.Instance.canMove = true;
+        PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
     }
     IEnumerator Dialogue2()
     {
-        PlayerMovement.Instance.canMove = false;
+        PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];
         yield return new WaitForSeconds(5f);
-        PlayerMovement.Instance.canMove = true;
+        PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
     }
 }

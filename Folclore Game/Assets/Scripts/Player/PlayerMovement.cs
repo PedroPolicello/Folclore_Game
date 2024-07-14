@@ -19,10 +19,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float accelerationSpeed;
     [HideInInspector] public bool canMove = true;
+    [HideInInspector] public bool canJump = true;
+    [HideInInspector] public bool canFlip = true;
 
     [Header("Jump Variables")] 
     [SerializeField] private float jumpForce;
-
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
 
@@ -49,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         FlipX();
+        SetAnimations();
     }
     void Move()
     {
@@ -65,20 +67,21 @@ public class PlayerMovement : MonoBehaviour
     }
     void FlipX()
     {
-        if (PlayerInputsControl.instance.GetMoveDirection().x > 0)
+        if (PlayerInputsControl.instance.GetMoveDirection().x > 0 && canFlip)
         {
             spriteRenderer.flipX = false;
         }
-        else if (PlayerInputsControl.instance.GetMoveDirection().x < 0)
+        else if (PlayerInputsControl.instance.GetMoveDirection().x < 0 && canFlip)
         {
             spriteRenderer.flipX = true;
         }
     }
     public void JumpStart()
     {
-        if (IsGrounded())
+        if (IsGrounded() && canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetBool("isJumping", true);
         }
     }
     public void JumpCanceled()
@@ -90,6 +93,46 @@ public class PlayerMovement : MonoBehaviour
         bool isGrounded = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1.5f, 0.8f), 0, groundLayer);
         return isGrounded;
     }
+
+    private void SetAnimations()
+    {
+        if (speed != 0)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
+        
+        if (rb.velocity.y < 0f)
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", true);
+        }
+        else if (rb.velocity.y == 0)
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isFalling", false);
+        }
+    }
+
+    public void SetPlayerStatic(bool isStatic)
+    {
+        if (isStatic)
+        {
+            canMove = false;
+            canFlip = false;
+            canJump = false;
+        }
+        else
+        {
+            canMove = true;
+            canFlip = true;
+            canJump = true;
+        }
+    }
+    
     void GetComponents()
     {
         animator = GetComponent<Animator>();
