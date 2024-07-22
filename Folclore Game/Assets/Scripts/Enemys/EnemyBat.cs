@@ -1,6 +1,5 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyBat : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class EnemyBat : MonoBehaviour
     [SerializeField] private float fireRate;
     [SerializeField] private float maxHeight;
     private float nextFire;
+    private bool inPos = false;
 
     [SerializeField] private int currentLife;
     private Transform transform;
@@ -27,7 +27,7 @@ public class EnemyBat : MonoBehaviour
     {
         FollowPlayer();
         FlipX();
-        AttackPlayer();
+        InPosition();
     }
 
     void FlipX()
@@ -47,11 +47,12 @@ public class EnemyBat : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
 
-    void AttackPlayer()
+    void InPosition()
     {
-        if (transform.position.x > target.transform.position.x - .5 && transform.position.x < target.transform.position.x + .5 && Time.time > nextFire)
+        if (transform.position.x > target.transform.position.x - 5 && transform.position.x < target.transform.position.x + 5 && Time.time > nextFire)
         {
-            //transform.position = Vector2.MoveTowards(transform.position, target.transform.position - new Vector3(0, -1, 0), speed * Time.deltaTime); AJUTES!!!!!!
+            print(inPos);
+            StartCoroutine(AttackPlayer());
             nextFire = Time.time + fireRate;
         }
         else
@@ -59,7 +60,15 @@ public class EnemyBat : MonoBehaviour
             transform.position = new Vector2(transform.position.x, maxHeight);
         }
     }
-    
+
+    IEnumerator AttackPlayer()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position - new Vector3(0, -1, 0), speed * Time.deltaTime);
+        yield return new WaitForSeconds(.1f);
+        transform.position = new Vector2(transform.position.x, maxHeight);
+
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Spell"))
@@ -67,12 +76,13 @@ public class EnemyBat : MonoBehaviour
             currentLife -= 1;
             CheckLife();
         }
-        
+
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerHealth.instance.TakeDamage(1);
             transform.position = new Vector2(transform.position.x, maxHeight);
-        }    }
+        }
+    }
 
     void CheckLife()
     {
