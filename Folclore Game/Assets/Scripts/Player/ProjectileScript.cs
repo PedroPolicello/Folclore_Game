@@ -18,12 +18,12 @@ public class ProjectileScript : MonoBehaviour
         if (PlayerMovement.Instance.spriteRenderer.flipX == false)
         {
             rb.AddForce(Vector2.right * speed * 100);
-            transform.eulerAngles = Vector3.forward * 90;
+            //transform.eulerAngles = Vector3.forward * 90;
         }
         else
         {
             rb.AddForce(Vector2.left * speed * 100);
-            transform.eulerAngles = Vector3.forward * -90;
+            transform.eulerAngles = Vector3.forward * 180;
         }
     }
 

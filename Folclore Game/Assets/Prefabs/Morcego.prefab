@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3189336559045903279}
   - component: {fileID: 5303748260782723682}
   - component: {fileID: 7787193541310208274}
+  - component: {fileID: 2895056673507355877}
   m_Layer: 0
   m_Name: Morcego
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -234084695, guid: af6d0e836fa87dc4fa159d77fe8465e1, type: 3}
+  m_Sprite: {fileID: -137732680, guid: 30689222b3584cc4590f20ba5f46f114, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.692, y: 1.15}
+    oldSize: {x: 1.19, y: 1.438}
     newSize: {x: 1.692, y: 1.15}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -227,3 +228,24 @@ MonoBehaviour:
   fireRate: 2
   maxHeight: 2
   currentLife: 0
+--- !u!95 &2895056673507355877
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497008559401761165}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7efe42c305a6cad4f9fe37626c8b29c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

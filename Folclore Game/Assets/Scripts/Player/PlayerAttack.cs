@@ -8,9 +8,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private float fireRate;
     private float nextFire;
+    private Animator animator;
     private void Awake()
     {
         instance = this;
+        animator = GetComponent<Animator>();
     }
 
     public void Attack()
@@ -19,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             Instantiate(projectile, shootPos.position, shootPos.rotation);
+            animator.SetTrigger("isAttacking");
         }
     }
 }

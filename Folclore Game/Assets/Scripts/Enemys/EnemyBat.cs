@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DentedPixel;
 
 public class EnemyBat : MonoBehaviour
 {
@@ -49,10 +50,9 @@ public class EnemyBat : MonoBehaviour
 
     void InPosition()
     {
-        if (transform.position.x > target.transform.position.x - 5 && transform.position.x < target.transform.position.x + 5 && Time.time > nextFire)
+        if (transform.position.x > target.transform.position.x - 1 && transform.position.x < target.transform.position.x + 1 && Time.time > nextFire)
         {
-            print(inPos);
-            StartCoroutine(AttackPlayer());
+            StartCoroutine(Attack());
             nextFire = Time.time + fireRate;
         }
         else
@@ -61,12 +61,10 @@ public class EnemyBat : MonoBehaviour
         }
     }
 
-    IEnumerator AttackPlayer()
+    IEnumerator Attack()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position - new Vector3(0, -1, 0), speed * Time.deltaTime);
-        yield return new WaitForSeconds(.1f);
-        transform.position = new Vector2(transform.position.x, maxHeight);
-
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.moveLocalY(gameObject, transform.position.y - 2, 1.5f).setEasePunch();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
