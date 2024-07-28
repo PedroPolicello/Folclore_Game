@@ -2,27 +2,34 @@ using UnityEngine;
 
 public class CollectIngredient : CollectableBase
 {
-    [SerializeField] private LayerMask ingredientType;
+    public Ingredient ingredientType;
 
     protected override void Collect()
     {
         if (inRange && PlayerInputsControl.instance.GetIsPressed())
         {
-            FirstQuestManager.Instance.AddIngredientCount();
-            switch (ingredientType.ToString())
+            switch (ingredientType)
             {
-                case "FrogLeg":
+                case Ingredient.FrogLeg:
                     FirstQuestManager.Instance.frogLeg = true;
                     break;
-                case "BatWing":
+                case Ingredient.BatWing:
                     FirstQuestManager.Instance.batWing = true;
                     break;
-                case "Feather":
+                case Ingredient.Feather:
                     FirstQuestManager.Instance.frogLeg = true;
                     break;
             }
 
+            FirstQuestManager.Instance.AddIngredientCount();
             Destroy(gameObject);
         }
     }
+}
+
+public enum Ingredient
+{
+    FrogLeg,
+    BatWing,
+    Feather
 }

@@ -10,15 +10,12 @@ public class FirstQuestManager : MonoBehaviour
     private int ingredientCount;
     [HideInInspector] public bool hasAllIngredients;
     [HideInInspector] public bool finishPuzzle1 = false;
+    [HideInInspector] public bool activeIngredient = false;
 
     #region GameObjects
-    [SerializeField] private GameObject ingredient1;
-    [SerializeField] private GameObject ingredient2;
-    [SerializeField] private GameObject ingredient3;
-
-    [HideInInspector] public bool frogLeg;
-    [HideInInspector] public bool feather;
-    [HideInInspector] public bool batWing;
+    public bool frogLeg;
+    public bool feather;
+    public bool batWing;
 
     [SerializeField] private GameObject potion;
     private GameObject card;
@@ -54,9 +51,7 @@ public class FirstQuestManager : MonoBehaviour
         if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !HasAllIngredients() && !finishPuzzle1)
         {
             StartCoroutine(Dialogue());
-            ingredient1.SetActive(true);
-            ingredient2.SetActive(true);
-            ingredient3.SetActive(true);
+            activeIngredient = true;
         }
     }
     void DeliverQuest()
