@@ -1531,6 +1531,9 @@ MonoBehaviour:
   hasAllIngredients: 0
   finishPuzzle1: 0
   activeIngredient: 0
+  ingredient1: {fileID: 0}
+  ingredient2: {fileID: 0}
+  ingredient3: {fileID: 0}
   frogLeg: 0
   feather: 0
   batWing: 0
@@ -1991,7 +1994,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 848188371}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &536756069579555937
+--- !u!1001 &7103707178087415415
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1999,49 +2002,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 4913138748726681899, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+      propertyPath: m_Name
+      value: Ingredient
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.6
+      value: 28.945843
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.66
+      value: -1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999828
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0058758226
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536278863352062500, guid: 5f932427114e8b8429cf90df10998526, type: 3}
+    - target: {fileID: 8310147643706139163, guid: 5f932427114e8b8429cf90df10998526, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6563721019273535504, guid: 5f932427114e8b8429cf90df10998526, type: 3}
-      propertyPath: m_Name
-      value: Ingredient
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2059,5 +2062,5 @@ SceneRoots:
   - {fileID: 50024930}
   - {fileID: 371812958}
   - {fileID: 75296465}
-  - {fileID: 536756069579555937}
   - {fileID: 1617299473}
+  - {fileID: 7103707178087415415}

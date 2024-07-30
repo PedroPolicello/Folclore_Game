@@ -13,6 +13,9 @@ public class FirstQuestManager : MonoBehaviour
     [HideInInspector] public bool activeIngredient = false;
 
     #region GameObjects
+    [SerializeField] private GameObject ingredient1;
+    [SerializeField] private GameObject ingredient2;
+    [SerializeField] private GameObject ingredient3;
     public bool frogLeg;
     public bool feather;
     public bool batWing;
@@ -43,12 +46,11 @@ public class FirstQuestManager : MonoBehaviour
     private void Update()
     {
         DeliverQuest();
-        HasAllIngredients();
         SetupQuest();
     }
     void SetupQuest()
     {
-        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !HasAllIngredients() && !finishPuzzle1)
+        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1)
         {
             StartCoroutine(Dialogue());
             activeIngredient = true;
@@ -56,7 +58,7 @@ public class FirstQuestManager : MonoBehaviour
     }
     void DeliverQuest()
     {
-        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
+        if (hasAllIngredients && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
         {
             StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();
@@ -64,15 +66,6 @@ public class FirstQuestManager : MonoBehaviour
             potion.SetActive(true);
             finishPuzzle1 = true;
         }
-    }
-    bool HasAllIngredients()
-    {
-        hasAllIngredients = ingredientCount >= 3;
-        return hasAllIngredients;
-    }
-    public void AddIngredientCount()
-    {
-        ingredientCount++;
     }
 
     void ResetTextBox()
