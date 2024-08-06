@@ -53,12 +53,14 @@ public class FirstQuestManager : MonoBehaviour
         if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1)
         {
             StartCoroutine(Dialogue());
-            activeIngredient = true;
+            ingredient1.SetActive(true);
+            ingredient2.SetActive(true);
+            ingredient3.SetActive(true);
         }
     }
     void DeliverQuest()
     {
-        if (hasAllIngredients && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
         {
             StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();
@@ -66,6 +68,17 @@ public class FirstQuestManager : MonoBehaviour
             potion.SetActive(true);
             finishPuzzle1 = true;
         }
+    }
+
+    bool HasAllIngredients()
+    {
+        hasAllIngredients = ingredientCount >= 3;
+        return hasAllIngredients;
+    }
+    
+    public void AddIngredientCount()
+    {
+        ingredientCount++;
     }
 
     void ResetTextBox()

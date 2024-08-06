@@ -186,4 +186,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Coletar
   inRange: 0
-  ingredientType: 2
+  ingredientType: 0

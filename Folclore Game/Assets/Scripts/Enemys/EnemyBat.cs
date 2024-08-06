@@ -78,7 +78,6 @@ public class EnemyBat : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerHealth.instance.TakeDamage(1);
-            transform.position = new Vector2(transform.position.x, maxHeight);
         }
     }
 
