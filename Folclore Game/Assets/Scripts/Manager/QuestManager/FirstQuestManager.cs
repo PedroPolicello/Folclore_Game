@@ -15,8 +15,8 @@ public class FirstQuestManager : MonoBehaviour
 
     [SerializeField] private GameObject spawnPointSeita;
     [SerializeField] private GameObject spawnPointAlquimista;
-    [SerializeField] private CanvasGroup fade;
     [SerializeField] private float timeToFade;
+    [SerializeField] private CanvasGroup fade;
     public bool goToWizard = false;
     private GameObject player;
 
@@ -24,9 +24,9 @@ public class FirstQuestManager : MonoBehaviour
     [SerializeField] private GameObject ingredient1;
     [SerializeField] private GameObject ingredient2;
     [SerializeField] private GameObject ingredient3;
-    public bool frogLeg;
-    public bool feather;
-    public bool batWing;
+    [HideInInspector] public bool frogLeg;
+    [HideInInspector] public bool feather;
+    [HideInInspector] public bool batWing;
 
     [SerializeField] private GameObject potion;
     private GameObject card;
@@ -50,13 +50,13 @@ public class FirstQuestManager : MonoBehaviour
         textBox = GameObject.FindGameObjectWithTag("backgroundDialogue");
         textBox.GetComponent<Image>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
     }
 
     private void Update()
     {
         DeliverQuest();
         SetupQuest();
-        if (HasAllIngredients() && goToWizard) StartCoroutine(SendBackToWizard());
     }
     void SetupQuest()
     {
@@ -83,13 +83,14 @@ public class FirstQuestManager : MonoBehaviour
     bool HasAllIngredients()
     {
         hasAllIngredients = ingredientCount >= 3;
-        goToWizard = true;
+        if(hasAllIngredients) goToWizard = true;
         return hasAllIngredients;
     }
 
     public void AddIngredientCount()
     {
         ingredientCount++;
+        if (HasAllIngredients() && goToWizard) StartCoroutine(SendBackToWizard());
     }
 
     void ResetTextBox()

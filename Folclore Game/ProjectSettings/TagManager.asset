@@ -18,7 +18,8 @@ TagManager:
   - esgoto
   - alquimista
   - caminho
-  - Camera
+  - fade
+  - canvas
   layers:
   - Default
   - TransparentFX
