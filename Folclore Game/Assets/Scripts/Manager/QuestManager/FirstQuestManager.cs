@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class FirstQuestManager : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class FirstQuestManager : MonoBehaviour
     [HideInInspector] public bool hasAllIngredients;
     [HideInInspector] public bool finishPuzzle1 = false;
     [HideInInspector] public bool activeIngredient = false;
+
+    [SerializeField] private GameObject spawnPointSeita;
+    [SerializeField] private GameObject spawnPointAlquimista;
+    [SerializeField] private CanvasGroup fade;
+    [SerializeField] private float timeToFade;
+    public bool goToWizard = false;
+    private GameObject player;
 
     #region GameObjects
     [SerializeField] private GameObject ingredient1;
@@ -26,8 +34,8 @@ public class FirstQuestManager : MonoBehaviour
 
     #region Texts
     private GameObject textBox;
-    
-    [TextArea(3,10)] [SerializeField] private string[] texts;
+
+    [TextArea(3, 10)][SerializeField] private string[] texts;
     #endregion
 
     private void Awake()
@@ -41,12 +49,14 @@ public class FirstQuestManager : MonoBehaviour
         card.SetActive(false);
         textBox = GameObject.FindGameObjectWithTag("backgroundDialogue");
         textBox.GetComponent<Image>().enabled = false;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
         DeliverQuest();
         SetupQuest();
+        if (HasAllIngredients() && goToWizard) StartCoroutine(SendBackToWizard());
     }
     void SetupQuest()
     {
@@ -73,9 +83,10 @@ public class FirstQuestManager : MonoBehaviour
     bool HasAllIngredients()
     {
         hasAllIngredients = ingredientCount >= 3;
+        goToWizard = true;
         return hasAllIngredients;
     }
-    
+
     public void AddIngredientCount()
     {
         ingredientCount++;
@@ -86,15 +97,15 @@ public class FirstQuestManager : MonoBehaviour
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = "";
         textBox.GetComponent<Image>().enabled = false;
     }
-     
+
     IEnumerator Dialogue()
     {
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
         yield return new WaitForSeconds(5f);
-        PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
+        StartCoroutine(SendToSeita());
     }
     IEnumerator Dialogue2()
     {
@@ -104,5 +115,26 @@ public class FirstQuestManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
+    }
+    IEnumerator SendToSeita()
+    {
+        fade.DOFade(1, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
+        player.transform.position = spawnPointSeita.transform.position;
+        yield return new WaitForSeconds(timeToFade + .5f);
+        fade.DOFade(0, timeToFade);
+        PlayerMovement.Instance.SetPlayerStatic(false);
+    }
+    IEnumerator SendBackToWizard()
+    {
+        goToWizard = false;
+        yield return new WaitForSeconds(1f);
+        PlayerMovement.Instance.SetPlayerStatic(true);
+        fade.DOFade(1, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
+        player.transform.position = spawnPointAlquimista.transform.position;
+        yield return new WaitForSeconds(timeToFade + .5f);
+        fade.DOFade(0, timeToFade);
+        PlayerMovement.Instance.SetPlayerStatic(false);
     }
 }
