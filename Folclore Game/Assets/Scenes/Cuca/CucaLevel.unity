@@ -941,6 +941,7 @@ GameObject:
   - component: {fileID: 323149982}
   - component: {fileID: 323149983}
   - component: {fileID: 323149985}
+  - component: {fileID: 323149986}
   m_Layer: 0
   m_Name: MANAGERS
   m_TagString: Untagged
@@ -995,6 +996,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 8730879053698941657, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
   timeToFade: 2
+--- !u!114 &323149986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323149981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b92ede8590fcd44b5320a1c8879e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  minDelay: 1
+  maxDelay: 2
+  isOnIdle: 0
+  isOnPhase1: 0
+  isOnPhase2: 0
+  isDead: 0
+  maxLife: 10
+  currentLife: 7
+  fireBallPrefab: {fileID: 3236269391468731942, guid: b27b38e50dad822409351d217d41195f, type: 3}
+  fireBallsQuantities: 0200000004000000
+  minPosX: -95
+  maxPosX: -75
+  spikesPrefab: {fileID: 0}
+  timeBTWSpikes: 0
+  dragonPrefab: {fileID: 3968730129792028848, guid: ca71dd745cd77ee45ad7dd5c9118123c, type: 3}
+  timeBTWDragons: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,6 +4048,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019074280}
   m_CullTransparentMesh: 1
+--- !u!1 &2028732743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2028732744}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2028732744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028732743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -75, y: 7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2049263153
 GameObject:
   m_ObjectHideFlags: 0
@@ -4586,3 +4647,4 @@ SceneRoots:
   - {fileID: 933993732}
   - {fileID: 2049263155}
   - {fileID: 1108482796}
+  - {fileID: 2028732744}
