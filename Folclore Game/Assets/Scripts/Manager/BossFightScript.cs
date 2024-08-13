@@ -1,6 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class BossFightScript : MonoBehaviour
@@ -9,9 +10,8 @@ public class BossFightScript : MonoBehaviour
 
     private Animator animator;
 
-    [Header("General Variables")] [SerializeField]
-    private float minDelay;
-
+    [Header("General Variables")] 
+    [SerializeField] private float minDelay;
     [SerializeField] private float maxDelay;
     public bool isOnIdle;
     public bool isOnPhase1;
@@ -33,9 +33,12 @@ public class BossFightScript : MonoBehaviour
     [SerializeField] private GameObject spikesPrefab;
     [SerializeField] private float timeBTWSpikes;
 
-    [Header("Dragon Variables")] 
+    [Header("Dragon Variables")]
     [SerializeField] private GameObject dragonPrefab;
     [SerializeField] private float timeBTWDragons;
+    [SerializeField] private GameObject[] dragonSpawnPos;
+    [SerializeField] private int[] dragonQuantities;
+    private int dragonCount;
 
     private void Awake()
     {
@@ -46,7 +49,6 @@ public class BossFightScript : MonoBehaviour
     private void Update()
     {
         ControllPhases();
-
         switch (currentState)
         {
             case State.Idle:
@@ -66,6 +68,8 @@ public class BossFightScript : MonoBehaviour
                 isDead = true;
                 break;
         }
+
+        dragonCount = GameObject.FindGameObjectsWithTag("dragon").Length;
     }
 
     void ControllPhases()
@@ -74,8 +78,8 @@ public class BossFightScript : MonoBehaviour
         else if (currentLife is <= 5 and > 0) currentState = State.Phase2;
         else currentState = State.Dead;
     }
-
-
+    
+    //ATTACKS & IDLE
     void SetIdle()
     {
         animator.SetTrigger("isIdle");
@@ -86,28 +90,38 @@ public class BossFightScript : MonoBehaviour
         for (int i = 0; i < fireBallsQuantity; i++)
         {
             fireBallSpawnPos = new Vector2(Random.Range(minMaxPosX.x, minMaxPosX.y), 7);
-            
+
             Instantiate(fireBallPrefab, fireBallSpawnPos, Quaternion.identity);
             yield return new WaitForSeconds(timeBTWFireBalls);
         }
     }
 
+    IEnumerator SpawnDragons(int dragonsQuantity)
+    {
+        for (int i = 0; i < dragonsQuantity; i++)
+        {
+            int spawnPosIndex = Random.Range(0, 2);
 
+            Instantiate(dragonPrefab, dragonSpawnPos[spawnPosIndex].transform.position, quaternion.identity);
+            yield return new WaitForSeconds(timeBTWDragons);
+        }
+    }
     void SpawnSpikes()
     {
+        
     }
-
-    void SpawnDragons()
-    {
-    }
-
+    
+    //PHASES & DIE
     IEnumerator Phase1()
     {
-        StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
-        yield return new WaitForSeconds(fireBallsQuantities[0] + 1);
-        StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
-        yield return new WaitForSeconds(fireBallsQuantities[1] + 1);
-        print("Spawn Dragons");
+        while (currentLife > 5 )
+        {
+            StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
+            yield return new WaitForSeconds(fireBallsQuantities[0]/2 + maxDelay);
+            StartCoroutine(SpawnDragons(dragonQuantities[0]));
+            yield return new WaitForSeconds(10);
+            //yield return new WaitUntil(() => dragonCount <= 0);
+        }
     }
 
     IEnumerator Phase2()
@@ -118,6 +132,12 @@ public class BossFightScript : MonoBehaviour
     IEnumerator Die()
     {
         yield return null;
+    }
+
+    //DAMAGE & LIFE
+    public void TakeDamage(int dmg)
+    {
+        currentLife -= dmg;
     }
 }
 

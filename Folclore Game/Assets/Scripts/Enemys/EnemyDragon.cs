@@ -17,7 +17,7 @@ public class EnemyDragon : MonoBehaviour
         transform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Target");
         currentLife = maxLife;
     }
 
@@ -42,7 +42,7 @@ public class EnemyDragon : MonoBehaviour
     void FollowPlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-        transform.position = new Vector2(transform.position.x, -1);
+        rb.AddForce(Vector2.down*2);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
