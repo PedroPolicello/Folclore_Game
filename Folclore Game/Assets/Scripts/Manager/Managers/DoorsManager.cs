@@ -29,7 +29,7 @@ public class DoorsManager : MonoBehaviour
 
     void SceneController()
     {
-        if(inRange && CompareTag("esgoto") && PlayerInputsControl.instance.GetIsPressed())
+        if(inRange && CompareTag("esgoto") && PlayerInputsControl.instance.GetIsPressed() && !MainQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "Bloqueado";
         }
