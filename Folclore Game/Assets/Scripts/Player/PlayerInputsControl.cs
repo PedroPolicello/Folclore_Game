@@ -48,6 +48,7 @@ public class PlayerInputsControl : MonoBehaviour
     public void OnCollect(InputAction.CallbackContext value)
     {
         isPressed = value.ReadValueAsButton();
+        print(isPressed);
     }
     public void OnAttack(InputAction.CallbackContext value)
     {

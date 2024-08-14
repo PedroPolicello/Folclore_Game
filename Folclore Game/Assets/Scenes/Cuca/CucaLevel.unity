@@ -1005,26 +1005,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 323149981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b92ede8590fcd44b5320a1c8879e09, type: 3}
+  m_Script: {fileID: 11500000, guid: 03c6e9e0d77febd4fa1988f362340a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  minDelay: 1
-  maxDelay: 2
-  isOnIdle: 0
-  isOnPhase1: 0
-  isOnPhase2: 0
-  isDead: 0
-  maxLife: 10
-  currentLife: 7
-  fireBallPrefab: {fileID: 3236269391468731942, guid: b27b38e50dad822409351d217d41195f, type: 3}
-  fireBallsQuantities: 0200000004000000
-  minPosX: -95
-  maxPosX: -75
-  spikesPrefab: {fileID: 0}
-  timeBTWSpikes: 0
-  dragonPrefab: {fileID: 3968730129792028848, guid: ca71dd745cd77ee45ad7dd5c9118123c, type: 3}
-  timeBTWDragons: 0
+  cardsCollect: 0
+  unlockBoss: 0
+  finishPuzzle1: 0
+  finishPuzzle2: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,7 +68,8 @@ public class SecondQuestManager : MonoBehaviour
             StartCoroutine(Dialogue2());
             WarriorScript.instance.ChangeSprite();
             card.SetActive(true);
-            finishPuzzle2 = true;
+            MainQuestManager.Instance.finishPuzzle2 = true;
+            MainQuestManager.Instance.AddCardToCount();
         }
     }
 

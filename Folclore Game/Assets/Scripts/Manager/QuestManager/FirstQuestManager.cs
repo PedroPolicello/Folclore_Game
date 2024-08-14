@@ -76,7 +76,8 @@ public class FirstQuestManager : MonoBehaviour
             WizardScript.instance.ChangeSprite();
             card.SetActive(true);
             potion.SetActive(true);
-            finishPuzzle1 = true;
+            MainQuestManager.Instance.finishPuzzle1 = true;
+            MainQuestManager.Instance.AddCardToCount();
         }
     }
 
