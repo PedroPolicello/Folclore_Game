@@ -14,7 +14,7 @@ public class PlayerInputsControl : MonoBehaviour
     
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;
@@ -48,7 +48,6 @@ public class PlayerInputsControl : MonoBehaviour
     public void OnCollect(InputAction.CallbackContext value)
     {
         isPressed = value.ReadValueAsButton();
-        print(isPressed);
     }
     public void OnAttack(InputAction.CallbackContext value)
     {

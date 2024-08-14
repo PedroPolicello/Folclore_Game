@@ -8,6 +8,7 @@ public class FirstQuestManager : MonoBehaviour
 {
     public static FirstQuestManager Instance;
 
+    private GameObject player;
     private int ingredientCount;
     [HideInInspector] public bool hasAllIngredients;
     [HideInInspector] public bool finishPuzzle1 = false;
@@ -17,9 +18,9 @@ public class FirstQuestManager : MonoBehaviour
     [SerializeField] private GameObject spawnPointAlquimista;
     [SerializeField] private float timeToFade;
     [SerializeField] private CanvasGroup fade;
-    public bool goToWizard = false;
-    private GameObject player;
-
+    public bool goToWizard;
+    private bool hasTalked;
+    
     #region GameObjects
     [SerializeField] private GameObject ingredient1;
     [SerializeField] private GameObject ingredient2;
@@ -31,7 +32,6 @@ public class FirstQuestManager : MonoBehaviour
     [SerializeField] private GameObject potion;
     private GameObject card;
     #endregion
-
     #region Texts
     private GameObject textBox;
 
@@ -70,14 +70,14 @@ public class FirstQuestManager : MonoBehaviour
     }
     void DeliverQuest()
     {
-        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1)
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1 && !hasTalked)
         {
             StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();
             card.SetActive(true);
             potion.SetActive(true);
             MainQuestManager.Instance.finishPuzzle1 = true;
-            MainQuestManager.Instance.AddCardToCount();
+            hasTalked = true;
         }
     }
 
@@ -102,6 +102,7 @@ public class FirstQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
+        PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
@@ -111,11 +112,13 @@ public class FirstQuestManager : MonoBehaviour
     }
     IEnumerator Dialogue2()
     {
+        PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
+        PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();
     }
     IEnumerator SendToSeita()
@@ -126,6 +129,7 @@ public class FirstQuestManager : MonoBehaviour
         yield return new WaitForSeconds(timeToFade + .5f);
         fade.DOFade(0, timeToFade);
         PlayerMovement.Instance.SetPlayerStatic(false);
+        PlayerAttack.instance.SetCanAttack(true);
     }
     IEnumerator SendBackToWizard()
     {

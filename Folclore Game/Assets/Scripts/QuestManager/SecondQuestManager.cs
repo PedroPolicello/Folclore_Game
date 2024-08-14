@@ -7,11 +7,11 @@ public class SecondQuestManager : MonoBehaviour
 {
     public static SecondQuestManager instance;
 
+    private GameObject Player;
     private int killCount;
     [HideInInspector] public bool killAllEnemies;
     [HideInInspector] public bool finishPuzzle2 = false;
-
-    [SerializeField] private GameObject Player;
+    private bool hasTalked;
 
     #region GameObjects
 
@@ -63,13 +63,13 @@ public class SecondQuestManager : MonoBehaviour
 
     void DeliverQuest()
     {
-        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle2)
+        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle2 && !hasTalked)
         {
             StartCoroutine(Dialogue2());
             WarriorScript.instance.ChangeSprite();
             card.SetActive(true);
             MainQuestManager.Instance.finishPuzzle2 = true;
-            MainQuestManager.Instance.AddCardToCount();
+            hasTalked = true;
         }
     }
 
@@ -90,11 +90,13 @@ public class SecondQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
+        PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
+        PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();
         enemySpawner.SetActive(true);
     }

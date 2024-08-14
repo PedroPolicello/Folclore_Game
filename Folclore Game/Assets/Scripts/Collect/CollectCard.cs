@@ -4,7 +4,7 @@ public class CollectCard : CollectableBase
     {
         if (inRange && PlayerInputsControl.instance.GetIsPressed())
         {
-            //MainQuestManager.Instance.AddCardCount();
+            MainQuestManager.Instance.AddCardToCount();
             Destroy(gameObject);
         }
     }

@@ -1,25 +1,29 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static PlayerHealth instance;
+    public static PlayerHealth Instance;
     
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private int maxHealth;
+    public int maxHealth;
     public int currentHealth;
     
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    
+    private float timeToFade = 2f;
+    private CanvasGroup fade;
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
     }
 
     // public void CallWinScreen()
@@ -35,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         StartCoroutine(Damage());
         CheckHealth();
+        UIManager.Instance.UpdateUI();
     }
 
     void CheckHealth()
@@ -62,12 +67,17 @@ public class PlayerHealth : MonoBehaviour
     
     IEnumerator Death()
     {
+        PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         animator.SetTrigger("isDead");
-        yield return new WaitForSeconds(2.2f);
-        Time.timeScale = 0;
+        yield return new WaitForSeconds(2f);
+        fade.DOFade(1, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
+        fade.DOFade(0, timeToFade);
         gameOverScreen.SetActive(true);
+        Time.timeScale = 0;
         PlayerMovement.Instance.SetPlayerStatic(false);
+        PlayerAttack.instance.SetCanAttack(true);
     }
     
     IEnumerator WinScreen()

@@ -77,7 +77,7 @@ public class EnemyBat : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerHealth.instance.TakeDamage(1);
+            PlayerHealth.Instance.TakeDamage(1);
         }
     }
 

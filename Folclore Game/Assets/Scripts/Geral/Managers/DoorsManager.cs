@@ -1,19 +1,16 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using DG.Tweening;
 
 public class DoorsManager : MonoBehaviour
 {
+    private bool inRange;
     private GameObject textFeedback;
     [SerializeField] private string text;
     
     [SerializeField] private float timeToFade = 2;
     private CanvasGroup fade;
 
-    //[SerializeField] private GameObject Player;
-    private bool inRange = false;
+    [SerializeField] private bool isEsgoto;
 
     private void Awake()
     {
@@ -43,7 +40,8 @@ public class DoorsManager : MonoBehaviour
         }
         if (inRange && CompareTag("caminho") && PlayerInputsControl.instance.GetIsPressed())
         {
-            global::SceneController.Instance.CucaCaminho();
+            if (isEsgoto) global::SceneController.Instance.CucaCaminho(true);
+            else global::SceneController.Instance.CucaCaminho(false);
         }
     }
 
