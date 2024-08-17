@@ -22,6 +22,8 @@ TagManager:
   - canvas
   - Target
   - dragon
+  - boss
+  - bat
   layers:
   - Default
   - TransparentFX

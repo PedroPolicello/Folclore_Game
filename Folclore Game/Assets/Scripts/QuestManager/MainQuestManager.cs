@@ -5,7 +5,7 @@ public class MainQuestManager : MonoBehaviour
     public static MainQuestManager Instance;
 
     [SerializeField] private int cardsCollect;
-    [SerializeField] private bool unlockBoss;
+    public bool unlockBoss;
     public bool finishPuzzle1;
     public bool finishPuzzle2;
 

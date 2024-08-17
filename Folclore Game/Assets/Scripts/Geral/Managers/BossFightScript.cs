@@ -38,7 +38,11 @@ public class BossFightScript : MonoBehaviour
     [SerializeField] private float timeBTWDragons;
     [SerializeField] private GameObject[] dragonSpawnPos;
     [SerializeField] private int[] dragonQuantities;
-    private int dragonCount;
+
+    private void OnEnable()
+    {
+
+    }
 
     private void Awake()
     {
@@ -68,8 +72,6 @@ public class BossFightScript : MonoBehaviour
                 isDead = true;
                 break;
         }
-
-        dragonCount = GameObject.FindGameObjectsWithTag("dragon").Length;
     }
 
     void ControllPhases()
@@ -89,7 +91,7 @@ public class BossFightScript : MonoBehaviour
     {
         for (int i = 0; i < fireBallsQuantity; i++)
         {
-            fireBallSpawnPos = new Vector2(Random.Range(minMaxPosX.x, minMaxPosX.y), 7);
+            fireBallSpawnPos = new Vector2(Random.Range(minMaxPosX.x, minMaxPosX.y), -83);
 
             Instantiate(fireBallPrefab, fireBallSpawnPos, Quaternion.identity);
             yield return new WaitForSeconds(timeBTWFireBalls);

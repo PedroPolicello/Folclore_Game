@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
@@ -18,7 +19,6 @@ public class ProjectileScript : MonoBehaviour
         if (PlayerMovement.Instance.spriteRenderer.flipX == false)
         {
             rb.AddForce(Vector2.right * speed * 100);
-            //transform.eulerAngles = Vector3.forward * 90;
         }
         else
         {
@@ -27,8 +27,8 @@ public class ProjectileScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if(other.CompareTag("dragon") || other.CompareTag("bat")) Destroy(gameObject);
     }
 }

@@ -70,6 +70,7 @@ public class SceneController : MonoBehaviour
         //SceneManager.LoadScene("CucaCasaAlquimista");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
+        yield return new WaitForSeconds(.5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
     }
@@ -90,6 +91,7 @@ public class SceneController : MonoBehaviour
         //SceneManager.LoadScene("CucaLevel");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
+        yield return new WaitForSeconds(.5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
     }
@@ -109,7 +111,29 @@ public class SceneController : MonoBehaviour
         //SceneManager.LoadScene("CucaEsgoto");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
+        yield return new WaitForSeconds(.5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
+    }
+
+    public void CucaBoss()
+    {
+        StartCoroutine(Boss());
+    }
+
+    IEnumerator Boss()
+    {
+        PlayerAttack.instance.SetCanAttack(false);
+        PlayerMovement.Instance.SetPlayerStatic(true);
+        fade.DOFade(1, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
+        activesScenes[2].SetActive(true);
+        player.transform.position = changeScenePos[4].transform.position; //ToBoss
+        yield return new WaitForSeconds(.5f);
+        fade.DOFade(0, timeToFade);
+        yield return new WaitForSeconds(1f);
+        PlayerMovement.Instance.SetPlayerStatic(false);
+        PlayerAttack.instance.SetCanAttack(true);
+        BossDialog.Instance.StartBossDialog();
     }
 }

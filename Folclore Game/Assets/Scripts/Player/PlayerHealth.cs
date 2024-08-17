@@ -26,14 +26,6 @@ public class PlayerHealth : MonoBehaviour
         fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
     }
 
-    // public void CallWinScreen()
-    // {
-    //     if (SecondQuestManager.instance.finishPuzzle2)
-    //     {
-    //         StartCoroutine(WinScreen());
-    //     }
-    // }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -74,16 +66,10 @@ public class PlayerHealth : MonoBehaviour
         fade.DOFade(1, timeToFade);
         yield return new WaitForSeconds(timeToFade + .5f);
         fade.DOFade(0, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
-    }
-    
-    IEnumerator WinScreen()
-    {
-        yield return new WaitForSeconds(6);
-        winScreen.SetActive(true);
-        Time.timeScale = 0;
     }
 }
