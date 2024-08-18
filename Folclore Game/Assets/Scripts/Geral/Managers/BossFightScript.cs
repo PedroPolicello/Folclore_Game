@@ -10,39 +10,40 @@ public class BossFightScript : MonoBehaviour
 
     private Animator animator;
 
-    [Header("General Variables")] 
-    [SerializeField] private float minDelay;
+    [Header("----General Variables----")] [SerializeField]
+    private float minDelay;
+
     [SerializeField] private float maxDelay;
     public bool isOnIdle;
     public bool isOnPhase1;
     public bool isOnPhase2;
     public bool isDead;
 
-    [Header("Life Variables")] 
-    [SerializeField] private int maxLife;
+    [Header("---- Life Variables ----")] [SerializeField]
+    private int maxLife;
+
     [SerializeField] private int currentLife;
 
-    [Header("Fire Ball Variables")] 
-    [SerializeField] private GameObject fireBallPrefab;
+    [Header("---- Fire Ball Variables ----")] [SerializeField]
+    private GameObject fireBallPrefab;
+
     [SerializeField] private float timeBTWFireBalls;
     [SerializeField] private Vector2 minMaxPosX;
     [SerializeField] private int[] fireBallsQuantities;
-    private Vector2 fireBallSpawnPos;
+    [SerializeField] private GameObject[] fireBallsBlockers;
+    private int fireBallBlockerDisable;
 
-    [Header("Spike Variables")] 
-    [SerializeField] private GameObject spikesPrefab;
+    [Header("---- Spike Variables ----")] [SerializeField]
+    private GameObject spikesPrefab;
+
     [SerializeField] private float timeBTWSpikes;
 
-    [Header("Dragon Variables")]
-    [SerializeField] private GameObject dragonPrefab;
+    [Header("---- Dragon Variables ----")] [SerializeField]
+    private GameObject dragonPrefab;
+
     [SerializeField] private float timeBTWDragons;
     [SerializeField] private GameObject[] dragonSpawnPos;
     [SerializeField] private int[] dragonQuantities;
-
-    private void OnEnable()
-    {
-
-    }
 
     private void Awake()
     {
@@ -80,21 +81,30 @@ public class BossFightScript : MonoBehaviour
         else if (currentLife is <= 5 and > 0) currentState = State.Phase2;
         else currentState = State.Dead;
     }
-    
+
     //ATTACKS & IDLE
     void SetIdle()
     {
         animator.SetTrigger("isIdle");
     }
 
-    IEnumerator FireBallFalling(int fireBallsQuantity)
+    IEnumerator FireBallFalling(int fireBallQuantity)
     {
-        for (int i = 0; i < fireBallsQuantity; i++)
+        while (fireBallQuantity > 0)
         {
-            fireBallSpawnPos = new Vector2(Random.Range(minMaxPosX.x, minMaxPosX.y), -83);
+            //Ativa um dos Bloqueadores
+            fireBallBlockerDisable = Random.Range(0, fireBallsBlockers.Length);
+            fireBallsBlockers[fireBallBlockerDisable].SetActive(true);
+            
+            //Spawna as bolas de fogo
+            for (float i = minMaxPosX.x; i < minMaxPosX.y + 1; i += 1.5f)
+            {
+                Instantiate(fireBallPrefab, new Vector2(i, -81), Quaternion.identity);
+            }
 
-            Instantiate(fireBallPrefab, fireBallSpawnPos, Quaternion.identity);
+            fireBallQuantity--;
             yield return new WaitForSeconds(timeBTWFireBalls);
+            foreach (var t in fireBallsBlockers) t.SetActive(false);
         }
     }
 
@@ -108,22 +118,24 @@ public class BossFightScript : MonoBehaviour
             yield return new WaitForSeconds(timeBTWDragons);
         }
     }
+
     void SpawnSpikes()
     {
-        
     }
-    
+
     //PHASES & DIE
     IEnumerator Phase1()
     {
-        while (currentLife > 5 )
+        while (currentLife > 5)
         {
+            yield return new WaitForSeconds(maxDelay);
             StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
-            yield return new WaitForSeconds(fireBallsQuantities[0]/2 + maxDelay);
+            yield return new WaitForSeconds(timeBTWFireBalls * fireBallsQuantities[0]);
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(dragonQuantities[0] * 3);
             //yield return new WaitUntil(() => dragonCount <= 0);
         }
+        SetIdle();
     }
 
     IEnumerator Phase2()
