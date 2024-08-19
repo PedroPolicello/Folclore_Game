@@ -169,7 +169,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5036877}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -5382,6 +5382,8 @@ MonoBehaviour:
   spawnPos: {fileID: 717270903}
   dragon: {fileID: 3968730129792028848, guid: ca71dd745cd77ee45ad7dd5c9118123c, type: 3}
   bat: {fileID: 3497008559401761165, guid: 92a3309302576bd44b5e3f7b18254df3, type: 3}
+  dragons: []
+  bats: []
 --- !u!61 &971144497
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8273,7 +8275,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 804849181}
+      - m_Target: {fileID: 1869261425}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

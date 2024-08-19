@@ -1,18 +1,28 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+    
     [SerializeField] private Transform spawnPos;
     [SerializeField] private GameObject dragon;
     [SerializeField] private GameObject bat;
+    [SerializeField] private GameObject[] dragons;
+    [SerializeField] private GameObject[] bats;
 
     private Collider2D collider;
 
     private void Awake()
     {
+        Instance = this;
         collider = GetComponent<Collider2D>();
+    }
+
+    private void Update()
+    {
+        bats = GameObject.FindGameObjectsWithTag("bat");
+        dragons = GameObject.FindGameObjectsWithTag("dragon");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -34,6 +44,18 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(bat, position, rotation);
             Instantiate(dragon, position, rotation);
             yield return new WaitForSeconds(2f);
+        }
+    }
+
+    public void KillAllEnemies()
+    {
+        foreach (var enemy in bats)
+        {
+            Destroy(enemy);
+        }
+        foreach (var enemy in dragons)
+        {
+            Destroy(enemy);
         }
     }
 }

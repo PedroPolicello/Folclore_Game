@@ -13,6 +13,7 @@ public class SecondQuestManager : MonoBehaviour
     [HideInInspector] public bool finishPuzzle2 = false;
     private bool hasTalked;
 
+
     #region GameObjects
 
     private GameObject enemySpawner;
@@ -32,7 +33,6 @@ public class SecondQuestManager : MonoBehaviour
         instance = this;
         SetReferences();
         Player = GameObject.FindGameObjectWithTag("Player");
-        Player.transform.position = new Vector3(-75, 0, 0);
     }
 
     void SetReferences()
@@ -54,8 +54,7 @@ public class SecondQuestManager : MonoBehaviour
 
     void SetupQuest()
     {
-        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() &&
-            !killAllEnemies && !finishPuzzle2)
+        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() && !killAllEnemies && !finishPuzzle2)
         {
             StartCoroutine(Dialogue());
         }

@@ -33,5 +33,10 @@ public class UIManager : MonoBehaviour
         {
             fillColor.color = Color.red;
         }
+        else if (healthBar.value >= healthBar.maxValue / 2)
+        {
+            fillColor.color = Color.green;
+
+        }
     }
 }

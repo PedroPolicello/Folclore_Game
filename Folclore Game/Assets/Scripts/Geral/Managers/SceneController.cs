@@ -12,8 +12,13 @@ public class SceneController : MonoBehaviour
     private CanvasGroup fade;
 
     [SerializeField] private GameObject[] changeScenePos; 
-    [SerializeField] private GameObject[] activesScenes; 
-    
+    [SerializeField] private GameObject[] activesScenes;
+
+    private void OnEnable()
+    {
+        StartCoroutine(StartGame(false));
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -38,20 +43,39 @@ public class SceneController : MonoBehaviour
         Application.Quit();
         print("Saindo...");
     }
-
-    public void Game()
-    {
-        fade.DOFade(1, timeToFade);
-        SceneManager.LoadScene("CucaLevel");
-        player.transform.position = new Vector3(-85,-2,0);
-        fade.DOFade(0, timeToFade);
-    }
-
+    
     void SetMapsToFalse()
     {
         for (int i = 0; i < activesScenes.Length; i++)
         {
             activesScenes[i].SetActive(false);
+        }
+    }
+
+    public void Game()
+    {
+        StartCoroutine(StartGame(true));
+    }
+    IEnumerator StartGame(bool restart)
+    {
+        if (restart)
+        {
+            Time.timeScale = 1;
+            fade.DOFade(1, timeToFade);
+            yield return new WaitForSeconds(timeToFade + .5f);
+            player.transform.position = new Vector3(-85,-2,0);
+            yield return new WaitForSeconds(timeToFade + .5f);
+            fade.DOFade(0, timeToFade);
+            yield return new WaitForSeconds(timeToFade + .5f);
+        }
+        else
+        {
+            PlayerMovement.Instance.SetPlayerStatic(true);
+            PlayerAttack.instance.SetCanAttack(false);
+            fade.DOFade(0, timeToFade);
+            yield return new WaitForSeconds(timeToFade + .5f);
+            PlayerMovement.Instance.SetPlayerStatic(false);
+            PlayerAttack.instance.SetCanAttack(true);
         }
     }
 
@@ -67,7 +91,6 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(timeToFade + .5f);
         activesScenes[0].SetActive(true); //Alquimista e Seita
         player.transform.position = changeScenePos[0].transform.position; //ToAlquimista
-        //SceneManager.LoadScene("CucaCasaAlquimista");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
         yield return new WaitForSeconds(.5f);
@@ -88,7 +111,6 @@ public class SceneController : MonoBehaviour
         SetMapsToFalse();//Alquimista, Seita e Esgoto
         if(isEsgoto) player.transform.position = changeScenePos[1].transform.position; //BackToCaminho(Esgoto)
         else player.transform.position = changeScenePos[3].transform.position; //BackToCaminho(Alquimista)
-        //SceneManager.LoadScene("CucaLevel");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
         yield return new WaitForSeconds(.5f);
@@ -108,7 +130,6 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(timeToFade + .5f);
         activesScenes[1].SetActive(true);
         player.transform.position = changeScenePos[2].transform.position; //ToEsgoto
-        //SceneManager.LoadScene("CucaEsgoto");
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
         yield return new WaitForSeconds(.5f);

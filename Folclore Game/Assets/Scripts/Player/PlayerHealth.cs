@@ -38,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             StartCoroutine(Death());
         }
     }
@@ -61,15 +62,14 @@ public class PlayerHealth : MonoBehaviour
     {
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
+        EnemySpawner.Instance.KillAllEnemies();
         animator.SetTrigger("isDead");
         yield return new WaitForSeconds(2f);
         fade.DOFade(1, timeToFade);
         yield return new WaitForSeconds(timeToFade + .5f);
+        gameOverScreen.SetActive(true);
         fade.DOFade(0, timeToFade);
         yield return new WaitForSeconds(timeToFade + .5f);
-        gameOverScreen.SetActive(true);
         Time.timeScale = 0;
-        PlayerMovement.Instance.SetPlayerStatic(false);
-        PlayerAttack.instance.SetCanAttack(true);
     }
 }
