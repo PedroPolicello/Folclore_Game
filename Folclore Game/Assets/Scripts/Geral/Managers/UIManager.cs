@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Slider healthBar;
     [SerializeField] private Image fillColor;
+    public GameObject pauseMenu;
 
     private void Awake()
     {

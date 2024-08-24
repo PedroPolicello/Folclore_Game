@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DestroyObj : MonoBehaviour
@@ -11,6 +10,6 @@ public class DestroyObj : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player")) Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,13 +9,13 @@ public class PlayerInputsControl : MonoBehaviour
     
     private Vector2 moveDirection;
     private bool isMoving;
-    private bool isJumping;
     private bool isAttacking;
     private bool isPressed;
+    private bool isPausePressed;
+    private bool inPause;
     
     private void Awake()
     {
-        //DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;
@@ -37,12 +38,10 @@ public class PlayerInputsControl : MonoBehaviour
     }
     void OnJump(InputAction.CallbackContext value)
     {
-        isJumping = value.ReadValueAsButton();
         PlayerMovement.Instance.JumpStart();
     }
     void OnJumpExit(InputAction.CallbackContext value)
     {
-        isJumping = value.ReadValueAsButton();
         PlayerMovement.Instance.JumpCanceled();
     }
     public void OnCollect(InputAction.CallbackContext value)
@@ -53,6 +52,23 @@ public class PlayerInputsControl : MonoBehaviour
     {
         isAttacking = value.ReadValueAsButton();
         PlayerAttack.instance.Attack();
+    }
+    public void OnPause(InputAction.CallbackContext value)
+    {
+        isPausePressed = value.ReadValueAsButton();
+        
+        if (!inPause && isPausePressed)
+        {
+            UIManager.Instance.pauseMenu.SetActive(true);
+            inPause = true;
+            Time.timeScale = 0;
+        }
+        else if(inPause && isPausePressed)
+        {
+            UIManager.Instance.pauseMenu.SetActive(false);
+            inPause = false;
+            Time.timeScale = 1;
+        }
     }
     public bool GetIsMoving()
     {
@@ -86,6 +102,9 @@ public class PlayerInputsControl : MonoBehaviour
         
         controls.Player.Attack.started += OnAttack;
         controls.Player.Attack.canceled += OnAttack;
+
+        controls.Player.Pause.started += OnPause;
+        controls.Player.Pause.canceled += OnPause;
     }
     private void OnEnable()
     {
@@ -95,7 +114,7 @@ public class PlayerInputsControl : MonoBehaviour
     {
         controls.Player.Move.started -= OnMove;
         controls.Player.Move.performed -= OnMove;
-        controls.Player.Move.canceled -= OnMove;
+        controls.Player.Move.canceled -= OnMoveExit;
 
         controls.Player.Jump.started -= OnJump;
         controls.Player.Jump.performed -= OnJump;
@@ -106,6 +125,9 @@ public class PlayerInputsControl : MonoBehaviour
         
         controls.Player.Attack.started -= OnAttack;
         controls.Player.Attack.canceled -= OnAttack;
+
+        controls.Player.Pause.started -= OnPause;
+        controls.Player.Pause.canceled -= OnPause;
         
         controls.Disable();
     }
