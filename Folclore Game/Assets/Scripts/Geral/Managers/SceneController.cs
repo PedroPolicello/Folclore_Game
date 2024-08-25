@@ -152,9 +152,6 @@ public class SceneController : MonoBehaviour
         player.transform.position = changeScenePos[4].transform.position; //ToBoss
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
-        yield return new WaitForSeconds(1f);
-        PlayerMovement.Instance.SetPlayerStatic(false);
-        PlayerAttack.instance.SetCanAttack(true);
         BossDialog.Instance.StartBossDialog();
     }
 }

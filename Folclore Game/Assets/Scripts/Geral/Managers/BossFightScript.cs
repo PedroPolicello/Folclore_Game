@@ -34,7 +34,9 @@ public class BossFightScript : MonoBehaviour
 
     [Header("---- Spike Variables ----")] 
     [SerializeField] private GameObject[] spikes;
+    [SerializeField] private GameObject[] warnings;
     [SerializeField] private float timeBTWSpikes;
+    [SerializeField] private int[] spikesQuantities;
 
     [Header("---- Dragon Variables ----")] 
     [SerializeField] private GameObject dragonPrefab;
@@ -104,7 +106,6 @@ public class BossFightScript : MonoBehaviour
             foreach (var t in fireBallsBlockers) t.SetActive(false);
         }
     }
-
     IEnumerator SpawnDragons(int dragonsQuantity)
     {
         for (int i = 0; i < dragonsQuantity; i++)
@@ -115,18 +116,18 @@ public class BossFightScript : MonoBehaviour
             yield return new WaitForSeconds(timeBTWDragons);
         }
     }
-
-    IEnumerator SpawnSpikes(bool begin)
+    IEnumerator SpawnSpikes(bool begin, int spikesQuantity)
     {
         if (begin)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < spikesQuantity; i++)
             {
                 int spikePosIndex = Random.Range(0, spikes.Length);
                 spikes[spikePosIndex].SetActive(true);
+                warnings[spikePosIndex].SetActive(true);
+                yield return new WaitForSeconds(1.2f);
                 spikes[spikePosIndex].transform.DOLocalMoveY(-4,1);
             }
-            yield return new WaitForSeconds(1);
         }
         else
         {
@@ -136,7 +137,6 @@ public class BossFightScript : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 spike.SetActive(false);
             } 
-            yield return new WaitForSeconds(1);
         }
     }
 
@@ -151,9 +151,9 @@ public class BossFightScript : MonoBehaviour
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
             yield return new WaitForSeconds(dragonQuantities[0] * 3);
             //yield return new WaitUntil(() => dragonCount <= 0);
-            StartCoroutine(SpawnSpikes(true));
+            StartCoroutine(SpawnSpikes(true, spikesQuantities[0]));
             yield return new WaitForSeconds(timeBTWSpikes);
-            StartCoroutine(SpawnSpikes(false));
+            StartCoroutine(SpawnSpikes(false, spikesQuantities[0]));
             yield return new WaitForSeconds(1);
         }
         SetIdle();
@@ -161,7 +161,19 @@ public class BossFightScript : MonoBehaviour
 
     IEnumerator Phase2()
     {
-        yield return null;
+        while (currentLife < 5 && currentLife > 0)
+        {
+            yield return new WaitForSeconds(maxDelay);
+            StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
+            yield return new WaitForSeconds(3 * fireBallsQuantities[1]);
+            StartCoroutine(SpawnDragons(dragonQuantities[1]));
+            yield return new WaitForSeconds(dragonQuantities[1] * 3);
+            //yield return new WaitUntil(() => dragonCount <= 0);
+            StartCoroutine(SpawnSpikes(true, spikesQuantities[1]));
+            yield return new WaitForSeconds(timeBTWSpikes);
+            StartCoroutine(SpawnSpikes(false, spikesQuantities[1]));
+            yield return new WaitForSeconds(1);
+        }
     }
 
     IEnumerator Die()
