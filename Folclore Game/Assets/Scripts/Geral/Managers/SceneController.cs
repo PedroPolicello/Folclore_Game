@@ -52,6 +52,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    //START GAME
     public void Game()
     {
         StartCoroutine(StartGame(true));
@@ -79,6 +80,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    //ALQUIMISTA
     public void CucaCasaAlquimista()
     {
         StartCoroutine(CasaAlquimista());
@@ -97,7 +99,8 @@ public class SceneController : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
     }
-
+    
+    //CAMINHO
     public void CucaCaminho(bool isEsgoto)
     {
         StartCoroutine(Caminho(isEsgoto));
@@ -118,6 +121,7 @@ public class SceneController : MonoBehaviour
         PlayerAttack.instance.SetCanAttack(true);
     }
     
+    //ESGOTO
     public void CucaEsgoto()
     {
         StartCoroutine(Esgoto());
@@ -137,11 +141,11 @@ public class SceneController : MonoBehaviour
         PlayerAttack.instance.SetCanAttack(true);
     }
 
+    //BOSS
     public void CucaBoss()
     {
         StartCoroutine(Boss());
     }
-
     IEnumerator Boss()
     {
         PlayerAttack.instance.SetCanAttack(false);
@@ -153,5 +157,21 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
         BossDialog.Instance.StartBossDialog();
+    }
+
+    //WIN SCREEN
+    public void CallWinScreen()
+    {
+        StartCoroutine(WinScreen());
+    }
+    IEnumerator WinScreen()
+    {
+        PlayerAttack.instance.SetCanAttack(false);
+        PlayerMovement.Instance.SetPlayerStatic(true);
+        fade.DOFade(1, timeToFade);
+        yield return new WaitForSeconds(timeToFade + .5f);
+        activesScenes[3].SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        fade.DOFade(0, timeToFade);
     }
 }

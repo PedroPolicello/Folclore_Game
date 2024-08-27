@@ -25,6 +25,7 @@ public class BossDialog : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         print("Dialogo Boss");
+        UIManager.Instance.bossLife.SetActive(true);
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);

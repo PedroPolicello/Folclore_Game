@@ -5,8 +5,9 @@ public class EnemyDragon : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private int maxLife;
-
-    [SerializeField] private int currentLife;
+    [SerializeField] private bool isBoss;
+    
+    private int currentLife;
     private Transform transform;
     private GameObject target;
     private SpriteRenderer spriteRenderer;
@@ -61,7 +62,12 @@ public class EnemyDragon : MonoBehaviour
 
     void CheckLife()
     {
-        if (currentLife <= 0)
+        if (currentLife <= 0 && isBoss)
+        {
+            BossFightScript.Instance.TakeDamage(1);
+            Destroy(gameObject);
+        }
+        else if (currentLife <= 0)
         {
             SecondQuestManager.instance.AddKillCount();
             Destroy(gameObject);

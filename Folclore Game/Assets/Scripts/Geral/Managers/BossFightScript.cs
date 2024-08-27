@@ -7,35 +7,32 @@ using Random = UnityEngine.Random;
 
 public class BossFightScript : MonoBehaviour
 {
+    public static BossFightScript Instance;
     public State currentState;
-
     private Animator animator;
 
-    [Header("----General Variables----")] [SerializeField]
-    private float minDelay;
-
-    [SerializeField] private float maxDelay;
+    [Header("---- General Variables ----")] 
     public bool isOnIdle;
     public bool isOnPhase1;
     public bool isOnPhase2;
     public bool isDead;
 
     [Header("---- Life Variables ----")] 
-    [SerializeField] private int maxLife;
-    [SerializeField] private int currentLife;
+    public int maxLife;
+    public int currentLife;
 
     [Header("---- Fire Ball Variables ----")] 
-    [SerializeField] private GameObject fireBallPrefab;
     [SerializeField] private float timeBTWFireBalls;
+    [SerializeField] private GameObject fireBallPrefab;
     [SerializeField] private Vector2 minMaxPosX;
     [SerializeField] private int[] fireBallsQuantities;
     [SerializeField] private GameObject[] fireBallsBlockers;
     private int fireBallBlockerDisable;
 
     [Header("---- Spike Variables ----")] 
+    [SerializeField] private float timeBTWSpikes;
     [SerializeField] private GameObject[] spikes;
     [SerializeField] private GameObject[] warnings;
-    [SerializeField] private float timeBTWSpikes;
     [SerializeField] private int[] spikesQuantities;
 
     [Header("---- Dragon Variables ----")] 
@@ -46,38 +43,56 @@ public class BossFightScript : MonoBehaviour
 
     private void Awake()
     {
-        currentState = State.Idle;
-        animator = GetComponent<Animator>();
+        Instance = this;
+        //currentState = State.Idle;
+        //animator = GetComponent<Animator>();
+        currentLife = maxLife;
+        UIManager.Instance.SetBossHealthBar();
+        ControllPhases();
     }
-
     private void Update()
     {
-        ControllPhases();
         switch (currentState)
         {
             case State.Idle:
-                if (!isOnIdle) SetIdle();
-                isOnIdle = true;
+                if (!isOnIdle)
+                {
+                    SetIdle();
+                    isOnIdle = true;
+                }
                 break;
             case State.Phase1:
-                if (!isOnPhase1) StartCoroutine(Phase1());
-                isOnPhase1 = true;
+                if (!isOnPhase1)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Phase1());
+                    print("Phase01");
+                    isOnPhase1 = true;
+                }
                 break;
             case State.Phase2:
-                if (!isOnPhase2) StartCoroutine(Phase2());
-                isOnPhase2 = true;
+                if (!isOnPhase2)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Phase2());
+                    print("Phase02");
+                    isOnPhase2 = true;
+                }
                 break;
             case State.Dead:
-                if (!isDead) StartCoroutine(Die());
-                isDead = true;
+                if (!isDead)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Die());
+                    isDead = true;
+                }
                 break;
         }
     }
-
     void ControllPhases()
     {
-        if (currentLife > 5) currentState = State.Phase1;
-        else if (currentLife is <= 5 and > 0) currentState = State.Phase2;
+        if (currentLife > maxLife / 2)currentState = State.Phase1; 
+        else if (currentLife <= maxLife / 2 && currentLife > 0)currentState = State.Phase2;
         else currentState = State.Dead;
     }
 
@@ -86,7 +101,6 @@ public class BossFightScript : MonoBehaviour
     {
         animator.SetTrigger("isIdle");
     }
-
     IEnumerator FireBallFalling(int fireBallQuantity)
     {
         while (fireBallQuantity > 0)
@@ -102,7 +116,8 @@ public class BossFightScript : MonoBehaviour
             }
 
             fireBallQuantity--;
-            yield return new WaitForSeconds(timeBTWFireBalls);
+            if(currentState == State.Phase1)yield return new WaitForSeconds(timeBTWFireBalls);
+            else if (currentState == State.Phase2)yield return new WaitForSeconds(timeBTWFireBalls - 1);
             foreach (var t in fireBallsBlockers) t.SetActive(false);
         }
     }
@@ -125,7 +140,7 @@ public class BossFightScript : MonoBehaviour
                 int spikePosIndex = Random.Range(0, spikes.Length);
                 spikes[spikePosIndex].SetActive(true);
                 warnings[spikePosIndex].SetActive(true);
-                yield return new WaitForSeconds(1.2f);
+                yield return new WaitForSeconds(1f);
                 spikes[spikePosIndex].transform.DOLocalMoveY(-4,1);
             }
         }
@@ -134,7 +149,7 @@ public class BossFightScript : MonoBehaviour
             foreach (GameObject spike in spikes)
             {
                 spike.transform.DOLocalMoveY(-8,1);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1f);
                 spike.SetActive(false);
             } 
         }
@@ -143,48 +158,51 @@ public class BossFightScript : MonoBehaviour
     //PHASES & DIE
     IEnumerator Phase1()
     {
-        while (currentLife > 5)
+        while (currentLife > maxLife/2)
         {
-            yield return new WaitForSeconds(maxDelay);
             StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
-            yield return new WaitForSeconds(3 * fireBallsQuantities[0]);
+            yield return new WaitForSeconds(10);
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
-            yield return new WaitForSeconds(dragonQuantities[0] * 3);
-            //yield return new WaitUntil(() => dragonCount <= 0);
+            //Esperar os dragões morrerem
+            yield return new WaitForSeconds(5);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[0]));
-            yield return new WaitForSeconds(timeBTWSpikes);
+            yield return new WaitForSeconds(5);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[0]));
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4f);
         }
-        SetIdle();
     }
-
     IEnumerator Phase2()
     {
-        while (currentLife < 5 && currentLife > 0)
+        print("Dialogo para Phase 2");
+        yield return new WaitForSeconds(10f);
+        while (currentLife <= maxLife/2 && currentLife > 0)
         {
-            yield return new WaitForSeconds(maxDelay);
             StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
-            yield return new WaitForSeconds(3 * fireBallsQuantities[1]);
+            yield return new WaitForSeconds(15);
             StartCoroutine(SpawnDragons(dragonQuantities[1]));
-            yield return new WaitForSeconds(dragonQuantities[1] * 3);
-            //yield return new WaitUntil(() => dragonCount <= 0);
+            //Esperar os dragões morrerem
+            yield return new WaitForSeconds(10);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[1]));
-            yield return new WaitForSeconds(timeBTWSpikes);
+            yield return new WaitForSeconds(6);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[1]));
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5f);
         }
     }
-
+    
     IEnumerator Die()
     {
-        yield return null;
+        //Destruir todos os Dragões
+        print("Dialogo pré-morte");
+        yield return new WaitForSeconds(5f);
+        SceneController.Instance.CallWinScreen();
     }
 
     //DAMAGE & LIFE
     public void TakeDamage(int dmg)
     {
         currentLife -= dmg;
+        UIManager.Instance.UpdateBossUI();
+        ControllPhases();
     }
 }
 

@@ -31,4 +31,9 @@ public class ProjectileScript : MonoBehaviour
     {
         if(other.CompareTag("dragon") || other.CompareTag("bat")) Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Destroy(gameObject);
+    }
 }

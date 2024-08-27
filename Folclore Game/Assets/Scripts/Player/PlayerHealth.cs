@@ -6,7 +6,6 @@ public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth Instance;
     
-    [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject gameOverScreen;
     public int maxHealth;
     public int currentHealth;
