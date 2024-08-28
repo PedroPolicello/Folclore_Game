@@ -8,21 +8,38 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
     
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private int musicVolume;
-    
+    [SerializeField] [Range(0f,1f)] private int musicVolume;
     [SerializeField] private AudioSource sFXSource;
-    [SerializeField] private int sFXVolume;
+    [SerializeField] [Range(0f,1f)] private int sFXVolume;
 
-    [SerializeField] private AudioClip[] sFXClips;
+    [Header("---- Player Clips ----")]
+    public AudioClip backgroundMusic;
+    public AudioClip walk;
+    public AudioClip jump;
+    public AudioClip attack;
+    public AudioClip damage;
+    public AudioClip death;
+    
+    [Header("---- Enemies Clips ----")]
+    public AudioClip enemyAttack;
+    public AudioClip enemyHit;
+    public AudioClip enemyDeath;
+    
+    [Header("---- NPC Clips ----")]
+    public AudioClip nPCInteract;
+    public AudioClip questComplete;
 
     private void Awake()
     {
         Instance = this;
         
+        musicSource.loop = true;
+    }
+
+    private void Update()
+    {
         musicSource.volume = musicVolume;
         sFXSource.volume = sFXVolume;
-        
-        musicSource.loop = true;
     }
 
     public void PlayPauseMusic(bool play)
@@ -31,9 +48,8 @@ public class SoundManager : MonoBehaviour
         else musicSource.Stop();
     }
 
-    public void playSFX(int sfxIndex)
+    public void PlaySFX(AudioClip clip )
     {
-        sFXSource.clip = sFXClips[sfxIndex];
-        sFXSource.Play();
+        sFXSource.PlayOneShot(clip);
     }
 }
