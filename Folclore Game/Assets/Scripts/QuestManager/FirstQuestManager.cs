@@ -120,9 +120,6 @@ public class FirstQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();
-        MainQuestManager.Instance.ActiveText(true, "Puzzle 01 Finalizado!");
-        yield return new WaitForSeconds(5f);
-        MainQuestManager.Instance.ActiveText(false, "");
     }
     IEnumerator SendToSeita()
     {
@@ -137,11 +134,13 @@ public class FirstQuestManager : MonoBehaviour
     }
     IEnumerator SendBackToWizard()
     {
+        MainQuestManager.Instance.ActiveText(true, "Puzzle 01 Finalizado!");
         goToWizard = false;
         yield return new WaitForSeconds(1f);
         PlayerMovement.Instance.SetPlayerStatic(true);
         fade.DOFade(1, timeToFade);
         yield return new WaitForSeconds(timeToFade + .5f);
+        MainQuestManager.Instance.ActiveText(false, "");
         player.transform.position = spawnPointAlquimista.transform.position;
         yield return new WaitForSeconds(timeToFade + .5f);
         fade.DOFade(0, timeToFade);

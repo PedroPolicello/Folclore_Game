@@ -12,6 +12,7 @@ public class SecondQuestManager : MonoBehaviour
     [HideInInspector] public bool killAllEnemies;
     [HideInInspector] public bool finishPuzzle2 = false;
     private bool hasTalked;
+    private bool hasAppeard = true;
 
 
     #region GameObjects
@@ -24,7 +25,7 @@ public class SecondQuestManager : MonoBehaviour
 
     private GameObject textBox;
 
-    [TextArea(3, 10)] [SerializeField] private string[] texts;
+    [TextArea(3, 10)][SerializeField] private string[] texts;
 
     #endregion
 
@@ -48,7 +49,10 @@ public class SecondQuestManager : MonoBehaviour
     {
         DeliverQuest();
         KillAllEnemies();
-        SetupQuest();        
+        SetupQuest();
+
+        if (killCount >= 6 && hasAppeard) StartCoroutine(PuzzleFeedback());
+
     }
 
     void SetupQuest()
@@ -70,7 +74,6 @@ public class SecondQuestManager : MonoBehaviour
             hasTalked = true;
         }
     }
-
     bool KillAllEnemies()
     {
         killAllEnemies = killCount >= 6;
@@ -79,7 +82,6 @@ public class SecondQuestManager : MonoBehaviour
     public void AddKillCount()
     {
         killCount++;
-        if(killAllEnemies)MainQuestManager.Instance.ActiveText(true, "Puzzle 02 Finalizado!");
     }
     void ResetTextBox()
     {
@@ -107,6 +109,13 @@ public class SecondQuestManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
+    }
+
+    IEnumerator PuzzleFeedback()
+    {
+        hasAppeard = false;
+        MainQuestManager.Instance.ActiveText(true, "Puzzle 02 Finalizado!");
+        yield return new WaitForSeconds(2);
         MainQuestManager.Instance.ActiveText(false, "");
     }
 }

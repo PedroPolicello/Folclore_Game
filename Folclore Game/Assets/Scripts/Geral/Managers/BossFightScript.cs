@@ -44,8 +44,6 @@ public class BossFightScript : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        //currentState = State.Idle;
-        //animator = GetComponent<Animator>();
         currentLife = maxLife;
         UIManager.Instance.SetBossHealthBar();
         ControllPhases();
@@ -96,11 +94,7 @@ public class BossFightScript : MonoBehaviour
         else currentState = State.Dead;
     }
 
-    //ATTACKS & IDLE
-    void SetIdle()
-    {
-        animator.SetTrigger("isIdle");
-    }
+    //ATTACKS
     IEnumerator FireBallFalling(int fireBallQuantity)
     {
         while (fireBallQuantity > 0)
