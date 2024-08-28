@@ -120,6 +120,9 @@ public class FirstQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();
+        MainQuestManager.Instance.ActiveText(true, "Puzzle 01 Finalizado!");
+        yield return new WaitForSeconds(5f);
+        MainQuestManager.Instance.ActiveText(false, "");
     }
     IEnumerator SendToSeita()
     {
@@ -129,6 +132,7 @@ public class FirstQuestManager : MonoBehaviour
         yield return new WaitForSeconds(timeToFade + .5f);
         fade.DOFade(0, timeToFade);
         PlayerMovement.Instance.SetPlayerStatic(false);
+        yield return new WaitForSeconds(5f);
         PlayerAttack.instance.SetCanAttack(true);
     }
     IEnumerator SendBackToWizard()

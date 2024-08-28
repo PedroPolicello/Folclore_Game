@@ -48,8 +48,7 @@ public class SecondQuestManager : MonoBehaviour
     {
         DeliverQuest();
         KillAllEnemies();
-        SetupQuest();
-        
+        SetupQuest();        
     }
 
     void SetupQuest()
@@ -80,6 +79,7 @@ public class SecondQuestManager : MonoBehaviour
     public void AddKillCount()
     {
         killCount++;
+        if(killAllEnemies)MainQuestManager.Instance.ActiveText(true, "Puzzle 02 Finalizado!");
     }
     void ResetTextBox()
     {
@@ -107,5 +107,6 @@ public class SecondQuestManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
+        MainQuestManager.Instance.ActiveText(false, "");
     }
 }
