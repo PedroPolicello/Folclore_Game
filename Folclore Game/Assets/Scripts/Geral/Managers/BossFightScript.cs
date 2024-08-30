@@ -55,7 +55,6 @@ public class BossFightScript : MonoBehaviour
             case State.Idle:
                 if (!isOnIdle)
                 {
-                    SetIdle();
                     isOnIdle = true;
                 }
                 break;
