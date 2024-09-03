@@ -1242,6 +1242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killAllEnemies: 0
   finishPuzzle2: 0
+  duration: 7
   texts:
   - "Me ajude a limpar esse esgoto dos inimigos.\n\nEles devem estar logo \xE0 frente."
   - "Muito obrigado!\n\nProcure o guardi\xE3o da casa da Cuca, ele deve te deixar
@@ -2044,6 +2045,7 @@ MonoBehaviour:
   feather: 0
   batWing: 0
   potion: {fileID: 28890195}
+  duration: 7
   texts:
   - "Me ajude a encontrar os ingredientes para minha po\xE7\xE3o.\n\nEles devem estar
     espalhados pelo caminho."
@@ -2111,8 +2113,8 @@ MonoBehaviour:
   bossFightManager: {fileID: 1214742127}
   virtualCamera: {fileID: 1678426261}
   camera: {fileID: 519420031}
+  duration: 5
   text: Inicio
-  duration: 2
 --- !u!1 &323149981
 GameObject:
   m_ObjectHideFlags: 0
@@ -8168,7 +8170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  duration: 2
+  duration: 5
   texts:
   - Agora vc vai ver!!
   - "N\xC3AAAAOOOOO"

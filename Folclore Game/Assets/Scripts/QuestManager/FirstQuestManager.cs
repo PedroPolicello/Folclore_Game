@@ -14,6 +14,7 @@ public class FirstQuestManager : MonoBehaviour
     [HideInInspector] public bool finishPuzzle1 = false;
     [HideInInspector] public bool activeIngredient = false;
 
+    [Header("---- Scene Variables ----")]
     [SerializeField] private GameObject spawnPointSeita;
     [SerializeField] private GameObject spawnPointAlquimista;
     [SerializeField] private float timeToFade;
@@ -21,23 +22,21 @@ public class FirstQuestManager : MonoBehaviour
     public bool goToWizard;
     private bool hasTalked;
     
-    #region GameObjects
+    [Header("---- GameObjects Variables ----")]
     [SerializeField] private GameObject ingredient1;
     [SerializeField] private GameObject ingredient2;
     [SerializeField] private GameObject ingredient3;
     [HideInInspector] public bool frogLeg;
     [HideInInspector] public bool feather;
     [HideInInspector] public bool batWing;
-
     [SerializeField] private GameObject potion;
     private GameObject card;
-    #endregion
-    #region Texts
-    private GameObject textBox;
-
+    
+    [Header("---- Dialogue Variables ----")]
+    [SerializeField] private float duration;
     [TextArea(3, 10)][SerializeField] private string[] texts;
-    #endregion
-
+    private GameObject textBox;
+    
     private void Awake()
     {
         Instance = this;
@@ -106,7 +105,7 @@ public class FirstQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
         ResetTextBox();
         StartCoroutine(SendToSeita());
     }
@@ -116,7 +115,7 @@ public class FirstQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();

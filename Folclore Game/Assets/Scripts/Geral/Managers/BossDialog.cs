@@ -13,8 +13,8 @@ public class BossDialog : MonoBehaviour
     [SerializeField] private Camera camera;
 
     [Header("---- Dialogue Variables ----")] 
-    [SerializeField] [TextArea(3,10)] private string text;
     [SerializeField] private float duration;
+    [SerializeField] [TextArea(3,10)] private string text;
     private GameObject textBox;
     
     private void Awake()

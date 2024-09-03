@@ -13,21 +13,15 @@ public class SecondQuestManager : MonoBehaviour
     [HideInInspector] public bool finishPuzzle2 = false;
     private bool hasTalked;
     private bool hasAppeard = true;
-
-
-    #region GameObjects
-
+    
     private GameObject enemySpawner;
     private GameObject card;
 
-    #endregion
-    #region Texts
-
+    [Header("---- Dialogue Variables ----")]
+    [SerializeField] private float duration;
+    [TextArea(3, 10)][SerializeField] private string[] texts;
     private GameObject textBox;
 
-    [TextArea(3, 10)][SerializeField] private string[] texts;
-
-    #endregion
 
     private void Awake()
     {
@@ -95,7 +89,7 @@ public class SecondQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[0];
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
         ResetTextBox();
@@ -106,7 +100,7 @@ public class SecondQuestManager : MonoBehaviour
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
         PlayerMovement.Instance.SetPlayerStatic(false);
         ResetTextBox();
     }
