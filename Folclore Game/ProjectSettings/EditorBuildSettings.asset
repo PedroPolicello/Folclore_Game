@@ -12,15 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelector.unity
     guid: 67417b53e4f693047bd7d6b562fe8094
   - enabled: 1
-    path: Assets/Scenes/Cuca/CucaLevel.unity
+    path: Assets/Scenes/CucaLevel.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Cuca/CucaCasaAlquimista.unity
-    guid: 8039f0e353919fe43b0c3673e52b5ca8
-  - enabled: 1
-    path: Assets/Scenes/Cuca/CucaEsgoto.unity
-    guid: 2170bb6074c9e9f4aa77f37c1644280b
-  - enabled: 1
-    path: Assets/Scenes/Cuca/CucaBoss.unity
-    guid: e9e6093002f662140b02f3167676a49d
   m_configObjects: {}

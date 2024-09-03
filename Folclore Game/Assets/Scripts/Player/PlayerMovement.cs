@@ -31,18 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        #region Singleton
-
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        #endregion
+        Instance = this;
         GetComponents();
     }
     void Update()

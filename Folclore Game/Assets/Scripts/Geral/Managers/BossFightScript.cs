@@ -1,15 +1,21 @@
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
 
 public class BossFightScript : MonoBehaviour
 {
     public static BossFightScript Instance;
     public State currentState;
     private Animator animator;
+    
+    [Header("---- Dialogue Variables ----")] 
+    public float duration;
+    [TextArea(3,10)] public string[] texts;
+    private GameObject textBox;
 
     [Header("---- General Variables ----")] 
     public bool isOnIdle;
@@ -46,7 +52,13 @@ public class BossFightScript : MonoBehaviour
         Instance = this;
         currentLife = maxLife;
         UIManager.Instance.SetBossHealthBar();
+        SetReferences();
         ControllPhases();
+    }
+    void SetReferences()
+    {
+        textBox = GameObject.FindGameObjectWithTag("backgroundDialogue");
+        textBox.GetComponent<Image>().enabled = false;
     }
     private void Update()
     {
@@ -63,7 +75,6 @@ public class BossFightScript : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(Phase1());
-                    print("Phase01");
                     isOnPhase1 = true;
                 }
                 break;
@@ -72,7 +83,6 @@ public class BossFightScript : MonoBehaviour
                 {
                     StopAllCoroutines();
                     StartCoroutine(Phase2());
-                    print("Phase02");
                     isOnPhase2 = true;
                 }
                 break;
@@ -166,8 +176,10 @@ public class BossFightScript : MonoBehaviour
     }
     IEnumerator Phase2()
     {
-        print("Dialogo para Phase 2");
-        yield return new WaitForSeconds(10f);
+        SetDialogue(true, 0);
+        yield return new WaitForSeconds(duration);
+        SetDialogue(false, 0);
+        
         while (currentLife <= maxLife/2 && currentLife > 0)
         {
             StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
@@ -185,8 +197,10 @@ public class BossFightScript : MonoBehaviour
     IEnumerator Die()
     {
         //Destruir todos os Dragões
-        print("Dialogo pré-morte");
-        yield return new WaitForSeconds(5f);
+        SetDialogue(true, 1);
+        yield return new WaitForSeconds(duration);
+        SetDialogue(false, 1);
+        
         SceneController.Instance.CallWinScreen();
     }
 
@@ -196,6 +210,20 @@ public class BossFightScript : MonoBehaviour
         currentLife -= dmg;
         UIManager.Instance.UpdateBossUI();
         ControllPhases();
+    }
+    
+    void SetDialogue(bool active, int textIndex)
+    {
+        if (active)
+        {
+            textBox.GetComponent<Image>().enabled = true;
+            textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[textIndex];
+        }
+        else
+        {
+            textBox.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            textBox.GetComponent<Image>().enabled = false;
+        }
     }
 }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -14,17 +15,17 @@ public class SceneController : MonoBehaviour
     [SerializeField] private GameObject[] changeScenePos; 
     [SerializeField] private GameObject[] activesScenes;
 
-    private void OnEnable()
-    {
-        StartCoroutine(StartGame(false));
-    }
-
     private void Awake()
     {
         Instance = this;
         fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
         player = GameObject.FindGameObjectWithTag("Player");
         SetMapsToFalse();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(StartGame(false));
     }
 
     public void MainMenu()

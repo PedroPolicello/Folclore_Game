@@ -1,6 +1,8 @@
 using System.Collections;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossDialog : MonoBehaviour
 {
@@ -9,9 +11,22 @@ public class BossDialog : MonoBehaviour
     [SerializeField] private GameObject bossFightManager;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private Camera camera;
+
+    [Header("---- Dialogue Variables ----")] 
+    [SerializeField] [TextArea(3,10)] private string text;
+    [SerializeField] private float duration;
+    private GameObject textBox;
+    
     private void Awake()
     {
         Instance = this;
+        SetReferences();
+    }
+    
+    void SetReferences()
+    {
+        textBox = GameObject.FindGameObjectWithTag("backgroundDialogue");
+        textBox.GetComponent<Image>().enabled = false;
     }
 
     public void StartBossDialog()
@@ -24,7 +39,10 @@ public class BossDialog : MonoBehaviour
     IEnumerator CucaDialog()
     {
         yield return new WaitForSeconds(1f);
-        print("Dialogo Boss");
+        SetDialogue(true);
+        yield return new WaitForSeconds(duration);
+        SetDialogue(false);
+        
         UIManager.Instance.bossLife.SetActive(true);
         yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
@@ -33,5 +51,19 @@ public class BossDialog : MonoBehaviour
         UIManager.Instance.UpdateUI();
         yield return new WaitForSeconds(0.5f);
         bossFightManager.SetActive(true);
+    }
+
+    void SetDialogue(bool active)
+    {
+        if (active)
+        {
+            textBox.GetComponent<Image>().enabled = true;
+            textBox.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        }
+        else
+        {
+            textBox.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            textBox.GetComponent<Image>().enabled = false;
+        }
     }
 }

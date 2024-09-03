@@ -2111,6 +2111,8 @@ MonoBehaviour:
   bossFightManager: {fileID: 1214742127}
   virtualCamera: {fileID: 1678426261}
   camera: {fileID: 519420031}
+  text: Inicio
+  duration: 2
 --- !u!1 &323149981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4396,9 +4398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 2128912171}
-  musicVolume: 10
+  musicVolume: 1
   sFXSource: {fileID: 1058324583}
-  sFXVolume: 10
+  sFXVolume: 1
   backgroundMusic: {fileID: 0}
   walk: {fileID: 0}
   jump: {fileID: 0}
@@ -5563,7 +5565,7 @@ GameObject:
   - component: {fileID: 933993731}
   - component: {fileID: 933993733}
   m_Layer: 0
-  m_Name: Parede DIr
+  m_Name: Parede Dir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7305,7 +7307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Casa Alquimista
-  timeToFade: 0
+  timeToFade: 2
   isEsgoto: 0
 --- !u!61 &1108482794
 BoxCollider2D:
@@ -8166,6 +8168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  duration: 2
+  texts:
+  - Agora vc vai ver!!
+  - "N\xC3AAAAOOOOO"
   isOnIdle: 0
   isOnPhase1: 0
   isOnPhase2: 0
@@ -12610,7 +12616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Esgoto
-  timeToFade: 0
+  timeToFade: 2
   isEsgoto: 0
 --- !u!61 &2049263157
 BoxCollider2D:
