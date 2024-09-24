@@ -2202,9 +2202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardsCollect: 0
   missionCompleteText: {fileID: 1562921005}
-  unlockBoss: 0
-  finishPuzzle1: 0
-  finishPuzzle2: 0
+  unlockBoss: 1
+  finishPuzzle1: 1
+  finishPuzzle2: 1
 --- !u!114 &323149987
 MonoBehaviour:
   m_ObjectHideFlags: 0

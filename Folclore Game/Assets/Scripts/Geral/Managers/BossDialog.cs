@@ -44,7 +44,6 @@ public class BossDialog : MonoBehaviour
         SetDialogue(false);
         
         UIManager.Instance.bossLife.SetActive(true);
-        yield return new WaitForSeconds(5f);
         PlayerMovement.Instance.SetPlayerStatic(false);
         PlayerAttack.instance.SetCanAttack(true);
         PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;

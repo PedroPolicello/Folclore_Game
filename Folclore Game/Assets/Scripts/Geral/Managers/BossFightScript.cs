@@ -40,6 +40,7 @@ public class BossFightScript : MonoBehaviour
     [SerializeField] private GameObject[] spikes;
     [SerializeField] private GameObject[] warnings;
     [SerializeField] private int[] spikesQuantities;
+    int spikePosIndex;
 
     [Header("---- Dragon Variables ----")] 
     [SerializeField] private GameObject dragonPrefab;
@@ -140,9 +141,9 @@ public class BossFightScript : MonoBehaviour
         {
             for (int i = 0; i < spikesQuantity; i++)
             {
-                int spikePosIndex = Random.Range(0, spikes.Length);
-                spikes[spikePosIndex].SetActive(true);
+                ChooseSpike();
                 warnings[spikePosIndex].SetActive(true);
+                spikes[spikePosIndex].SetActive(true);
                 yield return new WaitForSeconds(1f);
                 spikes[spikePosIndex].transform.DOLocalMoveY(-4,1);
             }
@@ -156,6 +157,13 @@ public class BossFightScript : MonoBehaviour
                 spike.SetActive(false);
             } 
         }
+    }
+
+    void ChooseSpike()
+    {
+        spikePosIndex = Random.Range(0, spikes.Length);
+        if (spikes[spikePosIndex].activeSelf == false) return;
+        else ChooseSpike();
     }
 
     //PHASES & DIE
