@@ -5,6 +5,7 @@ public class MainQuestManager : MonoBehaviour
 {
     public static MainQuestManager Instance;
 
+    [SerializeField] private GameObject morvain;
     [SerializeField] private int cardsCollect;
     [SerializeField] private TextMeshProUGUI missionCompleteText;
     public bool unlockBoss;
@@ -18,7 +19,11 @@ public class MainQuestManager : MonoBehaviour
 
     void Update()
     {
-        if (cardsCollect >= 2) unlockBoss = true;
+        if (cardsCollect >= 2)
+        {
+            unlockBoss = true;
+            morvain.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
     }
 
     public void AddCardToCount()
