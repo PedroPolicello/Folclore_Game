@@ -5104,17 +5104,20 @@ MonoBehaviour:
   musicVolume: {fileID: 1781563638}
   sFXSource: {fileID: 1058324583}
   sFXVolume: {fileID: 1079266726}
-  backgroundMusic: {fileID: 0}
-  walk: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 437b3ca3e24fecf4ca3249d944f9d7ba, type: 3}
+  bossMusic: {fileID: 8300000, guid: ff1620dc7dd13594ea6532656af018e0, type: 3}
   jump: {fileID: 0}
   attack: {fileID: 0}
-  damage: {fileID: 0}
-  death: {fileID: 0}
-  enemyAttack: {fileID: 0}
-  enemyHit: {fileID: 0}
-  enemyDeath: {fileID: 0}
-  nPCInteract: {fileID: 0}
-  questComplete: {fileID: 0}
+  damage: {fileID: 8300000, guid: d6f4bc7875524c84aa6bea2f726ec40f, type: 3}
+  death: {fileID: 8300000, guid: c144d232739fb204f9e75bf7561a1f6b, type: 3}
+  batAttack: {fileID: 8300000, guid: 982dde171a7364940847006a5589a066, type: 3}
+  dragonAttack: {fileID: 0}
+  nPCInteract: {fileID: 8300000, guid: eb65fc863015437448d9cb9a1d8e7743, type: 3}
+  collect: {fileID: 8300000, guid: c178a7424077a0b4aa8dcf8448f0011f, type: 3}
+  fireBall: {fileID: 8300000, guid: 5e351424e519cb04092fadb397ffef12, type: 3}
+  spikes: {fileID: 8300000, guid: c6d05f5ed8988f2428d731ec95a3ae32, type: 3}
+  bossHit: {fileID: 8300000, guid: 59907bfc0c14df547b6b4ee5758a1008, type: 3}
+  bossDie: {fileID: 8300000, guid: f64b40c191abc564a84dc09a79bee092, type: 3}
 --- !u!1 &746214657
 GameObject:
   m_ObjectHideFlags: 0

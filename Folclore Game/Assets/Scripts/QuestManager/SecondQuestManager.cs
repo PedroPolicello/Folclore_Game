@@ -85,6 +85,11 @@ public class SecondQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
+        Destroy(audioSource);
+        
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
@@ -97,6 +102,11 @@ public class SecondQuestManager : MonoBehaviour
     }
     IEnumerator Dialogue2()
     {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
+        Destroy(audioSource);
+        
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;
         textBox.GetComponentInChildren<TextMeshProUGUI>().text = texts[1];

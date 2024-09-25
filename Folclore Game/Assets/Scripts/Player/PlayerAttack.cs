@@ -34,8 +34,12 @@ public class PlayerAttack : MonoBehaviour
         if (PlayerInputsControl.Instance.GetIsAttacking() && Time.time > nextFire && canAttack)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(projectile, shootPos.position, shootPos.rotation);
             animator.SetTrigger("isAttacking");
+            Instantiate(projectile, shootPos.position, shootPos.rotation);
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.attack);
+            Destroy(audioSource);
         }
     }
 }

@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -58,6 +56,10 @@ public class BossFightScript : MonoBehaviour
         UIManager.Instance.SetBossHealthBar();
         SetReferences();
         ControllPhases();
+        SoundManager.Instance.PlayPauseMusic(false);
+        SoundManager.Instance.SetMusic(SoundManager.Instance.bossMusic);
+        SoundManager.Instance.PlayPauseMusic(true);
+
     }
     void SetReferences()
     {
@@ -122,6 +124,10 @@ public class BossFightScript : MonoBehaviour
             {
                 Instantiate(fireBallPrefab, new Vector2(i, -81), Quaternion.identity);
             }
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.fireBall);
+            Destroy(audioSource);
 
             fireBallQuantity--;
             if(currentState == State.Phase1)yield return new WaitForSeconds(timeBTWFireBalls);
@@ -149,6 +155,11 @@ public class BossFightScript : MonoBehaviour
                 warnings[spikePosIndex].SetActive(true);
                 spikes[spikePosIndex].SetActive(true);
                 yield return new WaitForSeconds(1f);
+                AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+                audioSource.PlayOneShot(SoundManager.Instance.spikes);
+                Destroy(audioSource);
+                
                 spikes[spikePosIndex].transform.DOLocalMoveY(-4,1);
             }
         }
@@ -215,7 +226,11 @@ public class BossFightScript : MonoBehaviour
     IEnumerator Die()
     {
         foreach(GameObject dragon in dragonsInGame) Destroy(dragon);
-        //dragonsInGame.clear
+        //dragonsInGame.clear // Limpar Array
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.PlayOneShot(SoundManager.Instance.bossDie);
+        Destroy(audioSource);
         SetDialogue(true, 1);
         yield return new WaitForSeconds(duration);
         SetDialogue(false, 1);

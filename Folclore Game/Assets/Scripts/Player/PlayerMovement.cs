@@ -68,6 +68,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGrounded() && canJump)
         {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.jump);
+            Destroy(audioSource);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             animator.SetBool("isJumping", true);
         }

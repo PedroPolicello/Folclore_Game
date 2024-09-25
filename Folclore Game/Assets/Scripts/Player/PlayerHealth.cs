@@ -27,6 +27,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.PlayOneShot(SoundManager.Instance.damage);
+        Destroy(audioSource);
         currentHealth -= damage;
         StartCoroutine(Damage());
         CheckHealth();
@@ -59,6 +63,10 @@ public class PlayerHealth : MonoBehaviour
     
     IEnumerator Death()
     {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.PlayOneShot(SoundManager.Instance.death);
+        Destroy(audioSource);
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         EnemySpawner.Instance.KillAllEnemies();

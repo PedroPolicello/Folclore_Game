@@ -25,6 +25,10 @@ public class CollectableBase : MonoBehaviour
     {
         if (inRange && PlayerInputsControl.Instance.GetIsPressed())
         {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.collect);
+            Destroy(audioSource);
             Destroy(gameObject);
         }
     }

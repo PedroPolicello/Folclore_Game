@@ -53,6 +53,10 @@ public class EnemyBat : MonoBehaviour
         if (transform.position.x > target.transform.position.x - 1 && transform.position.x < target.transform.position.x + 1 && Time.time > nextFire)
         {
             StartCoroutine(Attack());
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.batAttack);
+            Destroy(audioSource);
             nextFire = Time.time + fireRate;
         }
         else
