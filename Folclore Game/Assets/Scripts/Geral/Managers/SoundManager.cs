@@ -2,15 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
     
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] [Range(0f,1f)] private int musicVolume;
+    [SerializeField] private Slider musicVolume;
     [SerializeField] private AudioSource sFXSource;
-    [SerializeField] [Range(0f,1f)] private int sFXVolume;
+    [SerializeField] private Slider sFXVolume;
 
     [Header("---- Player Clips ----")]
     public AudioClip backgroundMusic;
@@ -32,14 +33,15 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
         musicSource.loop = true;
+        musicVolume.value = musicVolume.maxValue / 2;
+        sFXVolume.value = sFXVolume.maxValue / 2;
     }
 
     private void Update()
     {
-        musicSource.volume = musicVolume;
-        sFXSource.volume = sFXVolume;
+        musicSource.volume = musicVolume.value/10;
+        sFXSource.volume = sFXVolume.value/10;
     }
 
     public void PlayPauseMusic(bool play)
@@ -48,7 +50,7 @@ public class SoundManager : MonoBehaviour
         else musicSource.Stop();
     }
 
-    public void PlaySFX(AudioClip clip )
+    public void PlaySFX(AudioClip clip)
     {
         sFXSource.PlayOneShot(clip);
     }

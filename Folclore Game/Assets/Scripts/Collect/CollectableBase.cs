@@ -23,7 +23,7 @@ public class CollectableBase : MonoBehaviour
 
     protected virtual void Collect()
     {
-        if (inRange && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && PlayerInputsControl.Instance.GetIsPressed())
         {
             Destroy(gameObject);
         }

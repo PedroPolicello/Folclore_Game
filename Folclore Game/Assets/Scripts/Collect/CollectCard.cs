@@ -2,7 +2,7 @@ public class CollectCard : CollectableBase
 {
     protected override void Collect()
     {
-        if (inRange && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && PlayerInputsControl.Instance.GetIsPressed())
         {
             MainQuestManager.Instance.AddCardToCount();
             Destroy(gameObject);

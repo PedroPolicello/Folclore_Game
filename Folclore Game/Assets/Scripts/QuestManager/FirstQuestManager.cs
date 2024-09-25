@@ -59,7 +59,7 @@ public class FirstQuestManager : MonoBehaviour
     }
     void SetupQuest()
     {
-        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1)
+        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1)
         {
             StartCoroutine(Dialogue());
             ingredient1.SetActive(true);
@@ -69,7 +69,7 @@ public class FirstQuestManager : MonoBehaviour
     }
     void DeliverQuest()
     {
-        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle1 && !hasTalked)
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle1 && !hasTalked)
         {
             StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();

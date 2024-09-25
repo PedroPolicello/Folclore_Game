@@ -51,7 +51,7 @@ public class SecondQuestManager : MonoBehaviour
 
     void SetupQuest()
     {
-        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() && !killAllEnemies && !finishPuzzle2)
+        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !killAllEnemies && !finishPuzzle2)
         {
             StartCoroutine(Dialogue());
         }
@@ -59,7 +59,7 @@ public class SecondQuestManager : MonoBehaviour
 
     void DeliverQuest()
     {
-        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.instance.GetIsPressed() && !finishPuzzle2 && !hasTalked)
+        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle2 && !hasTalked)
         {
             StartCoroutine(Dialogue2());
             WarriorScript.instance.ChangeSprite();

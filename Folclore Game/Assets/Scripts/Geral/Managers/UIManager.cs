@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject pauseMenu;
+    public GameObject audioSettings;
     
     [Header("---- Player Life Variables ----")] 
     [SerializeField] private Slider healthBar;
@@ -15,8 +16,6 @@ public class UIManager : MonoBehaviour
     public GameObject bossLife;
     [SerializeField] private Slider bossHealthBar;
     [SerializeField] private Image bossFillColor;
-    
-    
 
     private void Awake()
     {
@@ -28,6 +27,14 @@ public class UIManager : MonoBehaviour
     {
         healthBar.maxValue = PlayerHealth.Instance.maxHealth;
         healthBar.value = healthBar.maxValue;
+    }
+
+    public void ExitPause()
+    {
+        audioSettings.SetActive(false);
+        pauseMenu.SetActive(false);
+        PlayerInputsControl.Instance.inPause = false;
+        Time.timeScale = 1;
     }
 
     private void Update()

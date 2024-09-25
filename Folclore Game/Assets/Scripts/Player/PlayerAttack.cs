@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (PlayerInputsControl.instance.GetIsAttacking() && Time.time > nextFire && canAttack)
+        if (PlayerInputsControl.Instance.GetIsAttacking() && Time.time > nextFire && canAttack)
         {
             nextFire = Time.time + fireRate;
             Instantiate(projectile, shootPos.position, shootPos.rotation);

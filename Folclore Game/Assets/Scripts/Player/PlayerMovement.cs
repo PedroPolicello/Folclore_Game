@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
-        if (PlayerInputsControl.instance.GetIsMoving() && canMove)
+        if (PlayerInputsControl.Instance.GetIsMoving() && canMove)
         {
             speed += accelerationSpeed * Time.deltaTime;
         }
@@ -51,15 +51,15 @@ public class PlayerMovement : MonoBehaviour
             speed = 0;
         }
 
-        transform.Translate(PlayerInputsControl.instance.GetMoveDirection() * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
+        transform.Translate(PlayerInputsControl.Instance.GetMoveDirection() * (Mathf.Clamp(speed, 0, maxSpeed) * Time.deltaTime));
     }
     void FlipX()
     {
-        if (PlayerInputsControl.instance.GetMoveDirection().x > 0 && canFlip)
+        if (PlayerInputsControl.Instance.GetMoveDirection().x > 0 && canFlip)
         {
             spriteRenderer.flipX = false;
         }
-        else if (PlayerInputsControl.instance.GetMoveDirection().x < 0 && canFlip)
+        else if (PlayerInputsControl.Instance.GetMoveDirection().x < 0 && canFlip)
         {
             spriteRenderer.flipX = true;
         }

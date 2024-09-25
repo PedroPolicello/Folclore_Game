@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -47,6 +49,7 @@ public class BossFightScript : MonoBehaviour
     [SerializeField] private float timeBTWDragons;
     [SerializeField] private GameObject[] dragonSpawnPos;
     [SerializeField] private int[] dragonQuantities;
+    [SerializeField] private GameObject[] dragonsInGame;
 
     private void Awake()
     {
@@ -63,6 +66,7 @@ public class BossFightScript : MonoBehaviour
     }
     private void Update()
     {
+        dragonsInGame = GameObject.FindGameObjectsWithTag("dragon");
         switch (currentState)
         {
             case State.Idle:
@@ -174,7 +178,10 @@ public class BossFightScript : MonoBehaviour
             StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
             yield return new WaitForSeconds(10);
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
+            
             //Esperar os dragões morrerem
+            //yield return new WaitUntil(dragonsInGame.Length == 0);
+            
             yield return new WaitForSeconds(5);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[0]));
             yield return new WaitForSeconds(5);
@@ -193,7 +200,10 @@ public class BossFightScript : MonoBehaviour
             StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
             yield return new WaitForSeconds(15);
             StartCoroutine(SpawnDragons(dragonQuantities[1]));
+            
             //Esperar os dragões morrerem
+            //yield return new WaitUntil(dragonsInGame.Length == 0);
+
             yield return new WaitForSeconds(10);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[1]));
             yield return new WaitForSeconds(6);
@@ -204,7 +214,8 @@ public class BossFightScript : MonoBehaviour
     
     IEnumerator Die()
     {
-        //Destruir todos os Dragões
+        foreach(GameObject dragon in dragonsInGame) Destroy(dragon);
+        //dragonsInGame.clear
         SetDialogue(true, 1);
         yield return new WaitForSeconds(duration);
         SetDialogue(false, 1);

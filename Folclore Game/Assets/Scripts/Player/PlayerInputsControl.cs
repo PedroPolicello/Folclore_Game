@@ -1,10 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputsControl : MonoBehaviour
 {
-    public static PlayerInputsControl instance;
+    public static PlayerInputsControl Instance;
     private Controls controls;
     
     private Vector2 moveDirection;
@@ -12,13 +11,13 @@ public class PlayerInputsControl : MonoBehaviour
     private bool isAttacking;
     private bool isPressed;
     private bool isPausePressed;
-    private bool inPause;
+    [HideInInspector] public bool inPause;
     
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -65,6 +64,7 @@ public class PlayerInputsControl : MonoBehaviour
         }
         else if(inPause && isPausePressed)
         {
+            UIManager.Instance.audioSettings.SetActive(false);
             UIManager.Instance.pauseMenu.SetActive(false);
             inPause = false;
             Time.timeScale = 1;

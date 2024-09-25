@@ -6,7 +6,7 @@ public class CollectIngredient : CollectableBase
 
     protected override void Collect()
     {
-        if (inRange && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && PlayerInputsControl.Instance.GetIsPressed())
         {
             FirstQuestManager.Instance.AddIngredientCount();
             Destroy(gameObject);

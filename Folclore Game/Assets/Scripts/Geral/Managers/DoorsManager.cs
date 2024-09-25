@@ -27,31 +27,31 @@ public class DoorsManager : MonoBehaviour
     void SceneController()
     {
         //Vai para o esgoto
-        if(inRange && CompareTag("esgoto") && PlayerInputsControl.instance.GetIsPressed() && !MainQuestManager.Instance.finishPuzzle1)
+        if(inRange && CompareTag("esgoto") && PlayerInputsControl.Instance.GetIsPressed() && !MainQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "Bloqueado";
         }
-        else if (inRange && CompareTag("esgoto") && PlayerInputsControl.instance.GetIsPressed() && MainQuestManager.Instance.finishPuzzle1)
+        else if (inRange && CompareTag("esgoto") && PlayerInputsControl.Instance.GetIsPressed() && MainQuestManager.Instance.finishPuzzle1)
         {
             global::SceneController.Instance.CucaEsgoto();
         }
         //Vai para o Alquimista
-        if (inRange && CompareTag("alquimista") && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && CompareTag("alquimista") && PlayerInputsControl.Instance.GetIsPressed())
         {
             global::SceneController.Instance.CucaCasaAlquimista();
         }
         //Volta para o caminho
-        if (inRange && CompareTag("caminho") && PlayerInputsControl.instance.GetIsPressed())
+        if (inRange && CompareTag("caminho") && PlayerInputsControl.Instance.GetIsPressed())
         {
             if (isEsgoto) global::SceneController.Instance.CucaCaminho(true);
             else global::SceneController.Instance.CucaCaminho(false);
         }
         //Vai para o Boss
-        if(inRange && CompareTag("boss") && PlayerInputsControl.instance.GetIsPressed() && !MainQuestManager.Instance.finishPuzzle1)
+        if(inRange && CompareTag("boss") && PlayerInputsControl.Instance.GetIsPressed() && !MainQuestManager.Instance.finishPuzzle1)
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "Bloqueado";
         }
-        else if (inRange && CompareTag("boss") && PlayerInputsControl.instance.GetIsPressed() && MainQuestManager.Instance.unlockBoss)
+        else if (inRange && CompareTag("boss") && PlayerInputsControl.Instance.GetIsPressed() && MainQuestManager.Instance.unlockBoss)
         {
             global::SceneController.Instance.CucaBoss();
         }
@@ -68,6 +68,7 @@ public class DoorsManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(!collision.gameObject.CompareTag("Player")) return;
         if (collision.gameObject.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "";
