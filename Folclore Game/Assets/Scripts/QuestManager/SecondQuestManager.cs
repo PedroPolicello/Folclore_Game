@@ -21,7 +21,7 @@ public class SecondQuestManager : MonoBehaviour
     [SerializeField] private float duration;
     [TextArea(3, 10)][SerializeField] private string[] texts;
     private GameObject textBox;
-
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -38,6 +38,7 @@ public class SecondQuestManager : MonoBehaviour
         enemySpawner.SetActive(false);
         card = GameObject.FindGameObjectWithTag("card2");
         card.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -85,10 +86,8 @@ public class SecondQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
-        Destroy(audioSource);
         
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
@@ -102,10 +101,8 @@ public class SecondQuestManager : MonoBehaviour
     }
     IEnumerator Dialogue2()
     {
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
-        Destroy(audioSource);
         
         PlayerMovement.Instance.SetPlayerStatic(true);
         textBox.GetComponent<Image>().enabled = true;

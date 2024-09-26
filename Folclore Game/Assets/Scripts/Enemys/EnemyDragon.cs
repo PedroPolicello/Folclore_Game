@@ -13,11 +13,14 @@ public class EnemyDragon : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
         transform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        audioSource.GetComponent<AudioSource>();
         target = GameObject.FindGameObjectWithTag("Target");
         currentLife = maxLife;
     }
@@ -56,10 +59,9 @@ public class EnemyDragon : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
             audioSource.PlayOneShot(SoundManager.Instance.dragonAttack);
-            Destroy(audioSource);
+            
             PlayerHealth.Instance.TakeDamage(1);
         }
     }
@@ -68,10 +70,9 @@ public class EnemyDragon : MonoBehaviour
     {
         if (currentLife <= 0 && isBoss)
         {
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
             audioSource.PlayOneShot(SoundManager.Instance.bossHit);
-            Destroy(audioSource);
+            
             BossFightScript.Instance.TakeDamage(1);
             Destroy(gameObject);
         }

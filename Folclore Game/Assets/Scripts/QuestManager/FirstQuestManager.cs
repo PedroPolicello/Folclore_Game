@@ -36,6 +36,7 @@ public class FirstQuestManager : MonoBehaviour
     [SerializeField] private float duration;
     [TextArea(3, 10)][SerializeField] private string[] texts;
     private GameObject textBox;
+    private AudioSource audioSource;
     
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class FirstQuestManager : MonoBehaviour
         textBox.GetComponent<Image>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
         fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -101,10 +103,8 @@ public class FirstQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
-        Destroy(audioSource);
         
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
@@ -116,10 +116,8 @@ public class FirstQuestManager : MonoBehaviour
     }
     IEnumerator Dialogue2()
     {
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
-        Destroy(audioSource);
         
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);

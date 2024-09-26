@@ -11,6 +11,7 @@ public class BossFightScript : MonoBehaviour
     public static BossFightScript Instance;
     public State currentState;
     private Animator animator;
+    private AudioSource audioSource;
     
     [Header("---- Dialogue Variables ----")] 
     public float duration;
@@ -59,7 +60,7 @@ public class BossFightScript : MonoBehaviour
         SoundManager.Instance.PlayPauseMusic(false);
         SoundManager.Instance.SetMusic(SoundManager.Instance.bossMusic);
         SoundManager.Instance.PlayPauseMusic(true);
-
+        audioSource = GetComponent<AudioSource>();
     }
     void SetReferences()
     {
@@ -124,15 +125,14 @@ public class BossFightScript : MonoBehaviour
             {
                 Instantiate(fireBallPrefab, new Vector2(i, -81), Quaternion.identity);
             }
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
-            audioSource.PlayOneShot(SoundManager.Instance.fireBall);
-            Destroy(audioSource);
 
             fireBallQuantity--;
             if(currentState == State.Phase1)yield return new WaitForSeconds(timeBTWFireBalls);
             else if (currentState == State.Phase2)yield return new WaitForSeconds(timeBTWFireBalls - 1);
             foreach (var t in fireBallsBlockers) t.SetActive(false);
+            
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+            audioSource.PlayOneShot(SoundManager.Instance.fireBall);
         }
     }
     IEnumerator SpawnDragons(int dragonsQuantity)
@@ -155,11 +155,6 @@ public class BossFightScript : MonoBehaviour
                 warnings[spikePosIndex].SetActive(true);
                 spikes[spikePosIndex].SetActive(true);
                 yield return new WaitForSeconds(1f);
-                AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
-                audioSource.PlayOneShot(SoundManager.Instance.spikes);
-                Destroy(audioSource);
-                
                 spikes[spikePosIndex].transform.DOLocalMoveY(-4,1);
             }
         }

@@ -52,8 +52,8 @@ public class SoundManager : MonoBehaviour
 
     private void Update()
     {
-        musicSource.volume = musicVolume.value/10;
-        sFXSource.volume = sFXVolume.value/10;
+        musicSource.volume = musicVolume.value/50;
+        sFXSource.volume = sFXVolume.value/50;
     }
     
     public void SetMusic(AudioClip clip)

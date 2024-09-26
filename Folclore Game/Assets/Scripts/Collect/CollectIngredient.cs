@@ -9,6 +9,7 @@ public class CollectIngredient : CollectableBase
         if (inRange && PlayerInputsControl.Instance.GetIsPressed())
         {
             FirstQuestManager.Instance.AddIngredientCount();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.collect);
             Destroy(gameObject);
             switch (ingredientType)
             {
