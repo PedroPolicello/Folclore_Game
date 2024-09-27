@@ -37,6 +37,7 @@ public class FirstQuestManager : MonoBehaviour
     [TextArea(3, 10)][SerializeField] private string[] texts;
     private GameObject textBox;
     private AudioSource audioSource;
+    private bool hasInteracted;
     
     private void Awake()
     {
@@ -61,17 +62,18 @@ public class FirstQuestManager : MonoBehaviour
     }
     void SetupQuest()
     {
-        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1)
+        if (WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !hasAllIngredients && !finishPuzzle1 && !hasInteracted)
         {
             StartCoroutine(Dialogue());
             ingredient1.SetActive(true);
             ingredient2.SetActive(true);
             ingredient3.SetActive(true);
+            hasInteracted = true;
         }
     }
     void DeliverQuest()
     {
-        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle1 && !hasTalked)
+        if (HasAllIngredients() && WizardScript.instance.GetIsNearWizard() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle1 && !hasTalked && !hasInteracted)
         {
             StartCoroutine(Dialogue2());
             WizardScript.instance.ChangeSprite();
@@ -79,13 +81,19 @@ public class FirstQuestManager : MonoBehaviour
             potion.SetActive(true);
             MainQuestManager.Instance.finishPuzzle1 = true;
             hasTalked = true;
+            hasInteracted = true;
         }
     }
 
     bool HasAllIngredients()
     {
         hasAllIngredients = ingredientCount >= 3;
-        if(hasAllIngredients) goToWizard = true;
+        if (hasAllIngredients)
+        {
+            goToWizard = true;
+            hasInteracted = false;
+        }
+
         return hasAllIngredients;
     }
 

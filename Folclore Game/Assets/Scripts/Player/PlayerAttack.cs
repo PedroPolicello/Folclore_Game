@@ -10,7 +10,8 @@ public class PlayerAttack : MonoBehaviour
     private float nextFire;
     private Animator animator;
     private bool canAttack = true;
-    
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         instance = this;
@@ -36,10 +37,9 @@ public class PlayerAttack : MonoBehaviour
             nextFire = Time.time + fireRate;
             animator.SetTrigger("isAttacking");
             Instantiate(projectile, shootPos.position, shootPos.rotation);
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
             audioSource.PlayOneShot(SoundManager.Instance.attack);
-            Destroy(audioSource);
         }
     }
 }

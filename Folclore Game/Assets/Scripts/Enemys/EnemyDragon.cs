@@ -20,7 +20,7 @@ public class EnemyDragon : MonoBehaviour
         transform = GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        audioSource.GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         target = GameObject.FindGameObjectWithTag("Target");
         currentLife = maxLife;
     }

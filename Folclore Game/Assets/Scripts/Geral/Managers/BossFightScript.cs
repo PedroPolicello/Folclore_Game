@@ -184,11 +184,11 @@ public class BossFightScript : MonoBehaviour
             StartCoroutine(FireBallFalling(fireBallsQuantities[0]));
             yield return new WaitForSeconds(10);
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
-            
-            //Esperar os dragões morrerem
-            //yield return new WaitUntil(dragonsInGame.Length == 0);
-            
             yield return new WaitForSeconds(5);
+
+            //Esperar os dragões morrerem
+            yield return new WaitUntil(DragonsInGame);
+
             StartCoroutine(SpawnSpikes(true, spikesQuantities[0]));
             yield return new WaitForSeconds(5);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[0]));
@@ -206,31 +206,38 @@ public class BossFightScript : MonoBehaviour
             StartCoroutine(FireBallFalling(fireBallsQuantities[1]));
             yield return new WaitForSeconds(15);
             StartCoroutine(SpawnDragons(dragonQuantities[1]));
-            
-            //Esperar os dragões morrerem
-            //yield return new WaitUntil(dragonsInGame.Length == 0);
+            yield return new WaitForSeconds(5);
 
-            yield return new WaitForSeconds(10);
+            //Esperar os dragões morrerem
+            yield return new WaitUntil(DragonsInGame);
+
             StartCoroutine(SpawnSpikes(true, spikesQuantities[1]));
             yield return new WaitForSeconds(6);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[1]));
             yield return new WaitForSeconds(5f);
         }
     }
+
+    bool DragonsInGame()
+    {
+        return dragonsInGame.Length == 0;
+    }
     
     IEnumerator Die()
     {
-        foreach(GameObject dragon in dragonsInGame) Destroy(dragon);
-        //dragonsInGame.clear // Limpar Array
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
         audioSource.PlayOneShot(SoundManager.Instance.bossDie);
-        Destroy(audioSource);
+
         SetDialogue(true, 1);
         yield return new WaitForSeconds(duration);
         SetDialogue(false, 1);
         
         SceneController.Instance.CallWinScreen();
+    }
+
+    public void KillAllDragons()
+    {
+        foreach (GameObject dragon in dragonsInGame) Destroy(dragon);
     }
 
     //DAMAGE & LIFE

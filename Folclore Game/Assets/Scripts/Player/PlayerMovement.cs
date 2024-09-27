@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private AudioSource audioSource;
+
     #endregion
 
     void Awake()
@@ -67,13 +69,12 @@ public class PlayerMovement : MonoBehaviour
     public void JumpStart()
     {
         if (IsGrounded() && canJump)
-        {
-            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
-            audioSource.PlayOneShot(SoundManager.Instance.jump);
-            Destroy(audioSource);
+        {          
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             animator.SetBool("isJumping", true);
+
+            audioSource.volume = SoundManager.Instance.sFXVolume.value / 50;
+            audioSource.PlayOneShot(SoundManager.Instance.jump);
         }
     }
     public void JumpCanceled()

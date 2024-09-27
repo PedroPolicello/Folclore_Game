@@ -23,7 +23,7 @@ public class SceneController : MonoBehaviour
         SetMapsToFalse();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(StartGame(false));
     }

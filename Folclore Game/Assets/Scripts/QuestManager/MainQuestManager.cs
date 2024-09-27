@@ -19,11 +19,8 @@ public class MainQuestManager : MonoBehaviour
 
     void Update()
     {
-        if (cardsCollect >= 2)
-        {
-            unlockBoss = true;
-            morvain.GetComponent<BoxCollider2D>().isTrigger = true;
-        }
+        if (cardsCollect >= 2) unlockBoss = true;
+        if (finishPuzzle2) morvain.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     public void AddCardToCount()

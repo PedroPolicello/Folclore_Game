@@ -22,6 +22,7 @@ public class SecondQuestManager : MonoBehaviour
     [TextArea(3, 10)][SerializeField] private string[] texts;
     private GameObject textBox;
     private AudioSource audioSource;
+    private bool hasInteracted;
 
     private void Awake()
     {
@@ -47,31 +48,33 @@ public class SecondQuestManager : MonoBehaviour
         SetupQuest();
 
         if (killCount >= 6 && hasAppeard) StartCoroutine(PuzzleFeedback());
-
     }
 
     void SetupQuest()
     {
-        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !killAllEnemies && !finishPuzzle2)
+        if (WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !killAllEnemies && !finishPuzzle2 && !hasInteracted)
         {
             StartCoroutine(Dialogue());
+            hasInteracted = true;
         }
     }
 
     void DeliverQuest()
     {
-        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle2 && !hasTalked)
+        if (killAllEnemies && WarriorScript.instance.GetIsNearWarrior() && PlayerInputsControl.Instance.GetIsPressed() && !finishPuzzle2 && !hasTalked && !hasInteracted)
         {
             StartCoroutine(Dialogue2());
             WarriorScript.instance.ChangeSprite();
             card.SetActive(true);
             MainQuestManager.Instance.finishPuzzle2 = true;
             hasTalked = true;
+            hasInteracted = true;
         }
     }
     bool KillAllEnemies()
     {
         killAllEnemies = killCount >= 6;
+        hasInteracted = false;
         return killAllEnemies;
     }
     public void AddKillCount()
