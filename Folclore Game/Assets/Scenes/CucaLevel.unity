@@ -1192,6 +1192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1518261011205888724, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4688406123195602684, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -85
@@ -1230,6 +1234,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688406123195602684, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245599743022086420, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831686886449357549, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7733673970309177077, guid: 505bed919e66a434fa7d9091aa12e03b, type: 3}
@@ -1443,12 +1455,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killAllEnemies: 0
   finishPuzzle2: 0
-  duration: 5
+  duration: 10
   texts:
-  - "Me ajude a limpar esse esgoto dos monstros que eu te entrego a \xFAltima carta.\n\nEles
-    devem estar logo \xE0 frente."
-  - "Muito obrigado, agora consigo passar por aqui!\n\nProcure o guardi\xE3o da casa
-    da Cuca, ele deve te deixar passar."
+  - "Se quer a \xFAltima carta, vai ter que limpar essa sujeira primeiro. Os monstros
+    da Cuca infestam os esgotos logo \xE0 frente. \n\r\nLivre-me dessas criaturas,
+    e a carta ser\xE1 sua.\r"
+  - "Excelente trabalho! Agora, finalmente, posso manter esta passagem segura.\n\r\nV\xE1
+    at\xE9 o Guardi\xE3o da casa da Cuca. Ele ser\xE1 sua \xFAltima barreira. Que
+    a sorte esteja do seu lado.\r"
 --- !u!82 &97678121
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1460,7 +1474,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2981,12 +2995,16 @@ MonoBehaviour:
   feather: 0
   batWing: 0
   potion: {fileID: 28890195}
-  duration: 5
+  duration: 10
   texts:
-  - "Me ajude a encontrar os 3 ingredientes para minha po\xE7\xE3o.\n\nEles devem
-    estar espalhados pelo caminho da seita, eu te levo at\xE9 l\xE1."
-  - "Muito obrigado, agora est\xE1 tudo pronto!\n\nA pr\xF3xima carta deve estar
-    nos esgotos, procure o guarda por l\xE1."
+  - "Jovem Araqu\xE9m, o destino nos une nesta jornada de sabedoria. Tr\xEAs ingredientes
+    essenciais aguardam por ti, ocultos ao longo do caminho da Seita. \n\r\nApenas
+    quando reunidos, minha po\xE7\xE3o poder\xE1 ser completada. Eu o conduzirei
+    at\xE9 l\xE1, mas a busca... essa \xE9 sua responsabilidade.\r"
+  - "Ah, perfeito... Agora tudo est\xE1 no lugar. A ess\xEAncia toma forma, gra\xE7as
+    a voc\xEA.\n\r\nSua recompensa? A primeira chave para o seu destino.\r\nA segunda...
+    est\xE1 oculta nas profundezas dos esgotos. Busque o Guarda de l\xE1, ele guarda
+    mais do que parece hehe\r"
 --- !u!82 &281813005
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2998,7 +3016,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3276,7 +3294,8 @@ MonoBehaviour:
   virtualCamera: {fileID: 1678426261}
   camera: {fileID: 519420031}
   duration: 5
-  text: QUEM OUSA ENTRAR EM MINHA CASA!!!
+  text: "Quem se atreve a invadir meu covil?!\n\r\nVoc\xEA ser\xE1 apenas mais um
+    tolo a perecer sob o meu poder!\r"
 --- !u!1 &323149981
 GameObject:
   m_ObjectHideFlags: 0
@@ -10546,6 +10565,7 @@ GameObject:
   - component: {fileID: 1164253946}
   - component: {fileID: 1164253947}
   - component: {fileID: 1164253948}
+  - component: {fileID: 1164253949}
   m_Layer: 0
   m_Name: Estacas
   m_TagString: Untagged
@@ -10677,6 +10697,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be37bad343a686743a9092d7581ee2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1164253949
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164253944}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1166678006
 GameObject:
   m_ObjectHideFlags: 0
@@ -11129,8 +11245,11 @@ MonoBehaviour:
   currentState: 0
   duration: 7
   texts:
-  - "Voc\xEA \xE9 mesmo espertinho.\nVamos ver se consegue me vencer agora!"
-  - "N\xC3O \xC9 POSSIVEL!!\nCOMO OUSA ME VENCER ASSIM!!"
+  - "Voc\xEA tem habilidade, garoto... Mas ser\xE1 que \xE9 o suficiente?\n\r\nMorvain
+    pensou o mesmo antes de cair diante de mim. Vamos ver se voc\xEA tem um destino
+    diferente!\r"
+  - "Isso n\xE3o pode estar acontecendo!\n\r\nComo ousa me derrotar... eu, a imortal!?
+    Maldito seja, Araqu\xE9m!\r"
   isOnIdle: 0
   isOnPhase1: 0
   isOnPhase2: 0
@@ -11180,7 +11299,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -13333,6 +13452,7 @@ GameObject:
   - component: {fileID: 1566583922}
   - component: {fileID: 1566583923}
   - component: {fileID: 1566583924}
+  - component: {fileID: 1566583925}
   m_Layer: 0
   m_Name: Estacas (1)
   m_TagString: Untagged
@@ -13464,6 +13584,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be37bad343a686743a9092d7581ee2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1566583925
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566583920}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1578829411
 GameObject:
   m_ObjectHideFlags: 0
@@ -15959,6 +16175,7 @@ GameObject:
   - component: {fileID: 1956483094}
   - component: {fileID: 1956483095}
   - component: {fileID: 1956483096}
+  - component: {fileID: 1956483097}
   m_Layer: 0
   m_Name: Estacas (4)
   m_TagString: Untagged
@@ -16090,6 +16307,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be37bad343a686743a9092d7581ee2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1956483097
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956483092}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1981877555
 GameObject:
   m_ObjectHideFlags: 0
@@ -16301,6 +16614,7 @@ GameObject:
   - component: {fileID: 2012680936}
   - component: {fileID: 2012680937}
   - component: {fileID: 2012680938}
+  - component: {fileID: 2012680939}
   m_Layer: 0
   m_Name: Estacas (2)
   m_TagString: Untagged
@@ -16432,6 +16746,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be37bad343a686743a9092d7581ee2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2012680939
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012680934}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2019074280
 GameObject:
   m_ObjectHideFlags: 0
@@ -16750,6 +17160,7 @@ GameObject:
   - component: {fileID: 2058553414}
   - component: {fileID: 2058553415}
   - component: {fileID: 2058553416}
+  - component: {fileID: 2058553417}
   m_Layer: 0
   m_Name: Estacas (3)
   m_TagString: Untagged
@@ -16881,6 +17292,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be37bad343a686743a9092d7581ee2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2058553417
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058553412}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2073445046
 GameObject:
   m_ObjectHideFlags: 0

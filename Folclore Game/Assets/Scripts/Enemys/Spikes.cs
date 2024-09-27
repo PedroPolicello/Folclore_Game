@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
+    private AudioSource audioSource;
+    
     private void OnEnable()
     {
         StartCoroutine(Sound());
+    }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -17,9 +24,8 @@ public class Spikes : MonoBehaviour
     IEnumerator Sound()
     {
         yield return new WaitForSeconds(1f);
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
         audioSource.PlayOneShot(SoundManager.Instance.spikes);
-        Destroy(audioSource);
     }
 }

@@ -125,14 +125,15 @@ public class BossFightScript : MonoBehaviour
             {
                 Instantiate(fireBallPrefab, new Vector2(i, -81), Quaternion.identity);
             }
+            
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
+            audioSource.PlayOneShot(SoundManager.Instance.fireBall);
 
             fireBallQuantity--;
             if(currentState == State.Phase1)yield return new WaitForSeconds(timeBTWFireBalls);
             else if (currentState == State.Phase2)yield return new WaitForSeconds(timeBTWFireBalls - 1);
             foreach (var t in fireBallsBlockers) t.SetActive(false);
             
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
-            audioSource.PlayOneShot(SoundManager.Instance.fireBall);
         }
     }
     IEnumerator SpawnDragons(int dragonsQuantity)
@@ -225,6 +226,7 @@ public class BossFightScript : MonoBehaviour
     
     IEnumerator Die()
     {
+        KillAllDragons();
         audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
         audioSource.PlayOneShot(SoundManager.Instance.bossDie);
 

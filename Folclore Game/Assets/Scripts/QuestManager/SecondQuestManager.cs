@@ -89,7 +89,7 @@ public class SecondQuestManager : MonoBehaviour
 
     IEnumerator Dialogue()
     {
-        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
         
         PlayerAttack.instance.SetCanAttack(false);
@@ -104,7 +104,7 @@ public class SecondQuestManager : MonoBehaviour
     }
     IEnumerator Dialogue2()
     {
-        audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
         audioSource.PlayOneShot(SoundManager.Instance.nPCInteract);
         
         PlayerMovement.Instance.SetPlayerStatic(true);
