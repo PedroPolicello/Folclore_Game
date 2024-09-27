@@ -25,7 +25,7 @@ public class SceneController : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(StartGame(false));
+        Game(false);
     }
 
     public void MainMenu()
@@ -54,9 +54,10 @@ public class SceneController : MonoBehaviour
     }
 
     //START GAME
-    public void Game()
+    public void Game(bool restart)
     {
-        StartCoroutine(StartGame(true));
+        if(restart) StartCoroutine(StartGame(true));
+        else StartCoroutine(StartGame(false));
     }
     IEnumerator StartGame(bool restart)
     {
@@ -64,11 +65,8 @@ public class SceneController : MonoBehaviour
         {
             Time.timeScale = 1;
             fade.DOFade(1, timeToFade);
-            yield return new WaitForSeconds(timeToFade + .5f);
-            player.transform.position = new Vector3(-85,-2,0);
-            yield return new WaitForSeconds(timeToFade + .5f);
-            fade.DOFade(0, timeToFade);
-            yield return new WaitForSeconds(timeToFade + .5f);
+            yield return new WaitForSeconds(timeToFade + 1f);
+            SceneManager.LoadScene("CucaLevel");
         }
         else
         {
@@ -174,5 +172,8 @@ public class SceneController : MonoBehaviour
         activesScenes[3].SetActive(true);
         yield return new WaitForSeconds(.5f);
         fade.DOFade(0, timeToFade);
+        SoundManager.Instance.PlayPauseMusic(false);
+        SoundManager.Instance.SetMusic(SoundManager.Instance.victoryMusic);
+        SoundManager.Instance.PlayPauseMusic(true);
     }
 }

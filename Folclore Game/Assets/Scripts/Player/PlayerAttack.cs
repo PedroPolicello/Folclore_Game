@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
             animator.SetTrigger("isAttacking");
             Instantiate(projectile, shootPos.position, shootPos.rotation);
 
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/100;
+            audioSource.volume = SoundManager.Instance.sFXVolume.value/150;
             audioSource.PlayOneShot(SoundManager.Instance.attack);
         }
     }

@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     {
         fade.DOFade(1, 2f);
         yield return new WaitForSeconds(2f);
+        DontDestroy.Instance.StopMusic();
         SceneManager.LoadScene("CucaLevel");
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5705fc3f655d0c243b3b59f5f961e3b5
+guid: b0a20e4977edc2140903cbe5ee0238ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Logo_0
+      name: "N\xEDvel bloqueado_0"
       rect:
         serializedVersion: 2
-        x: 149
-        y: 232
-        width: 440
-        height: 309
+        x: 109
+        y: 351
+        width: 873
+        height: 1292
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,29 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59ff41e1f93f79742b4e4c50cfb7db78
-      internalID: 356460104
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Logo_1
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 511
-        width: 29
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 81f450a23ea6ab040b44010cf36b5ccc
-      internalID: 2123869148
+      spriteID: bbbad7b8c4ff70e4483d119a48746d82
+      internalID: 1835797491
       vertices: []
       indices: 
       edges: []
@@ -188,8 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Logo_0: 356460104
-      Logo_1: 2123869148
+      "N\xEDvel bloqueado_0": 1835797491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

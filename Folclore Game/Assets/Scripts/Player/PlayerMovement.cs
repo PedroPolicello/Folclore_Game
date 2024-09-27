@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             animator.SetBool("isJumping", true);
 
-            audioSource.volume = SoundManager.Instance.sFXVolume.value / 50;
+            audioSource.volume = SoundManager.Instance.sFXVolume.value / 25;
             audioSource.PlayOneShot(SoundManager.Instance.jump);
         }
     }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +11,10 @@ public class SoundManager : MonoBehaviour
     public Slider sFXVolume;
 
     [Header("---- Player Clips ----")]
-    public AudioClip backgroundMusic; //OK
     public AudioClip bossMusic; //OK
+    public AudioClip backgroundMusic; //OK
+    public AudioClip victoryMusic; //OK
+    
     //public AudioClip walk;
     public AudioClip jump; //OK
     public AudioClip attack; //OK

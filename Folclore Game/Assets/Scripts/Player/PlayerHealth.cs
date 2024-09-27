@@ -67,6 +67,8 @@ public class PlayerHealth : MonoBehaviour
         audioSource.volume = SoundManager.Instance.sFXVolume.value/10;
         audioSource.PlayOneShot(SoundManager.Instance.death);
 
+        SetColliderRB2D(false, 0);
+        BossFightScript.Instance.StopAllCoroutines();
         PlayerAttack.instance.SetCanAttack(false);
         PlayerMovement.Instance.SetPlayerStatic(true);
         BossFightScript.Instance.KillAllDragons();
@@ -78,5 +80,11 @@ public class PlayerHealth : MonoBehaviour
         fade.DOFade(0, timeToFade);
         yield return new WaitForSeconds(timeToFade + .5f);
         Time.timeScale = 0;
+    }
+
+    public void SetColliderRB2D(bool collider, int gravityScale)
+    {
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = collider;
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = gravityScale;
     }
 }

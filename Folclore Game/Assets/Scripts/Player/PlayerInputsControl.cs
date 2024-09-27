@@ -58,6 +58,7 @@ public class PlayerInputsControl : MonoBehaviour
         
         if (!inPause && isPausePressed)
         {
+            PlayerAttack.instance.SetCanAttack(false);
             UIManager.Instance.pauseMenu.SetActive(true);
             inPause = true;
             Time.timeScale = 0;
@@ -66,6 +67,7 @@ public class PlayerInputsControl : MonoBehaviour
         {
             UIManager.Instance.audioSettings.SetActive(false);
             UIManager.Instance.pauseMenu.SetActive(false);
+            PlayerAttack.instance.SetCanAttack(true);
             inPause = false;
             Time.timeScale = 1;
         }

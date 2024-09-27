@@ -29,12 +29,23 @@ public class UIManager : MonoBehaviour
         healthBar.value = healthBar.maxValue;
     }
 
-    public void ExitPause()
+    public void Pause(bool isActive)
     {
-        audioSettings.SetActive(false);
-        pauseMenu.SetActive(false);
-        PlayerInputsControl.Instance.inPause = false;
-        Time.timeScale = 1;
+        if (isActive)
+        {
+            PlayerAttack.instance.SetCanAttack(false);
+            pauseMenu.SetActive(true);
+            PlayerInputsControl.Instance.inPause = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            audioSettings.SetActive(false);
+            pauseMenu.SetActive(false);
+            PlayerAttack.instance.SetCanAttack(true);
+            PlayerInputsControl.Instance.inPause = false;
+            Time.timeScale = 1;
+        }
     }
 
     private void Update()

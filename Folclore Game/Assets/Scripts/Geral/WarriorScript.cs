@@ -7,6 +7,7 @@ public class WarriorScript : MonoBehaviour
 
     [SerializeField] private Sprite guerreiro2;
     [SerializeField] private string[] puzzleTexts;
+    [SerializeField] private GameObject pressE;
 
     private GameObject textFeedback;
     private bool isNearWarrior;
@@ -25,11 +26,13 @@ public class WarriorScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isNearWarrior = true;
+            pressE.SetActive(true);
             textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[0];
         }
         if (other.CompareTag("Player") && SecondQuestManager.instance.killAllEnemies)
         {
             isNearWarrior = true;
+            pressE.SetActive(true);
             textFeedback.GetComponent<TextMeshProUGUI>().text = puzzleTexts[1];
         }
     }
@@ -39,6 +42,7 @@ public class WarriorScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isNearWarrior = false;
+            pressE.SetActive(false);
             textFeedback.GetComponent<TextMeshProUGUI>().text = "";
         }
     }

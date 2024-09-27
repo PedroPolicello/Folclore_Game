@@ -70,9 +70,6 @@ public class EnemyDragon : MonoBehaviour
     {
         if (currentLife <= 0 && isBoss)
         {
-            audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
-            audioSource.PlayOneShot(SoundManager.Instance.bossHit);
-            
             BossFightScript.Instance.TakeDamage(1);
             Destroy(gameObject);
         }

@@ -7,6 +7,7 @@ public class CollectableBase : MonoBehaviour
 
     private GameObject textFeedback;
     [SerializeField] private string text;
+    [SerializeField] private GameObject pressE;
     [HideInInspector] public bool inRange;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class CollectableBase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = text;
+            pressE.SetActive(true);
             inRange = true;
         }
     }
@@ -43,6 +45,7 @@ public class CollectableBase : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "";
+            pressE.SetActive(false);
             inRange = false;
         }
     }

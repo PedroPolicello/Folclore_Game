@@ -6,9 +6,10 @@ public class DoorsManager : MonoBehaviour
     private bool inRange;
     private GameObject textFeedback;
     [SerializeField] private string text;
+    [SerializeField] private GameObject pressE;
     
     [SerializeField] private float timeToFade = 2;
-    private CanvasGroup fade;
+    //private CanvasGroup fade;
 
     [SerializeField] private bool isEsgoto;
 
@@ -16,7 +17,7 @@ public class DoorsManager : MonoBehaviour
     {
         textFeedback = GameObject.FindGameObjectWithTag("textFeedback");
         textFeedback.GetComponent<TextMeshProUGUI>().text = "";
-        fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
+        //fade = GameObject.FindGameObjectWithTag("fade").GetComponent<CanvasGroup>();
     }
 
     private void Update()
@@ -62,6 +63,7 @@ public class DoorsManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = text;
+            pressE.SetActive(true);
             inRange = true;
         }
     }
@@ -72,6 +74,7 @@ public class DoorsManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             textFeedback.GetComponent<TextMeshProUGUI>().text = "";
+            pressE.SetActive(false);
             inRange = false;
         }
     }

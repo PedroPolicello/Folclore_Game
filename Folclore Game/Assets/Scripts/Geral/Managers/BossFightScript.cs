@@ -186,10 +186,8 @@ public class BossFightScript : MonoBehaviour
             yield return new WaitForSeconds(10);
             StartCoroutine(SpawnDragons(dragonQuantities[0]));
             yield return new WaitForSeconds(5);
-
-            //Esperar os dragões morrerem
-            yield return new WaitUntil(DragonsInGame);
-
+            yield return new WaitUntil(DragonsInGame); //Esperar os dragões morrerem
+            yield return new WaitForSeconds(1);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[0]));
             yield return new WaitForSeconds(5);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[0]));
@@ -208,10 +206,8 @@ public class BossFightScript : MonoBehaviour
             yield return new WaitForSeconds(15);
             StartCoroutine(SpawnDragons(dragonQuantities[1]));
             yield return new WaitForSeconds(5);
-
-            //Esperar os dragões morrerem
-            yield return new WaitUntil(DragonsInGame);
-
+            yield return new WaitUntil(DragonsInGame); //Esperar os dragões morrerem
+            yield return new WaitForSeconds(1);
             StartCoroutine(SpawnSpikes(true, spikesQuantities[1]));
             yield return new WaitForSeconds(6);
             StartCoroutine(SpawnSpikes(false, spikesQuantities[1]));
@@ -245,6 +241,9 @@ public class BossFightScript : MonoBehaviour
     //DAMAGE & LIFE
     public void TakeDamage(int dmg)
     {
+        audioSource.volume = SoundManager.Instance.sFXVolume.value/50;
+        audioSource.PlayOneShot(SoundManager.Instance.bossHit);
+        
         currentLife -= dmg;
         UIManager.Instance.UpdateBossUI();
         ControllPhases();
